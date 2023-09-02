@@ -7,7 +7,7 @@
         </div>
         <div class="text-xl py-3">- Create a Game -</div>
         <div class="flex border-black border-2">
-            <input type="text" class="border-r-2 border-r-gray-300 placeholder:pl-2" placeholder="Name">
+            <input type="text" class="border-r-2 border-r-gray-300 placeholder:pl-2" placeholder="Game Name">
             <div class="p-2 cursor-pointer"><img src="../assets/right-arrow.svg"></div>
         </div>
     </div>
