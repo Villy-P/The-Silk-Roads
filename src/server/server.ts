@@ -5,9 +5,13 @@ import dotenv from 'dotenv';
 import http from 'http';
 import cors from 'cors';
 
-import socketFunc from './socket';
-
 dotenv.config();
+
+import socketFunc from './socket';
+import userGameFunc from './usergame';
+import SQLFunc from './database';
+
+SQLFunc();
 
 const silkRoads = express();
 
@@ -17,22 +21,15 @@ silkRoads.use(session({
     resave: false,
     saveUninitialized: true
 }));
+userGameFunc(silkRoads);
 
 silkRoads.get('/', (req, res) => {
     res.send('wow')
-})
+});
 
 const server = http.createServer(silkRoads);
 
 socketFunc(server);
-
-import { SQLConnection, DATABASE_NAME } from './database';
-
-SQLConnection.connect((err) => {
-    if (err)
-        throw err;
-    console.log("Connected to database " + DATABASE_NAME);
-});
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Listening on port ${process.env.EXPRESS_PORT}`);

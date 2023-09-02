@@ -44,7 +44,7 @@ export default function userGameFunc(silkRoads: Express) {
     silkRoads.get("/startNewGame/:gamename", async (req, res) => {
         const gamename = req.params.gamename!;
         const game: Game = await GameRepository.createGame({
-            code: crypto.randomBytes(12).toString("hex"),
+            code: crypto.randomBytes(3).toString("hex"),
             name: gamename,
             constructor: { name: "RowDataPacket" }
         });
