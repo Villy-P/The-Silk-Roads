@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+      "target": "esnext",
+      "module": "commonjs",
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
@@ -26,7 +26,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "noEmit": true,
   },
   "include": [
     "src/**/*.ts",

@@ -14,6 +14,7 @@
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
+    "@types/express-session": "^1.17.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -23,9 +24,11 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "autoprefixer": "^10.4.15",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mysql2": "^3.6.0",
     "postcss": "^8.4.29",
     "sass": "^1.32.7",
