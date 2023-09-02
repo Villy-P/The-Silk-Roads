@@ -3,7 +3,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { SQLConnection } from "./database";
 
 export interface Game extends RowDataPacket {
-    id: number;
+    id?: number;
     name: string;
     code: string;
 }
