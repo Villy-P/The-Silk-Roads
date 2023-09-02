@@ -12,7 +12,7 @@ export class GameRepository {
     public static readByID(id: number): Promise<Game | undefined> {
         return new Promise((resolve, reject) => {
             SQLConnection.query<Game[]>(
-                "SELECT * FROM user WHERE id = ?", [id],
+                "SELECT * FROM game WHERE id = ?", [id],
                 (err, res) => {
                     if (err) reject(err);
                     else resolve(res[0]);
