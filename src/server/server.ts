@@ -3,6 +3,7 @@ import express from 'express';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import http from 'http';
+import cors from 'cors';
 
 import socketFunc from './socket';
 
@@ -10,11 +11,16 @@ dotenv.config();
 
 const silkRoads = express();
 
+silkRoads.use(cors());
 silkRoads.use(session({
     secret: process.env.EXPRESS_SECRET!,
     resave: false,
     saveUninitialized: true
 }));
+
+silkRoads.get('/', (req, res) => {
+    res.send('wow')
+})
 
 const server = http.createServer(silkRoads);
 

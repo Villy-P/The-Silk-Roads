@@ -14,6 +14,7 @@
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express-session": "^1.17.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
@@ -24,6 +25,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "autoprefixer": "^10.4.15",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",

@@ -12,3 +12,13 @@
         </div>
     </div>
 </template>
+
+<script lang="ts">
+    import { Vue } from 'vue-class-component';
+
+    import socket from '../client/socket'
+
+    socket();
+
+    export default class MainPage extends Vue {}
+</script>

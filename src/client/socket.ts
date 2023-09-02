@@ -1,8 +1,10 @@
 const socketPort = 3030;
-const socket = new WebSocket(`ws://localhost:${socketPort}`);
+const socket = new WebSocket(`ws://192.168.1.249:${socketPort}`);
 
-socket.addEventListener('open', () => {
-    socket.send(JSON.stringify({
-        type: 'join',
-    }));
-});
+export default function clientSocket() {
+    socket.addEventListener('open', () => {
+        socket.send(JSON.stringify({
+            type: 'join',
+        }));
+    });
+}
