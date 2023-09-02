@@ -20,5 +20,9 @@
 
     socket();
 
-    export default class MainPage extends Vue {}
+    export default class MainPage extends Vue {
+        createNewGame() {
+            //
+        }
+    }
 </script>
