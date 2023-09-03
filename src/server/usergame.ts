@@ -5,7 +5,6 @@ import { User, UserRepository } from "./user";
 import { SQLConnection } from "./database";
 import { Express } from "express";
 import crypto from 'crypto';
-import ip from 'ip';
 
 export interface UserGame extends RowDataPacket {
     id?: number;
@@ -51,7 +50,7 @@ export default function userGameFunc(silkRoads: Express) {
         });
         const user: User = await UserRepository.createUser({
             name: "New User",
-            ip: ip.address(),
+            ip: req.socket.localAddress?.replace('::ffff:', ''),
             constructor: { name: "RowDataPacket" }
         });
         await UserGameRepository.startNewGame(game, user);

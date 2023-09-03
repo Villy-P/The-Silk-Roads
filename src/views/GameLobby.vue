@@ -11,6 +11,9 @@
     import { Vue } from 'vue-class-component';
 
     import { isLeader, currentGame, currentUser } from '@/client/current';
+    import { createSocket } from '@/client/socket';
+
+    createSocket();
 
     export default class MainPage extends Vue {
         isLeader = isLeader;
