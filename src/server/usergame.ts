@@ -53,6 +53,6 @@ export default function userGameFunc(silkRoads: Express) {
             constructor: { name: "RowDataPacket" }
         });
         await UserGameRepository.startNewGame(game, user);
-        res.send(JSON.stringify({game: game, user: user}));
+        res.send(JSON.stringify({game: game, user: user, isleader: true}));
     });
 }

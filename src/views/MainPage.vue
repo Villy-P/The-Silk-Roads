@@ -32,7 +32,7 @@
                 return;
             const res = await getResponse(`/startNewGame/${this.$refs.createGameInput.value}`);
             const data = await res.json();
-            setCurrent(data.game, data.user);
+            setCurrent(data.game, data.user, data.isleader);
             this.$router.push('/lobby')
         }
     }
