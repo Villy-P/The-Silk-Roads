@@ -1,6 +1,7 @@
 export interface User {
     id: number;
     name: string;
+    ip: string;
 }
 
 export interface Game {

@@ -1,7 +1,7 @@
 <template>
     <div v-if="isLeader">
-        <div class="w-screen h-32 flex items-center text-5xl font-mono py-10">
-            <div class="grow px-5 text-ellipsis overflow-hidden">{{ currentGame?.name }}asdfadsfasdfasdkjhfkasjdhgfjhasgdjkfhgasdjkhfg</div>
+        <div class="w-screen h-32 flex items-center text-4xl font-mono py-10">
+            <div class="grow px-5 text-ellipsis overflow-hidden whitespace-nowrap">{{ currentGame?.name }}asdfadsfasdfasdkjhfkasjdhgfjhasgdjkfhgasdjkhfg</div>
             <div class="px-5">{{ currentGame?.code }}</div>
         </div>
     </div>

@@ -5,6 +5,7 @@ import { User, UserRepository } from "./user";
 import { SQLConnection } from "./database";
 import { Express } from "express";
 import crypto from 'crypto';
+import ip from 'ip';
 
 export interface UserGame extends RowDataPacket {
     id?: number;
@@ -30,7 +31,7 @@ export class UserGameRepository {
         return new Promise((resolve, reject) => {
             SQLConnection.query<ResultSetHeader>(
                 "INSERT INTO user_game (userid, gameid, isleader) VALUES (?,?,?)",
-                [game.id, user.id, true],
+                [user.id, game.id, true],
                 (err, res) => {
                     if (err) reject(err);
                     else UserGameRepository.readByID(res.insertId).then(user_game => resolve(user_game!)).catch(reject)
@@ -50,6 +51,7 @@ export default function userGameFunc(silkRoads: Express) {
         });
         const user: User = await UserRepository.createUser({
             name: "New User",
+            ip: ip.address(),
             constructor: { name: "RowDataPacket" }
         });
         await UserGameRepository.startNewGame(game, user);

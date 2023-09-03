@@ -5,6 +5,7 @@ import { SQLConnection } from "./database";
 export interface User extends RowDataPacket {
     id?: number;
     name: string;
+    ip?: string;
 }
 
 export class UserRepository {
@@ -23,8 +24,8 @@ export class UserRepository {
     public static createUser(user: User): Promise<User> {
         return new Promise((resolve, reject) => {
             SQLConnection.query<ResultSetHeader>(
-                "INSERT INTO user (name) VALUES (?)",
-                [user.name],
+                "INSERT INTO user (name, ip) VALUES (?,?)",
+                [user.name, user.ip],
                 (err, res) => {
                     if (err) reject(err);
                     else UserRepository.readByID(res.insertId).then(user => resolve(user!)).catch(reject);
