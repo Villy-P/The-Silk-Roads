@@ -2,10 +2,15 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { SQLConnection } from "./database";
 
+export enum GAME_STATE {
+    LOBBY
+}
+
 export interface Game extends RowDataPacket {
     id?: number;
     name: string;
     code: string;
+    state?: GAME_STATE;
 }
 
 export class GameRepository {

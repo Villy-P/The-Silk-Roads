@@ -1,4 +1,4 @@
-import { currentUser, isLeader } from "./current";
+import { currentUser } from "./current";
 
 const socketPort = 3030;
 export let socket: WebSocket | null = null;
