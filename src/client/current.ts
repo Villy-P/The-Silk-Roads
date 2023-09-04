@@ -11,3 +11,7 @@ export function setCurrent(game: Game, user: User, isleader: boolean): void {
     currentUser = user;
     isLeader = isleader;
 }
+
+export function getCurrentPlayers(): User[] {
+    return currentPlayers;
+}
