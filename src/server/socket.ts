@@ -3,6 +3,16 @@ import http from 'http';
 
 interface Message {
     type: string;
+    data: string;
+}
+
+function newPlayer(socket: webSocket.Server, data: string) {
+    socket.clients.forEach((client) => {
+        client.send(JSON.stringify({
+            type: 'newPlayer',
+            data: data
+        }));
+    });
 }
 
 export default function initWebSocket(server: http.Server) {
@@ -12,7 +22,7 @@ export default function initWebSocket(server: http.Server) {
         ws.on('message', (msg) => {
             const data: Message = JSON.parse(msg.toString());
             if (data.type == 'join') {
-                console.log('Someone Joined!');
+                newPlayer(socket, data.data);
             }
         });
     });
