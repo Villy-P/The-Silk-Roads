@@ -28,5 +28,11 @@
         mounted(): void {
             createSocket(this.store);
         }
+
+        beforeUnmount(): void {
+            this.store.state.currentGame = null;
+            this.store.state.currentUser = null;
+            this.store.state.isLeader = false;
+        }
     }
 </script>
