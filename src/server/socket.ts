@@ -21,6 +21,7 @@ export default function initWebSocket(server: http.Server) {
     socket.on('connection', (ws) => {
         ws.on('message', (msg) => {
             const data: Message = JSON.parse(msg.toString());
+            console.log(data);
             if (data.type == 'join') {
                 newPlayer(socket, data.data);
             }

@@ -17,7 +17,8 @@
     import { Vue } from 'vue-class-component';
 
     import { getResponse } from '@/client/response';
-    import { setCurrent } from '@/client/current';
+    import { useStore } from 'vuex';
+    import { key } from '@/store';
 
     export default class MainPage extends Vue {
         declare $refs: {
@@ -25,12 +26,16 @@
             joinGameInput: HTMLInputElement
         }
 
+        store = useStore(key);
+
         async createNewGame() {
             if (this.$refs.createGameInput.value.length == 0)
                 return;
             const res = await getResponse(`/startNewGame/${this.$refs.createGameInput.value}`);
             const data = await res.json();
-            setCurrent(data.game, data.user, data.isleader);
+            this.store.state.currentGame = data.game;
+            this.store.state.currentUser = data.user;
+            this.store.state.isLeader = true;
             this.$router.push('/lobby')
         }
 
@@ -41,7 +46,9 @@
             const data = await res.json();
             if (data.game == undefined)
                 return;
-            setCurrent(data.game, data.user, false);
+            this.store.state.currentGame = data.game;
+            this.store.state.currentUser = data.user;
+            this.store.state.isLeader = false;
             this.$router.push('/lobby');
         }
     }

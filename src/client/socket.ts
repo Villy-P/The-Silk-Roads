@@ -1,22 +1,25 @@
-import { currentPlayers, currentUser } from "./current";
+import { StoreState } from '@/store';
+import { Store } from 'vuex';
 
 const socketPort = 3030;
 export let socket: WebSocket | null = null;
 
-export function createSocket() {
-    socket = new WebSocket(`ws://${currentUser?.ip}:${socketPort}`);
-    console.log(`Created New Socket:\n\tIP: ${currentUser?.ip}\n\tPort: ${socketPort}`);
+export function createSocket(store: Store<StoreState>) {
+    console.log(store.state)
+    socket = new WebSocket(`ws://192.168.1.249:${socketPort}`);
+    console.log(`Created New Socket:\n\tIP: 192.168.1.249\n\tPort: ${socketPort}`);
     socket.addEventListener('open', () => {
         socket?.send(JSON.stringify({
             type: 'join',
-            data: currentUser
+            data: store.state.currentUser
         }));
     });
     socket.addEventListener('message', (evt) => {
         const data = JSON.parse(evt.data);
+        console.log(data);
         if (data.type === 'newPlayer') {
-            currentPlayers.push(data.data);
-            console.log(currentPlayers);
+            store.state.currentPlayers.push(data.data);
+            console.log(data.data);
         }
     });
 }
