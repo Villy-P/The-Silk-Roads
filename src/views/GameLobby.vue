@@ -7,11 +7,11 @@
                 <div class="px-5">{{ store.state.currentGame?.code }}</div>
             </div>
         </div><hr><br>
-        <div class="flex flex-col gap-2 justify-center">
+        <div class="flex flex-wrap gap-1 justify-center">
             <div 
                 v-for="(p, i) in store.state.currentPlayers" 
                 :key="p ? p.id : ''" 
-                class="border-2 border-black p-1 py-2 m-4 w-96 max-w-96 text-center mx-auto"
+                class="border-2 border-black p-1 py-2 my-1 w-96 max-w-96 text-center mx-auto"
                 :class="i == 0 ? 'bg-cyan-400 cursor-pointer hover:bg-cyan-500' : ''">
                 {{ p ? (i == 0 ? 'Start Game' : p.name) : '' }}
             </div>
