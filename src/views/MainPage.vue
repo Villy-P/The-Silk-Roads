@@ -2,8 +2,8 @@
     <div class="w-screen h-screen flex flex-col justify-center items-center">
         <div class="text-xl pb-3">- Join a Game -</div>
         <div class="flex border-black border-2">
-            <input type="text" class="border-r-2 border-r-gray-300 pl-2" placeholder="Code">
-            <div class="p-2 cursor-pointer"><img src="../assets/right-arrow.svg"></div>
+            <input type="text" class="border-r-2 border-r-gray-300 pl-2" placeholder="Code" ref="joinGameInput" minlength="1" maxlength="6">
+            <div class="p-2 cursor-pointer" @click="joinNewGame()"><img src="../assets/right-arrow.svg"></div>
         </div>
         <div class="text-xl py-3">- Create a Game -</div>
         <div class="flex border-black border-2">
@@ -16,15 +16,13 @@
 <script lang="ts">
     import { Vue } from 'vue-class-component';
 
-    import socket from '../client/socket'
     import { getResponse } from '@/client/response';
     import { setCurrent } from '@/client/current';
 
-    socket();
-
     export default class MainPage extends Vue {
         declare $refs: {
-            createGameInput: HTMLInputElement
+            createGameInput: HTMLInputElement,
+            joinGameInput: HTMLInputElement
         }
 
         async createNewGame() {
@@ -34,6 +32,17 @@
             const data = await res.json();
             setCurrent(data.game, data.user, data.isleader);
             this.$router.push('/lobby')
+        }
+
+        async joinNewGame() {
+            if (this.$refs.joinGameInput.value.length == 0)
+                return;
+            const res = await getResponse(`/joinGame/${this.$refs.joinGameInput.value}`);
+            const data = await res.json();
+            if (data.game == undefined)
+                return;
+            setCurrent(data.game, data.user, false);
+            this.$router.push('/lobby');
         }
     }
 </script>

@@ -56,4 +56,18 @@ export default function userGameFunc(silkRoads: Express) {
         await UserGameRepository.startNewGame(game, user);
         res.send(JSON.stringify({game: game, user: user, isleader: true}));
     });
+
+    silkRoads.get("/joinGame/:joincode", async (req, res) => {
+        const code = req.params.joincode!;
+        const game = await GameRepository.getGameByCode(code);
+        const user: User = await UserRepository.createUser({
+            name: "New Player",
+            ip: req.socket.localAddress?.replace('::ffff:', ''),
+            constructor: { name: "RowDataPacket" }
+        });
+        res.send(JSON.stringify({
+            game: game,
+            user: user
+        }));
+    });
 }

@@ -5,13 +5,16 @@
             <div class="px-5">{{ currentGame?.code }}</div>
         </div>
     </div>
+    <div v-else>
+        {{currentGame?.name}}
+    </div>
 </template>
 
 <script lang="ts">
     import { Vue } from 'vue-class-component';
 
     import { isLeader, currentGame, currentUser } from '@/client/current';
-    import clientSocket, { createSocket } from '@/client/socket';
+    import { createSocket } from '@/client/socket';
 
     export default class MainPage extends Vue {
         isLeader = isLeader;
@@ -20,7 +23,6 @@
 
         mounted(): void {
             createSocket();
-            clientSocket();
         }
     }
 </script>
