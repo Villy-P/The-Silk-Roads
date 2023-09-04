@@ -17,22 +17,15 @@
 
 <script lang="ts">
     import { Vue } from 'vue-class-component'
-    import { Watch } from 'vue-property-decorator';
 
     import { isLeader, currentGame, currentUser, currentPlayers } from '@/client/current';
     import { createSocket } from '@/client/socket';
-    import { User } from '@/client/sql';
 
     export default class MainPage extends Vue {
         isLeader = isLeader;
         currentGame = currentGame;
         currentUser = currentUser;
         thisCurrentPlayers = currentPlayers;
-
-        @Watch("currentPlayers")
-        watchPlayers(newValue: User[]) {
-            this.thisCurrentPlayers = newValue;
-        }
 
         mounted(): void {
             createSocket();
