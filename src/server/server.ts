@@ -2,7 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import cors from 'cors';
-import { SERVER_PORT } from '@/data/data';
+import { SERVER_PORT } from '../data/data';
 import { userFunc } from './users';
 
 const options = {
