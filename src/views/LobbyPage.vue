@@ -7,6 +7,7 @@
     import { clientSocket } from '../client/socket';
     import { key } from '@/store/store';
     import { useStore } from 'vuex';
+    import socketSetup from '../client/socket';
 
     export default class LobbyPage extends Vue {
         store = useStore(key);
@@ -18,6 +19,10 @@
                 return;
             }
             this.store.state.username = username;
+
+            socketSetup(this.store);
+
+            clientSocket.emit('joined', username);
         }
     }
 </script>

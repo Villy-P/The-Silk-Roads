@@ -4,6 +4,7 @@ import https from 'https';
 import cors from 'cors';
 import { SERVER_PORT } from '../data/data';
 import { userFunc } from './users';
+import { socketFunc } from './socket';
 
 const options = {
     key: fs.readFileSync('cert\\CA\\localhost\\localhost.decrypted.key', 'utf-8'),
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 userFunc();
+socketFunc();
 
 server.listen(SERVER_PORT, () => {
     console.log("Express server listening on port " + SERVER_PORT);
