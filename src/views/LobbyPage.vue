@@ -1,5 +1,7 @@
 <template>
-    <div></div>
+    <div v-for="item in store.state.users" :key="item.socketID">
+        {{ item.username }}
+    </div>
 </template>
 
 <script lang="ts">
