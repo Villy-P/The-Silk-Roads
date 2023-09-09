@@ -60,7 +60,7 @@
             }
             this.store.state.username = this.$refs.input.value.trim();
             localStorage.setItem("username", this.store.state.username);
-            this.$router.push("/chat");
+            this.$router.push("/lobby");
         }
 	}
 </script>
