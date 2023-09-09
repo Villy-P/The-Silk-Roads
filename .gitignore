@@ -132,3 +132,5 @@ dist
 .vscode/
 
 data.ts
+
+cert/
