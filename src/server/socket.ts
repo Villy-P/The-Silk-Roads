@@ -29,6 +29,6 @@ io.on('connection', (socket) => {
             users.push(currentSocket);
         else
             user.socketID = socket.id;
-        io.emit('joined', broadcastUsers());
+        io.emit('joined', broadcastUsers(socket.id));
     });
 });

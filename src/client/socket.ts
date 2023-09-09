@@ -7,3 +7,9 @@ export const clientSocket = io(`https://${IP_ADDRESS}:${SERVER_PORT}/`, {
         'custom-header': "abcd"
     }
 });
+
+export default function socketSetup() {
+    clientSocket.on('joined', (message: string) => {
+        const msg = JSON.parse(message);
+    });
+}
