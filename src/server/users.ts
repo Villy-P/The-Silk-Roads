@@ -1,7 +1,7 @@
 import { User } from "@/scripts/interface";
 import { app } from "./server";
 
-const users: User[] = [];
+export const users: User[] = [];
 
 export function userFunc() {
     app.get("/usernameexists/:username", (req, res) => {
@@ -14,4 +14,12 @@ export function userFunc() {
         }
         res.send(false);
     });
+}
+
+export function getUserByUsername(username: string): User | undefined {
+    return users.find((i) => i.username === username);
+}
+
+export function broadcastUsers(): string {
+    return JSON.stringify({users: users});
 }
