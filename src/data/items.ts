@@ -24,5 +24,7 @@ export enum ITEMS {
     GOLD,
     SUGAR,
     PRINTING,
-    TEXTS
+    TEXTS,
+    COTTON_CLOTH,
+    IVORY
 }

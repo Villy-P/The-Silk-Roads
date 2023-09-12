@@ -3,7 +3,8 @@ import { ITEMS } from "./items";
 enum MERCHANT {
     ARAB,
     CHINESE,
-    HANSEATIC_LEAGUE
+    HANSEATIC_LEAGUE,
+    INDIAN
 }
 
 function getMerchantBaseExports(m: MERCHANT) {
@@ -46,6 +47,16 @@ function getMerchantBaseExports(m: MERCHANT) {
                 ITEMS.FURS,
                 ITEMS.COTTON_TEXTILES
             ]
+        case MERCHANT.INDIAN:
+            return [
+                ITEMS.SILK,
+                ITEMS.COTTON_CLOTH,
+                ITEMS.PAPER,
+                ITEMS.SPICES,
+                ITEMS.PEARLS,
+                ITEMS.IVORY,
+                ITEMS.PRECIOUS_STONES
+            ]
     }
 }
 
@@ -86,6 +97,17 @@ function getMerchantBaseImports(m: MERCHANT) {
                 ITEMS.TEXTS,
                 ITEMS.ASTROLABE
             ]
+        case MERCHANT.INDIAN:
+            return [
+                ITEMS.SILVER,
+                ITEMS.PORCELAIN,
+                ITEMS.CAMELS,
+                ITEMS.PERSIAN_RUG,
+                ITEMS.FURS,
+                ITEMS.SILK,
+                ITEMS.ASTROLABE,
+                ITEMS.PAPER_MAKING
+            ]
     }
 }
 
@@ -97,5 +119,7 @@ function getMerchantDescription(m: MERCHANT) {
             return "Under previous dynasties, merchants held a low social status in China, but the Mongols value and encourage trade, so you have flourished under the rule of Kublai Khan. Greater safety combined with banknotes that can be exchanged for coin currencies has expanded trade.";
         case MERCHANT.HANSEATIC_LEAGUE:
             return "Northern Europe isn’t exactly a trading powerhouse, but news of the riches of the east have sparked interest in trade and travel, and the Hanseatic League dominates trade in northern Europe. The guild is actually a confederation of guilds and trade towns in Central and Northern Europe. The League (also called the Hansa) essentially has a monopoly over trade from Portugal in the west to England in the north, Russia in the east and Venice in the south. Merchants of the Hansa bring eastern goods to the rest of Europe. The trade fairs of Northern Europe have provided a market for expanding trade, and Northern Europe has a few goods of its own to offer to the east.";
+        case MERCHANT.INDIAN:
+            return "While we typically associate India with the Indian Ocean trade, India was an important link in the Silk Road trade as well. India was drawn into a wider network of cross-cultural and economic exchange that helped India develop some of the best medieval economies, especially since it served as a connecting point between China and the Middle East.";
     }
 }
