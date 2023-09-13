@@ -9,7 +9,7 @@
     </div>
     <div v-if="store.state.user?.status == USER_STATUS.LEADER" class="flex h-20 w-full border-b-black border-b-2 justify-center items-center">
         <div class="cursor-pointer rounded-lg bg-slate-100 p-2 mx-2" @click="showInstructions = true">Show Link</div>
-        <div class="cursor-pointer rounded-lg bg-cyan-300 p-2 mx-2">Start Game</div>
+        <div class="cursor-pointer rounded-lg bg-cyan-300 p-2 mx-2" @click="play">Start Game</div>
     </div>
     <div class="flex w-fit m-auto items-center gap-3">
         <img class="w-14 my-5" src="../assets/users.svg">
@@ -30,6 +30,7 @@
     import { useStore } from 'vuex';
     import { USER_STATUS } from '@/scripts/interface';
     import { IP_ADDRESS, VUE_PORT } from '@/data/data';
+    import socketSetup, { clientSocket } from '@/client/socket';
 
     export default class LobbyPage extends Vue {
         store = useStore(key);
@@ -46,7 +47,13 @@
                 this.$router.push("/");
                 return;
             }
+            socketSetup(this.store, this.$router);
+            clientSocket.emit('joined', username);
             this.store.state.username = username;
+        }
+
+        play() {
+            clientSocket.emit("play");
         }
     }
 </script>

@@ -35,7 +35,6 @@
 	import { key } from '../store/store';
     import { useStore } from 'vuex';
     import { IP_ADDRESS, SERVER_PORT, CREATOR_NAME, APP_NAME } from '@/data/data';
-    import socketSetup, { clientSocket } from '@/client/socket';
 
 	export default class HomeView extends Vue {
 		declare $refs: {
@@ -61,8 +60,6 @@
             }
             this.store.state.username = this.$refs.input.value.trim();
             localStorage.setItem("username", this.store.state.username);
-            socketSetup(this.store);
-            clientSocket.emit('joined', username);
             this.$router.push("/lobby");
         }
 

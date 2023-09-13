@@ -31,7 +31,13 @@ export function socketFunc() {
                 users.push(currentSocket);
             else
                 user.socketID = socket.id;
-            io.emit('joined', broadcastUsers(socket.id));
+            io.emit('userState', broadcastUsers(socket.id));
         });
+        socket.on('play', () => {
+            io.emit('play');
+        });
+        socket.on('requestUserState', () => {
+            socket.emit('userState', broadcastUsers(socket.id));
+        })
     });
 }
