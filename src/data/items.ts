@@ -5,6 +5,7 @@ export enum ITEMS {
     GOLD,
     RICE,
     WINE,
+    SALT,
     TEXTS,
     PAPER,
     LINEN,
@@ -49,6 +50,8 @@ export function getItemName(item: ITEMS): string {
             return "Gold";
         case ITEMS.RICE:
             return "Rice";
+        case ITEMS.SALT:
+            return "Salt";
         case ITEMS.WINE:
             return "Wine";
         case ITEMS.TEXTS:
