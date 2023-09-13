@@ -13,4 +13,6 @@ export interface User {
     merchantType: MERCHANT | undefined;
     items: ITEMS[];
     imports: ITEMS[];
+    gold: number;
+    silver: number;
 }

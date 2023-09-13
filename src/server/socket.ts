@@ -29,6 +29,8 @@ export function socketFunc() {
                 merchantType: undefined,
                 imports: [],
                 items: [],
+                silver: 0,
+                gold: 0,
             };
             const user = getUserByUsername(message);
             if (user === undefined)
