@@ -1,3 +1,5 @@
+import { CITIES } from "./city";
+
 enum INNOVATIONS {
     PRINTING,
     GUNPOWDER,
@@ -7,7 +9,16 @@ enum INNOVATIONS {
     TEXTS
 }
 
-function getInnovationDescription(innovation: INNOVATIONS) {
+export function getInnovationCardSpecialText(city: CITIES) {
+    switch (city) {
+        case CITIES.BAGHDAD:
+            return "Because Baghdad remains an intellectual center, you can also choose an innovation card to take back to your homeland.";
+        case CITIES.BEIJING:
+            return "You also encounter some novel technologies while in China and decide to secretly add descriptions to your journal to take back with you."
+    }
+}
+
+export function getInnovationDescription(innovation: INNOVATIONS) {
     switch (innovation) {
         case INNOVATIONS.PRINTING:
             return "Printing technology made its way to both the Middle East and Europe. Rashid al-Din marveled at the possibilities of this technology: \n “[W]hen any book was desired, a copy was made by a skillful calligrapher on tablets and carefully corrected by proof-readers...Under this system he had copies made, lent them to friends, and urged them to transcribe them and return the originals. He had Arabic translations made of those works he composed in Persian, and Persian translations of works composed in Arabic. When the translations had been prepared, he deposited them in the library.” Marco Polo also documented the technology in his book.";
