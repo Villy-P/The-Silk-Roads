@@ -17,14 +17,12 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
     clientSocket.on('userState', (message: string) => {
         const msg = JSON.parse(message);
         store.state.users = msg.users;
-        if (!store.state.user)
-            store.state.user = msg.user;
+        store.state.user = msg.user;
     });
     clientSocket.on('play', (message) => {
         const msg = JSON.parse(message);
         store.state.users = msg.users;
-        if (!store.state.user)
-            store.state.user = msg.user;
+        store.state.user = msg.user;
         router.push("/play");
     });
 }
