@@ -30,7 +30,7 @@
     import { useStore } from 'vuex';
     import { USER_STATUS } from '@/scripts/interface';
     import { IP_ADDRESS, VUE_PORT } from '@/data/data';
-    import socketSetup, { clientSocket } from '@/client/socket';
+    import socketSetup from '@/client/socket';
 
     export default class LobbyPage extends Vue {
         store = useStore(key);
@@ -53,7 +53,7 @@
         }
 
         play() {
-            clientSocket.emit("play", this.store.state.user?.username);
+            this.store.state.socket?.emit("play", this.store.state.user?.username);
         }
     }
 </script>

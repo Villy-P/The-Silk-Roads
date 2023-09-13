@@ -11,7 +11,6 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import socketSetup, { clientSocket } from '@/client/socket';
     import { getMerchantName } from '@/data/merchant';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
