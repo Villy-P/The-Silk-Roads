@@ -68,10 +68,13 @@
 
         async mounted() {
             const username = localStorage.getItem("username");
-            if (username != null) {
+            const res = await fetch(`https://${IP_ADDRESS}:${SERVER_PORT}/usernameexists/${username}`);
+            const data = await res.text();
+            if (username != null && data === "true") {
                 this.$router.push("/lobby");
                 return;
             }
+            localStorage.removeItem("username");
         }
 	}
 </script>

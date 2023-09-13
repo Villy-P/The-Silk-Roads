@@ -11,8 +11,16 @@
         <div class="cursor-pointer rounded-lg bg-slate-100 p-2 mx-2" @click="showInstructions = true">Show Link</div>
         <div class="cursor-pointer rounded-lg bg-cyan-300 p-2 mx-2">Start Game</div>
     </div>
-    <div v-for="item in store.state.users" :key="item.socketID">
-        <div v-if="item.status != USER_STATUS.LEADER">{{ item.username }}</div>
+    <div class="flex w-fit m-auto items-center gap-3">
+        <img class="w-14 my-5" src="../assets/users.svg">
+        <p class="text-2xl text-black">{{ store.state.users.length - 1 }}</p>
+    </div>
+    <div class="flex flex-wrap justify-center items-center">
+        <div v-for="item in store.state.users" :key="item.socketID" class="">
+            <div v-if="item.status != USER_STATUS.LEADER" class="w-fit h-fit px-2 py-1 border-2 border-black">
+                {{ item.username }}
+            </div>
+        </div>
     </div>
 </template>
 
