@@ -1,30 +1,44 @@
 <template>
+    <div v-if="showInstructions" class="absolute w-full h-screen bg-slate-900 opacity-60 flex items-center justify-center">
+        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="showInstructions = false">
+			<img src="../assets/x.svg">
+		</div>
+        <div class="bg-white h-fit rounded-2xl text-center">
+            <p class="text-black font-bold text-2xl p-3 px-6">https://{{ IP_ADDRESS }}:{{ VUE_PORT }}/</p>
+        </div>
+    </div>
+    <div v-if="store.state.user?.status == USER_STATUS.LEADER" class="flex h-20 w-full border-b-black border-b-2 justify-center items-center">
+        <div class="cursor-pointer rounded-lg bg-slate-100 p-2 mx-2" @click="showInstructions = true">Show Link</div>
+        <div class="cursor-pointer rounded-lg bg-cyan-300 p-2 mx-2">Start Game</div>
+    </div>
     <div v-for="item in store.state.users" :key="item.socketID">
-        {{ item.username }}
+        <div v-if="item.status != USER_STATUS.LEADER">{{ item.username }}</div>
     </div>
 </template>
 
 <script lang="ts">
     import { Vue } from 'vue-class-component';
-    import { clientSocket } from '../client/socket';
     import { key } from '@/store/store';
     import { useStore } from 'vuex';
-    import socketSetup from '../client/socket';
+    import { USER_STATUS } from '@/scripts/interface';
+    import { IP_ADDRESS, VUE_PORT } from '@/data/data';
 
     export default class LobbyPage extends Vue {
         store = useStore(key);
 
-        mounted(): void {
+        USER_STATUS = USER_STATUS;
+        IP_ADDRESS = IP_ADDRESS;
+        VUE_PORT = VUE_PORT;
+
+        showInstructions = false;
+
+        async mounted() {
             const username = localStorage.getItem("username");
             if (username == null) {
                 this.$router.push("/");
                 return;
             }
             this.store.state.username = username;
-
-            socketSetup(this.store);
-
-            clientSocket.emit('joined', username);
         }
     }
 </script>
