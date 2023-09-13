@@ -3,6 +3,7 @@ import { server } from './server'
 import { IP_ADDRESS, VUE_PORT } from '../data/data';
 import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
+import { getMerchantBaseExports, getMerchantBaseImports } from '@/data/merchant';
 
 
 export function socketFunc() {
@@ -24,7 +25,10 @@ export function socketFunc() {
             const currentSocket: User = {
                 username: message,
                 socketID: socket.id,
-                status: isLeader
+                status: isLeader,
+                merchantType: undefined,
+                imports: [],
+                items: [],
             };
             const user = getUserByUsername(message);
             if (user === undefined)
@@ -34,6 +38,16 @@ export function socketFunc() {
             io.emit('userState', broadcastUsers(socket.id));
         });
         socket.on('play', () => {
+            let id = 0;
+            for (const user of users) {
+                if (user.status === USER_STATUS.LEADER)
+                    continue;
+                user.merchantType = id++;
+                user.items = getMerchantBaseExports(user.merchantType);
+                user.imports = getMerchantBaseImports(user.merchantType);
+                if (id == 6)
+                    id = 0;
+            }
             io.emit('play');
         });
         socket.on('requestUserState', () => {

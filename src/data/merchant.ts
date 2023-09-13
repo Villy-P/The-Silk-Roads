@@ -1,14 +1,15 @@
 import { ITEMS } from "./items";
 
-enum MERCHANT {
+export enum MERCHANT {
     ARAB,
     CHINESE,
     HANSEATIC_LEAGUE,
     INDIAN,
-    PERSIAN
+    PERSIAN,
+    VENETIAN
 }
 
-export function getMerchantBaseExports(m: MERCHANT) {
+export function  getMerchantBaseExports(m: MERCHANT) {
     switch (m) {
         case MERCHANT.ARAB:
             return [
@@ -70,6 +71,16 @@ export function getMerchantBaseExports(m: MERCHANT) {
                 ITEMS.ASTROLABE,
                 ITEMS.PAPER_MAKING
             ]
+        case MERCHANT.VENETIAN:
+            return [
+                ITEMS.BYZANTINE_SILK,
+                ITEMS.LINEN,
+                ITEMS.WOOL_CLOTH,
+                ITEMS.SILVER,
+                ITEMS.WINE,
+                ITEMS.EGYPTIAN_CLOTH,
+                ITEMS.SUGAR
+            ]
     }
 }
 
@@ -129,6 +140,22 @@ export function getMerchantBaseImports(m: MERCHANT) {
                 ITEMS.GOLD,
                 ITEMS.GUNPOWDER
             ]
+        case MERCHANT.VENETIAN:
+            return [
+                ITEMS.SPICES,
+                ITEMS.SILK,
+                ITEMS.PORCELAIN,
+                ITEMS.SILVER,
+                ITEMS.GOLD,
+                ITEMS.PAPER_MAKING,
+                ITEMS.PERSIAN_RUG,
+                ITEMS.LEATHER_GOODS,
+                ITEMS.PERFUME,
+                ITEMS.GUNPOWDER,
+                ITEMS.COMPASS,
+                ITEMS.TEXTS,
+                ITEMS.ASTROLABE,
+            ]
     }
 }
 
@@ -144,5 +171,7 @@ export function getMerchantDescription(m: MERCHANT) {
             return "While we typically associate India with the Indian Ocean trade, India was an important link in the Silk Road trade as well. India was drawn into a wider network of cross-cultural and economic exchange that helped India develop some of the best medieval economies, especially since it served as a connecting point between China and the Middle East.";
         case MERCHANT.PERSIAN:
             return "The invasions of the Mongols were devastating, but luckily you benefit from their favorable attitudes toward trade and their building programs in the cities that bring constant flows of caravans of traders. You also act as an important middleman between the Mediterranean and Asia.";
+        case MERCHANT.VENETIAN:
+            return "Ever since the Crusades, Venetian merchants have been controlling trade in the Mediterranean and growing wealthy acting as middlemen between Europe and the east. Because you provide this important trade link, much of your wealth comes from the additional taxes you charge on items you sell in Europe";
     }
 }

@@ -4,6 +4,7 @@ export enum ITEMS {
     SILK,
     GOLD,
     RICE,
+    WINE,
     TEXTS,
     PAPER,
     LINEN,
@@ -16,6 +17,7 @@ export enum ITEMS {
     HORSES,
     WEAPONS,
     COMPASS,
+    PERFUME,
     PRINTING,
     PORCELAIN,
     GLASSWARE,
@@ -28,7 +30,9 @@ export enum ITEMS {
     COTTON_CLOTH,
     PAPER_MAKING,
     LEATHER_GOODS,
+    BYZANTINE_SILK,
+    EGYPTIAN_CLOTH,
     PRECIOUS_STONES,
     COTTON_TEXTILES,
-    TRANSLATED_TEXT
+    TRANSLATED_TEXT,
 }
