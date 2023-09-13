@@ -9,3 +9,6 @@
 * Move Cities
 * Taxes
 * Loans
+* Open Map
+* Show Instructions
+* Bank Notes
