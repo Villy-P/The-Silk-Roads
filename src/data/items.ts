@@ -26,5 +26,9 @@ export enum ITEMS {
     PRINTING,
     TEXTS,
     COTTON_CLOTH,
-    IVORY
+    IVORY,
+    GLASSWARE,
+    WEAPONS,
+    LEATHER_GOODS,
+    TRANSLATED_TEXT
 }
