@@ -1,3 +1,4 @@
+import { CITIES } from "./city";
 import { ITEMS } from "./items";
 
 export enum MERCHANT {
@@ -190,5 +191,22 @@ export function getMerchantName(m: MERCHANT): string {
             return "Persian";
         case MERCHANT.VENETIAN:
             return "Venetian";
+    }
+}
+
+export function getMerchantStartingCities(merchant: MERCHANT) {
+    switch (merchant) {
+        case MERCHANT.ARAB:
+            return [CITIES.BAGHDAD, CITIES.TABRIZ];
+        case MERCHANT.CHINESE:
+            return [CITIES.BEIJING, CITIES.DUNHUANG];
+        case MERCHANT.HANSEATIC_LEAGUE:
+            return [CITIES.BRUGES];
+        case MERCHANT.INDIAN:
+            return [CITIES.CALICUT];
+        case MERCHANT.PERSIAN:
+            return [CITIES.KASHGAR, CITIES.SAMARKAND];
+        case MERCHANT.VENETIAN:
+            return [CITIES.VENICE];
     }
 }

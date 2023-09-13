@@ -2,7 +2,15 @@ import { ITEMS } from "./items";
 
 export enum CITIES {
     BAGHDAD,
-    BEIJING
+    BEIJING,
+    BRUGES,
+    CALICUT,
+    CONSTANTINOPLE,
+    DUNHUANG,
+    KASHGAR,
+    SAMARKAND,
+    TABRIZ,
+    VENICE
 }
 
 export function getCityName(city: CITIES) {
@@ -51,7 +59,7 @@ interface TradingItems {
     items: TradingItem[]
 }
 
-export function getTradingItems(city: CITIES): TradingItems {
+export function getTradingItems(city: CITIES): TradingItems | undefined {
     switch (city) {
         case CITIES.BAGHDAD:
             return { items: [
