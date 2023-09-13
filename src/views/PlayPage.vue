@@ -17,6 +17,7 @@
                 return;
             }
             this.store.state.username = username;
+            console.log(this.store.state);
         }
     }
 </script>

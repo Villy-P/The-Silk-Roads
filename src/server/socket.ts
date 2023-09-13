@@ -3,7 +3,7 @@ import { server } from './server'
 import { IP_ADDRESS, VUE_PORT } from '../data/data';
 import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
-import { getMerchantBaseExports, getMerchantBaseImports } from '@/data/merchant';
+import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
 
 
 export function socketFunc() {
@@ -48,7 +48,7 @@ export function socketFunc() {
                 if (id == 6)
                     id = 0;
             }
-            io.emit('play');
+            io.emit('play', broadcastUsers(socket.id));
         });
         socket.on('requestUserState', () => {
             socket.emit('userState', broadcastUsers(socket.id));
