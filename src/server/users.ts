@@ -24,6 +24,6 @@ export function getUserBySocketID(id: string): User | undefined {
     return users.find((i) => i.socketID === id);
 }
 
-export function broadcastUsers(socketID: string): string {
-    return JSON.stringify({users: users, user: getUserBySocketID(socketID)});
+export function broadcastUsers(): string {
+    return JSON.stringify({users: users});
 }

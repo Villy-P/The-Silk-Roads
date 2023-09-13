@@ -37,9 +37,10 @@ export function socketFunc() {
                 users.push(currentSocket);
             else
                 user.socketID = socket.id;
-            io.emit('userState', broadcastUsers(socket.id));
+            io.emit('userState', broadcastUsers());
+            socket.emit('user', JSON.stringify({user: getUserByUsername(message)}));
         });
-        socket.on('play', () => {
+        socket.on('play', (msg) => {
             let id = 0;
             for (const user of users) {
                 if (user.status === USER_STATUS.LEADER)
@@ -50,10 +51,12 @@ export function socketFunc() {
                 if (id == 6)
                     id = 0;
             }
-            io.emit('play', broadcastUsers(socket.id));
+            io.emit('play', broadcastUsers());
+            socket.emit('user', JSON.stringify({user: getUserByUsername(msg)}));
         });
-        socket.on('requestUserState', () => {
-            socket.emit('userState', broadcastUsers(socket.id));
+        socket.on('requestUserState', (msg) => {
+            socket.emit('userState', broadcastUsers());
+            socket.emit('user', JSON.stringify({user: getUserByUsername(msg)}));
         })
     });
 }
