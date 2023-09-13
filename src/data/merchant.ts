@@ -175,3 +175,20 @@ export function getMerchantDescription(m: MERCHANT) {
             return "Ever since the Crusades, Venetian merchants have been controlling trade in the Mediterranean and growing wealthy acting as middlemen between Europe and the east. Because you provide this important trade link, much of your wealth comes from the additional taxes you charge on items you sell in Europe";
     }
 }
+
+export function getMerchantName(m: MERCHANT): string {
+    switch (m) {
+        case MERCHANT.ARAB:
+            return "Arab";
+        case MERCHANT.CHINESE:
+            return "Chinese";
+        case MERCHANT.HANSEATIC_LEAGUE:
+            return "Hanseatic League";
+        case MERCHANT.INDIAN:
+            return "Indian";
+        case MERCHANT.PERSIAN:
+            return "Persian";
+        case MERCHANT.VENETIAN:
+            return "Venetian";
+    }
+}
