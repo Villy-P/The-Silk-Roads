@@ -8,3 +8,4 @@
 * Journal
 * Move Cities
 * Taxes
+* Loans
