@@ -8,7 +8,7 @@ import { Store } from 'vuex';
 export let clientSocket: Socket;
 
 export default function socketSetup(store: Store<StoreState>, router: Router) {
-    clientSocket = io(`https://${IP_ADDRESS}:${SERVER_PORT}/`, {
+    store.state.socket = io(`https://${IP_ADDRESS}:${SERVER_PORT}/`, {
         withCredentials: true,
         extraHeaders: {
             'custom-header': "abcd"

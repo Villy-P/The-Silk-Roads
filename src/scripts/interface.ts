@@ -9,6 +9,7 @@ export enum USER_STATUS {
 export interface User {
     socketID: string;
     username: string;
+    serverCode: string; 
     status: USER_STATUS;
     merchantType: MERCHANT | undefined;
     items: ITEMS[];

@@ -1,5 +1,5 @@
 import { User } from "@/scripts/interface";
-import { app } from "./server";
+import { app, serverCode } from "./server";
 
 export const users: User[] = [];
 
@@ -13,6 +13,12 @@ export function userFunc() {
             }
         }
         res.send(false);
+    });
+
+    app.get("/usernamevalid/:username", (req, res) => {
+        const username = req.params.username;
+        const user = users.find((i) => i.username == username);
+        res.send(user && user.serverCode === serverCode);
     });
 }
 

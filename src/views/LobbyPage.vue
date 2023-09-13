@@ -48,7 +48,7 @@
                 return;
             }
             socketSetup(this.store, this.$router);
-            clientSocket.emit('joined', username);
+            this.store.state.socket?.emit('joined', username);
             this.store.state.username = username;
         }
 

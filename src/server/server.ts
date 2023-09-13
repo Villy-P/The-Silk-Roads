@@ -5,6 +5,7 @@ import cors from 'cors';
 import { SERVER_PORT } from '../data/data';
 import { userFunc } from './users';
 import { socketFunc } from './socket';
+import crypto from 'crypto'
 
 const options = {
     key: fs.readFileSync('cert\\CA\\localhost\\localhost.decrypted.key', 'utf-8'),
@@ -13,6 +14,7 @@ const options = {
 
 export const app = express();
 export const server = https.createServer(options, app);
+export const serverCode = crypto.randomBytes(50).toString('hex');
 
 app.use(cors({ origin: '*' }));
 

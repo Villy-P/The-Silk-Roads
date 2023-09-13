@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { server } from './server'
+import { server, serverCode } from './server'
 import { IP_ADDRESS, VUE_PORT } from '../data/data';
 import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
@@ -26,6 +26,7 @@ export function socketFunc() {
                 username: message,
                 socketID: socket.id,
                 status: isLeader,
+                serverCode: serverCode,
                 merchantType: undefined,
                 imports: [],
                 items: [],
