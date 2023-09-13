@@ -16,6 +16,7 @@ export default function socketSetup(store: Store<StoreState>) {
     clientSocket.on('joined', (message: string) => {
         const msg = JSON.parse(message);
         store.state.users = msg.users;
-        store.state.user = msg.user;
+        if (!store.state.user)
+            store.state.user = msg.user;
     });
 }
