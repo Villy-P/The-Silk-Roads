@@ -28,7 +28,6 @@
             this.store.state.username = username;
             // socketSetup(this.store, this.$router);
             // clientSocket.emit('joined', username);
-            console.log(this.store.state);
         }
 
         getMerchantName(){

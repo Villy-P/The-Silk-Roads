@@ -52,7 +52,9 @@ export function socketFunc() {
                 if (id == 6)
                     id = 0;
             }
+            console.log(users)
             io.emit('play', broadcastUsers());
+            console.log(getUserByUsername(msg));
             socket.emit('user', JSON.stringify({user: getUserByUsername(msg)}));
         });
         socket.on('requestUserState', (msg) => {
