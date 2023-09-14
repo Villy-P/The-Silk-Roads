@@ -116,3 +116,82 @@ export function getItemName(item: ITEMS): string {
             return "Translated Text";
     }
 }
+
+export function getItemAsset(item: ITEMS) {
+    switch (item) {
+        case ITEMS.TEA:
+            return "tea.png";
+        case ITEMS.FURS:
+            return "fur.png";
+        case ITEMS.SILK:
+            return "silk.png";
+        case ITEMS.GOLD:
+            return "gold.jpeg";
+        case ITEMS.RICE:
+            return "rice.jpeg";
+        case ITEMS.WINE:
+            return "wine.png";
+        case ITEMS.SALT:
+            return "salt.jpg";
+        case ITEMS.TEXTS:
+            return "texts.jpeg";
+        case ITEMS.PAPER:
+            return "paper.png";
+        case ITEMS.LINEN:
+            return "linen.png";
+        case ITEMS.IVORY:
+            return "ivory.png";
+        case ITEMS.SUGAR:
+            return "sugar.jpeg";
+        case ITEMS.SPICES:
+            return "spices.png";
+        case ITEMS.CAMELS:
+            return "camel.png";
+        case ITEMS.PEARLS:
+            return "pearl.jpeg";
+        case ITEMS.SILVER:
+            return "silver.png";
+        case ITEMS.HORSES:
+            return "horse.png";
+        case ITEMS.WEAPONS:
+            return "weapon.png";
+        case ITEMS.COMPASS:
+            return "compass.png";
+        case ITEMS.PERFUME:
+            return "perfume.png";
+        case ITEMS.PRINTING:
+            return "printing.png";
+        case ITEMS.PORCELAIN:
+            return "porcelain.png";
+        case ITEMS.GLASSWARE:
+            return "glassware.png";
+        case ITEMS.GUNPOWDER:
+            return "gunpowder.png";
+        case ITEMS.ASTROLABE:
+            return "astrolabe.png";
+        case ITEMS.BANK_NOTES:
+            return "banknote.jpeg";
+        case ITEMS.WOOL_CLOTH:
+            return "woolcloth.png";
+        case ITEMS.FINE_CLOTHS:
+            return "silk.png";
+        case ITEMS.PERSIAN_RUG:
+            return "rug.jpeg";
+        case ITEMS.COTTON_CLOTH:
+            return "cottoncloth.jpeg";
+        case ITEMS.PAPER_MAKING:
+            return "papermaking.jpeg";
+        case ITEMS.LEATHER_GOODS:
+            return "leather.png";
+        case ITEMS.BYZANTINE_SILK:
+            return "silk.png";
+        case ITEMS.EGYPTIAN_CLOTH:
+            return "cottoncloth.jpeg";
+        case ITEMS.PRECIOUS_STONES:
+            return "preciousgem.png";
+        case ITEMS.COTTON_TEXTILES:
+            return "cottoncloth.jpeg";
+        case ITEMS.TRANSLATED_TEXT:
+            return "texts.jpeg";
+    }
+}
