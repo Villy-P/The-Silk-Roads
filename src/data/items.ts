@@ -150,7 +150,7 @@ export function getItemAsset(item: ITEMS) {
         case ITEMS.PEARLS:
             return "pearl.jpeg";
         case ITEMS.SILVER:
-            return "silver.png";
+            return "silver.jpg";
         case ITEMS.HORSES:
             return "horse.png";
         case ITEMS.WEAPONS:

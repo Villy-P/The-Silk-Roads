@@ -3,7 +3,7 @@
         <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer">
 			<img src="../assets/x.svg">
 		</div>
-        <div class="bg-white w-1/2 h-2/3 rounded-2xl text-center overflow-auto text-black">
+        <div class="bg-white w-3/4 h-2/3 rounded-2xl text-center overflow-auto text-black">
             <p class="font-bold text-2xl p-3 px-6 opacity-100">{{ getMerchantName() }} Merchant</p>
             <p class="p-4 opacity-100">{{ getMerchantDescription() }}</p>
             <p class="p-4 pt-0">Below are the items that you have to trade (export) and the items you wish to buy (import)</p>
@@ -13,17 +13,17 @@
                 <p class="w-1/2 p-2">Imports</p>
             </div>
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
-                <div class="h-full w-1/2 text-left pl-2">
-                    <div v-for="item in store.state.user!.items" :key="item" class="flex">
-                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-7">
-                        <p>{{ getItemName(item) }}</p>{
+                <div class="h-full w-1/2 text-left pl-2 py-2">
+                    <div v-for="item in store.state.user!.items" :key="item" class="flex gap-2 items-center">
+                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-6 h-6">
+                        <p>{{ getItemName(item) }}</p>
                     </div>
                 </div>
                 <div class="w-0.5 bg-black"></div>
-                <div class="h-full w-1/2 text-left pl-2">
-                    <div v-for="item in store.state.user!.imports" :key="item" class="flex">
-                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-7">
-                        <p>{{ getItemName(item) }}</p>{
+                <div class="h-full w-1/2 text-left pl-2 py-2">
+                    <div v-for="item in store.state.user!.imports" :key="item" class="flex gap-2 items-center">
+                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-6 h-6">
+                        <p>{{ getItemName(item) }}</p>
                     </div>
                 </div>
             </div>
