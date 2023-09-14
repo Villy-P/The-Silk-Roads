@@ -5,7 +5,6 @@ import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
 import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
 
-
 export function socketFunc() {
     const io = new Server(server, {
         cors: {
@@ -14,11 +13,10 @@ export function socketFunc() {
                 `https://${IP_ADDRESS}:${VUE_PORT}`
             ],
             methods: ["GET", "POST"],
-            allowedHeaders: ['custom-header'],
+            allowedHeaders: ['my-custom-header'],
             credentials: true
         }
     });
-
     io.on('connection', (socket) => {
         socket.on('joined', (message) => {
             const isLeader = users.length == 0 ? USER_STATUS.LEADER : USER_STATUS.BASIC;

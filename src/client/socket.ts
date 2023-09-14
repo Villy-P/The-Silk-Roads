@@ -11,7 +11,7 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
     store.state.socket = io(`https://${IP_ADDRESS}:${SERVER_PORT}/`, {
         withCredentials: true,
         extraHeaders: {
-            'custom-header': "abcd"
+            'my-custom-header': "abcd"
         }
     });
     store.state.socket.on('userState', (message: string) => {
