@@ -93,9 +93,9 @@ export function getItemName(item: ITEMS): string {
         case ITEMS.BANK_NOTES:
             return "Bank Notes";
         case ITEMS.WOOL_CLOTH:
-            return "Wool CLoth";
+            return "Wool Cloth";
         case ITEMS.FINE_CLOTHS:
-            return "Fine CLoths";
+            return "Fine Cloths";
         case ITEMS.PERSIAN_RUG:
             return "Persian Rug";
         case ITEMS.COTTON_CLOTH:
