@@ -53,7 +53,7 @@
         }
 
         play() {
-            this.store.state.socket?.emit("play", this.store.state.user?.username);
+            this.store.state.socket?.emit("play");
         }
     }
 </script>
