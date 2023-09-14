@@ -8,16 +8,18 @@
             <p class="p-4 opacity-100">{{ getMerchantDescription() }}</p>
             <p class="p-4 pt-0">Below are the items that you have to trade (export) and the items you wish to buy (import)</p>
             <div class="w-11/12 border-2 border-black flex m-auto">
-                <p class="w-1/2 border-r-2 border-r-black p-2">Exports</p>
+                <p class="w-1/2 p-2">Exports</p>
+                <div class="w-0.5 bg-black"></div>
                 <p class="w-1/2 p-2">Imports</p>
             </div>
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
-                <div class="h-full w-1/2 border-r-2 border-black">
+                <div class="h-full w-1/2 text-left pl-2">
                     <div v-for="item in store.state.user!.items" :key="item">
                         {{ getItemName(item) }}
                     </div>
                 </div>
-                <div class="h-full w-1/2">
+                <div class="w-0.5 bg-black"></div>
+                <div class="h-full w-1/2 text-left pl-2">
                     <div v-for="item in store.state.user!.imports" :key="item">
                         {{ getItemName(item) }}
                     </div>
