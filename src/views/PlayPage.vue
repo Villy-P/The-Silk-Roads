@@ -14,15 +14,16 @@
             </div>
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
                 <div class="h-full w-1/2 text-left pl-2">
-                    <div v-for="item in store.state.user!.items" :key="item">
-                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)">
-                        {{ getItemName(item) }}
+                    <div v-for="item in store.state.user!.items" :key="item" class="flex">
+                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-7">
+                        <p>{{ getItemName(item) }}</p>{
                     </div>
                 </div>
                 <div class="w-0.5 bg-black"></div>
                 <div class="h-full w-1/2 text-left pl-2">
-                    <div v-for="item in store.state.user!.imports" :key="item">
-                        {{ getItemName(item) }}
+                    <div v-for="item in store.state.user!.imports" :key="item" class="flex">
+                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-7">
+                        <p>{{ getItemName(item) }}</p>{
                     </div>
                 </div>
             </div>
