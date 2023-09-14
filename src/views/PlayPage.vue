@@ -15,6 +15,7 @@
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
                 <div class="h-full w-1/2 text-left pl-2">
                     <div v-for="item in store.state.user!.items" :key="item">
+                        <img :src="require(`@/assets/items/${getItemAsset(item)}`)">
                         {{ getItemName(item) }}
                     </div>
                 </div>
@@ -32,7 +33,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getMerchantName, getMerchantDescription } from '@/data/merchant';
-    import { ITEMS, getItemName } from '@/data/items';
+    import { ITEMS, getItemName, getItemAsset } from '@/data/items';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -62,6 +63,10 @@
 
         getItemName(i: ITEMS) {
             return getItemName(i);
+        }
+
+        getItemAsset(i: ITEMS) {
+            return getItemAsset(i);
         }
     }
 </script>
