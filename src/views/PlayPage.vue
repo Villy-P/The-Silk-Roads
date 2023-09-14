@@ -12,10 +12,12 @@
                 <p class="w-1/2 p-2">Imports</p>
             </div>
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
-                <div class="h-fit w-1/2 border-r-2 border-black">
+                <div class="h-full w-1/2 border-r-2 border-black">
                     <div v-for="item in store.state.user!.items" :key="item">
                         {{ getItemName(item) }}
                     </div>
+                </div>
+                <div class="h-full w-1/2">
                     <div v-for="item in store.state.user!.imports" :key="item">
                         {{ getItemName(item) }}
                     </div>
@@ -45,6 +47,7 @@
             this.store.state.username = username;
             // socketSetup(this.store, this.$router);
             // clientSocket.emit('joined', username);
+            console.log(this.store.state.user?.imports);
         }
 
         getMerchantName() {
