@@ -1,7 +1,7 @@
 import { User } from "@/scripts/interface";
 import { app, serverCode } from "./server";
 
-export const users: User[] = [];
+export let users: User[] = [];
 
 export function userFunc() {
     app.get("/usernameexists/:username", (req, res) => {
@@ -18,7 +18,7 @@ export function userFunc() {
     app.get("/usernamevalid/:username", (req, res) => {
         const username = req.params.username;
         const user = users.find((i) => i.username == username);
-        res.send(user && user.serverCode === serverCode);
+        res.send((user && user.serverCode === serverCode) ? 'true' : 'false');
     });
 }
 
@@ -32,4 +32,8 @@ export function getUserBySocketID(id: string): User | undefined {
 
 export function broadcastUsers(): string {
     return JSON.stringify({users: users});
+}
+
+export function clearUsers() {
+    users = [];
 }

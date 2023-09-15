@@ -65,7 +65,7 @@
 
         async mounted() {
             const username = localStorage.getItem("username");
-            const res = await fetch(`https://${IP_ADDRESS}:${SERVER_PORT}/usernameexists/${username}`);
+            const res = await fetch(`https://${IP_ADDRESS}:${SERVER_PORT}/usernamevalid/${username}`);
             const data = await res.text();
             if (username != null && data === "true") {
                 this.$router.push("/lobby");
