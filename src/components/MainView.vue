@@ -25,19 +25,33 @@
         </div>
         <div class="grow flex w-full">
             <img src="../assets/world.jpg" class="object-cover w-2/3">
-            <div class="bg-white w-1/3 h-full border-l-2 border-l-black"></div>
+            <div class="bg-white w-1/3 h-full border-l-2 border-l-black">
+                <div class="text-center py-3 text-3xl" style="font-variant: small-caps;">
+                    Welcome To {{ getCityName() }}
+                </div>
+                <div class="w-11/12 m-auto indent-10" v-html="getCityDescription()"></div>
+            </div>
         </div>
     </div>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
+    import { getCityDescription, getCityName } from '@/data/city';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
 
     export default class MainView extends Vue {
         store = useStore(key);
+
+        getCityName() {
+            return getCityName(this.store.state.user!.currentCity!);
+        }
+
+        getCityDescription() {
+            return getCityDescription(this.store.state.user!.currentCity!);
+        }
     }
 </script>
 
