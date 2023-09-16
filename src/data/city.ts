@@ -19,6 +19,22 @@ export function getCityName(city: CITIES) {
             return "Baghdad";
         case CITIES.BEIJING:
             return "Beijing";
+        case CITIES.BRUGES:
+            return "Bruges";
+        case CITIES.CALICUT:
+            return "Calicut";
+        case CITIES.CONSTANTINOPLE:
+            return "Constantinople";
+        case CITIES.DUNHUANG:
+            return "Dunhuang";
+        case CITIES.KASHGAR:
+            return "Kashgar";
+        case CITIES.SAMARKAND:
+            return "Samarkand";
+        case CITIES.TABRIZ:
+            return "Tabriz";
+        case CITIES.VENICE:
+            return "Venice";
     }
 }
 
