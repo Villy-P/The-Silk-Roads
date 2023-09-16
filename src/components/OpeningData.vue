@@ -30,7 +30,7 @@
             <div v-else class="pb-4">
                 <p class="pb-4">Since you are an {{ getMerchantName() }} Merchant, you can choose where you start your journey:</p>
                 <div class="flex items-center flex-wrap justify-center">
-                    <div v-for="city in getMerchantStartingCities()" :key="city" @click="store.state.user!.currentCity = city">
+                    <div v-for="city in getMerchantStartingCities()" :key="city" @click="moveToCity(city)">
                         <div class="m-1 p-1 cursor-pointer border-2 border-black bg-blue-400 w-fit">Start in {{ getCityName(city) }}</div>
                     </div>
                 </div>
@@ -47,6 +47,7 @@
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
+    import { GAME_STATE } from '@/scripts/state';
 
     export default class OpeningData extends Vue {
         store = useStore(key);
@@ -73,6 +74,12 @@
 
         getCityName(i: CITIES) {
             return getCityName(i);
+        }
+
+        moveToCity(i: CITIES) {
+            this.store.state.user!.currentCity = i;
+            this.store.state.user!.state = GAME_STATE.MAIN;
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
 </script>

@@ -1,3 +1,4 @@
 export enum GAME_STATE {
-    OPENING
+    OPENING,
+    MAIN
 }

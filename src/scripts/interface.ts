@@ -1,6 +1,7 @@
 import { CITIES } from "@/data/city";
 import { ITEMS } from "@/data/items";
 import { MERCHANT } from "@/data/merchant";
+import { GAME_STATE } from "./state";
 
 export enum USER_STATUS {
     LEADER,
@@ -18,4 +19,5 @@ export interface User {
     gold: number;
     silver: number;
     currentCity?: CITIES;
+    state: GAME_STATE;
 }

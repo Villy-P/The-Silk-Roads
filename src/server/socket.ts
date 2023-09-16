@@ -4,6 +4,7 @@ import { IP_ADDRESS, VUE_PORT } from '../data/data';
 import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
 import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
+import { GAME_STATE } from '../scripts/state';
 
 export function socketFunc() {
     const io = new Server(server, {
@@ -30,6 +31,7 @@ export function socketFunc() {
                 items: [],
                 silver: 0,
                 gold: 0,
+                state: GAME_STATE.OPENING,
             };
             const user = getUserByUsername(message);
             if (user === undefined)
@@ -53,6 +55,16 @@ export function socketFunc() {
         });
         socket.on('requestUserState', () => {
             socket.emit('userState', broadcastUsers());
-        })
+        });
+        socket.on('updateUser', (user) => {
+            const u = JSON.parse(user);
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].username == u.username) {
+                    users[i] = u;
+                    break;
+                }
+            }
+            io.emit('userState', broadcastUsers());
+        });
     });
 }
