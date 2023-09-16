@@ -30,6 +30,9 @@
                     Welcome To {{ getCityName() }}
                 </div>
                 <div class="w-11/12 m-auto indent-10" v-html="getCityDescription()"></div>
+                <div v-if="getCityInnovationCard()">
+                    <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -37,7 +40,8 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { getCityDescription, getCityName } from '@/data/city';
+    import { getCityDescription, getCityInnovationCard, getCityName } from '@/data/city';
+    import { getInnovationCardSpecialText } from '@/data/innovation';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -51,6 +55,14 @@
 
         getCityDescription() {
             return getCityDescription(this.store.state.user!.currentCity!);
+        }
+
+        getInnovationCardSpecialText() {
+            return getInnovationCardSpecialText(this.store.state.user!.currentCity!);
+        }
+
+        getCityInnovationCard() {
+            return getCityInnovationCard(this.store.state.user!.currentCity!);
         }
     }
 </script>
