@@ -8,6 +8,8 @@ import { Router } from 'vue-router';
 import { Store } from 'vuex';
 
 export default function socketSetup(store: Store<StoreState>, router: Router) {
+    if (store.state.socket)
+        return;
     store.state.socket = io(`https://${IP_ADDRESS}:${SERVER_PORT}/`, {
         withCredentials: true,
         extraHeaders: {

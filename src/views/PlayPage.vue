@@ -14,14 +14,14 @@
             </div>
             <div class="w-11/12 border-2 border-t-0 border-black flex m-auto mb-7">
                 <div class="h-full w-1/2 text-left pl-2 py-2">
-                    <div v-for="item in store.state.user!.items" :key="item" class="flex gap-2 items-center">
+                    <div v-for="item in store.state.user?.items" :key="item" class="flex gap-2 items-center">
                         <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-6 h-6">
                         <p>{{ getItemName(item) }}</p>
                     </div>
                 </div>
                 <div class="w-0.5 bg-black"></div>
                 <div class="h-full w-1/2 text-left pl-2 py-2">
-                    <div v-for="item in store.state.user!.imports" :key="item" class="flex gap-2 items-center">
+                    <div v-for="item in store.state.user?.imports" :key="item" class="flex gap-2 items-center">
                         <img :src="require(`@/assets/items/${getItemAsset(item)}`)" class="w-6 h-6">
                         <p>{{ getItemName(item) }}</p>
                     </div>
@@ -38,6 +38,7 @@
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
+    import socketSetup from '@/client/socket';
 
     export default class PlayPage extends Vue {
         store = useStore(key);
@@ -49,14 +50,16 @@
                 return;
             }
             this.store.state.username = username;
+            socketSetup(this.store, this.$router);
+            this.store.state.socket?.emit('joined');
         }
 
         getMerchantName() {
-            return getMerchantName(this.store.state.user!.merchantType!)
+            return getMerchantName(this.store.state.user?.merchantType || 0)
         }
 
         getMerchantDescription() {
-            return getMerchantDescription(this.store.state.user!.merchantType!);
+            return getMerchantDescription(this.store.state.user?.merchantType || 0);
         }
 
         getItemName(i: ITEMS) {
