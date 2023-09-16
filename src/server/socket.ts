@@ -57,10 +57,9 @@ export function socketFunc() {
             socket.emit('userState', broadcastUsers());
         });
         socket.on('updateUser', (user) => {
-            const u = JSON.parse(user);
             for (let i = 0; i < users.length; i++) {
-                if (users[i].username == u.username) {
-                    users[i] = u;
+                if (users[i].username == user.username) {
+                    users[i] = user;
                     break;
                 }
             }
