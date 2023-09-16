@@ -1,0 +1,27 @@
+.tooltip-container {
+    @apply relative
+}
+
+.tooltip-container:hover .tooltip-text, .tooltip-hovered .tooltip-text {
+    @apply opacity-100;
+}
+
+.tooltip-text {
+    @apply opacity-0 w-fit px-2 py-1 bg-black text-white rounded-md absolute z-10 whitespace-nowrap text-xs pointer-events-none transition-all select-none
+}
+
+.tooltip-top {
+    @apply bottom-full mb-1
+}
+
+.tooltip-right {
+    @apply -top-2 left-full ml-1
+}
+
+.tooltip-left {
+    @apply -bottom-2 right-full mr-1
+}
+
+.tooltip-bottom {
+    @apply top-full mt-1
+}
