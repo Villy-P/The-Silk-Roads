@@ -34,3 +34,20 @@ export function getInnovationDescription(innovation: INNOVATIONS) {
             return "The Crusades helped introduce many scholarly works (many from the Translation Movement) to Europe, sparking a thirst for more texts on mathematics, science, medicine, astronomy and philosophy. The spread of papermaking and printing enhanced the availability of texts.";
     }
 }
+
+export function getInnovationImageSrc(innovation: INNOVATIONS): string {
+    switch (innovation) {
+        case INNOVATIONS.PRINTING:
+            return "printing.png";
+        case INNOVATIONS.GUNPOWDER:
+            return "gunpowder.png";
+        case INNOVATIONS.COMPASS:
+            return "compass.png";
+        case INNOVATIONS.PAPERMAKING:
+            return "paper.png";
+        case INNOVATIONS.ASTROLABE:
+            return "astrolabe.png";
+        case INNOVATIONS.TEXTS:
+            return "texts.jpeg";
+    }
+}
