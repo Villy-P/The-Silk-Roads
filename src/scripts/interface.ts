@@ -1,3 +1,4 @@
+import { CITIES } from "@/data/city";
 import { ITEMS } from "@/data/items";
 import { MERCHANT } from "@/data/merchant";
 
@@ -11,9 +12,10 @@ export interface User {
     username: string;
     serverCode: string; 
     status: USER_STATUS;
-    merchantType: MERCHANT | undefined;
+    merchantType?: MERCHANT;
     items: ITEMS[];
     imports: ITEMS[];
     gold: number;
     silver: number;
+    currentCity?: CITIES;
 }

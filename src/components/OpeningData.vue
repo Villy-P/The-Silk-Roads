@@ -30,7 +30,7 @@
             <div v-else class="pb-4">
                 <p class="pb-4">Since you are an {{ getMerchantName() }} Merchant, you can choose where you start your journey:</p>
                 <div class="flex items-center flex-wrap justify-center">
-                    <div v-for="city in getMerchantStartingCities()" :key="city">
+                    <div v-for="city in getMerchantStartingCities()" :key="city" @click="store.state.user!.currentCity = city">
                         <div class="m-1 p-1 cursor-pointer border-2 border-black bg-blue-400 w-fit">Start in {{ getCityName(city) }}</div>
                     </div>
                 </div>
