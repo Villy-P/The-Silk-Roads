@@ -1,6 +1,6 @@
 import { CITIES } from "./city";
 
-enum INNOVATIONS {
+export enum INNOVATIONS {
     PRINTING,
     GUNPOWDER,
     COMPASS,
@@ -32,6 +32,23 @@ export function getInnovationDescription(innovation: INNOVATIONS) {
             return "The astrolabe was invented in ancient Greece, but during the Islamic golden age, Muslim astronomers improved the astrolave, which can be used to determine latitude and triangulate a position, thus making it a critical instrument for navigators, especially sailors. ";
         case INNOVATIONS.TEXTS:
             return "The Crusades helped introduce many scholarly works (many from the Translation Movement) to Europe, sparking a thirst for more texts on mathematics, science, medicine, astronomy and philosophy. The spread of papermaking and printing enhanced the availability of texts.";
+    }
+}
+
+export function getInnovationCardName(innovation: INNOVATIONS): string {
+    switch (innovation) {
+        case INNOVATIONS.PRINTING:
+            return "Printing";
+        case INNOVATIONS.GUNPOWDER:
+            return "Gunpowder";
+        case INNOVATIONS.COMPASS:
+            return "Compass";
+        case INNOVATIONS.PAPERMAKING:
+            return "Papermaking";
+        case INNOVATIONS.ASTROLABE:
+            return "Astrolabe";
+        case INNOVATIONS.TEXTS:
+            return "Texts";
     }
 }
 

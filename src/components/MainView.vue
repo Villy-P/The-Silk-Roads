@@ -32,6 +32,20 @@
                 <div class="w-11/12 m-auto indent-10" v-html="getCityDescription()"></div>
                 <div v-if="getCityInnovationCard()">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
+                    <div class="w-10/12 flex h-40 m-auto">
+                        <div class="h-full w-1/12 flex items-center cursor-pointer">
+                            <img src="../assets/icon/leftarrow.svg">
+                        </div>
+                        <div class="grow rounded-xl mx-3 border-2 border-black">
+                            <div class="flex gap-2 items-center w-fit m-auto p-2">
+                                <img :src="require(`@/assets/items/${getItemAsset()}`)" class="w-6 h-6">
+                                <p>{{ getInnovationCardName() }}</p>
+                            </div>
+                        </div>
+                        <div class="h-full w-1/12 flex items-center cursor-pointer">
+                            <img src="../assets/icon/rightarrow.svg">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,13 +55,15 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityDescription, getCityInnovationCard, getCityName } from '@/data/city';
-    import { getInnovationCardSpecialText } from '@/data/innovation';
+    import { INNOVATIONS, getInnovationCardName, getInnovationCardSpecialText, getInnovationImageSrc } from '@/data/innovation';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
 
     export default class MainView extends Vue {
         store = useStore(key);
+
+        currentInnovation = INNOVATIONS.PRINTING;
 
         getCityName() {
             return getCityName(this.store.state.user!.currentCity!);
@@ -63,6 +79,14 @@
 
         getCityInnovationCard() {
             return getCityInnovationCard(this.store.state.user!.currentCity!);
+        }
+
+        getInnovationCardName() {
+            return getInnovationCardName(this.currentInnovation);
+        }
+
+        getItemAsset() {
+            return getInnovationImageSrc(this.currentInnovation);
         }
     }
 </script>
