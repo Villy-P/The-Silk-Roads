@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col h-screen w-full">
+    <div class="flex flex-col h-screen w-full overflow-clip">
         <div class="h-14 flex border-b-black border-b-2">
             <div class="flex items-center justify-center w-fit tooltip-container">
                 <img src="../assets/items/silver.jpg" class="w-10">
@@ -23,26 +23,27 @@
                 </div>
             </div>
         </div>
-        <div class="grow flex w-full">
+        <div class="flex w-full" style="height: calc(100% - 56px);">
             <img src="../assets/world.jpg" class="object-cover w-2/3">
-            <div class="bg-white w-1/3 h-full border-l-2 border-l-black">
+            <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
                 <div class="text-center py-3 text-3xl" style="font-variant: small-caps;">
                     Welcome To {{ getCityName() }}
                 </div>
                 <div class="w-11/12 m-auto indent-10" v-html="getCityDescription()"></div>
                 <div v-if="getCityInnovationCard()">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
-                    <div class="w-10/12 flex h-40 m-auto">
-                        <div class="h-full w-1/12 flex items-center cursor-pointer">
+                    <div class="w-full flex h-fit m-auto items-center">
+                        <div class="h-full w-72 flex items-center cursor-pointer">
                             <img src="../assets/icon/leftarrow.svg">
                         </div>
-                        <div class="grow rounded-xl mx-3 border-2 border-black">
+                        <div class="rounded-xl mx-3 border-2 border-black h-fit">
                             <div class="flex gap-2 items-center w-fit m-auto p-2">
                                 <img :src="require(`@/assets/items/${getItemAsset()}`)" class="w-6 h-6">
                                 <p>{{ getInnovationCardName() }}</p>
                             </div>
+                            <div class="p-1 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
                         </div>
-                        <div class="h-full w-1/12 flex items-center cursor-pointer">
+                        <div class="h-full w-72 flex items-center cursor-pointer">
                             <img src="../assets/icon/rightarrow.svg">
                         </div>
                     </div>
@@ -55,7 +56,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityDescription, getCityInnovationCard, getCityName } from '@/data/city';
-    import { INNOVATIONS, getInnovationCardName, getInnovationCardSpecialText, getInnovationImageSrc } from '@/data/innovation';
+    import { INNOVATIONS, getInnovationCardName, getInnovationCardSpecialText, getInnovationDescription, getInnovationImageSrc } from '@/data/innovation';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -87,6 +88,10 @@
 
         getItemAsset() {
             return getInnovationImageSrc(this.currentInnovation);
+        }
+
+        getInnovationDescription() {
+            return getInnovationDescription(this.currentInnovation);
         }
     }
 </script>
