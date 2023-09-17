@@ -16,7 +16,10 @@
                     <p>{{ store.state.user?.items.length }}</p>
                     <div class="tooltip-text tooltip-bottom">Items</div>
                 </div>
-                <img src="../assets/economic.png" class="w-10">
+                <div class="select-none tooltip-container h-full flex items-center cursor-pointer">
+                    <img src="../assets/economic.png" class="w-10">
+                    <div class="tooltip-text tooltip-bottom">Inventory</div>
+                </div>
                 <div class="select-none tooltip-container h-full flex items-center">
                     <p>{{ store.state.user?.imports.length }}</p>
                     <div class="tooltip-text tooltip-bottom">Imports</div>
@@ -33,17 +36,17 @@
                 <div v-if="getCityInnovationCard()">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
                     <div class="w-full flex h-fit m-auto items-center">
-                        <div class="h-full w-72 flex items-center cursor-pointer">
+                        <div class="h-full w-1/12 flex items-center cursor-pointer">
                             <img src="../assets/icon/leftarrow.svg">
                         </div>
-                        <div class="rounded-xl mx-3 border-2 border-black h-fit">
+                        <div class="rounded-xl w-10/12 mx-3 border-2 border-black h-fit">
                             <div class="flex gap-2 items-center w-fit m-auto p-2">
                                 <img :src="require(`@/assets/items/${getItemAsset()}`)" class="w-6 h-6">
                                 <p>{{ getInnovationCardName() }}</p>
                             </div>
-                            <div class="p-1 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
+                            <div class="p-3 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
                         </div>
-                        <div class="h-full w-72 flex items-center cursor-pointer">
+                        <div class="h-full w-1/12 flex items-center cursor-pointer" @click="chanceInnovationCard(1)">
                             <img src="../assets/icon/rightarrow.svg">
                         </div>
                     </div>
@@ -92,6 +95,14 @@
 
         getInnovationDescription() {
             return getInnovationDescription(this.currentInnovation);
+        }
+
+        chanceInnovationCard(amount: number) {
+            this.currentInnovation += amount;
+            if (this.currentInnovation < 0)
+                this.currentInnovation = INNOVATIONS.TEXTS;
+            if (this.currentInnovation > INNOVATIONS.TEXTS)
+                this.currentInnovation = INNOVATIONS.PRINTING;
         }
     }
 </script>
