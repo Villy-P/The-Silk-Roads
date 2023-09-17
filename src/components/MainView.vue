@@ -45,6 +45,7 @@
                                 <p>{{ getInnovationCardName() }}</p>
                             </div>
                             <div class="p-3 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
+                            <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">Select</div>
                         </div>
                         <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(1)">
                             <img src="../assets/icon/rightarrow.svg">
