@@ -1,4 +1,10 @@
 export enum ITEMS {
+    TEXTS,
+    COMPASS,
+    PRINTING,
+    GUNPOWDER,
+    ASTROLABE,
+    PAPER_MAKING,
     TEA,
     FURS,
     SILK,
@@ -6,7 +12,6 @@ export enum ITEMS {
     RICE,
     WINE,
     SALT,
-    TEXTS,
     PAPER,
     LINEN,
     IVORY,
@@ -17,19 +22,14 @@ export enum ITEMS {
     SILVER,
     HORSES,
     WEAPONS,
-    COMPASS,
     PERFUME,
-    PRINTING,
     PORCELAIN,
     GLASSWARE,
-    GUNPOWDER,
-    ASTROLABE,
     BANK_NOTES,
     WOOL_CLOTH,
     FINE_CLOTHS,
     PERSIAN_RUG,
     COTTON_CLOTH,
-    PAPER_MAKING,
     LEATHER_GOODS,
     BYZANTINE_SILK,
     EGYPTIAN_CLOTH,
@@ -193,5 +193,36 @@ export function getItemAsset(item: ITEMS) {
             return "cottoncloth.jpeg";
         case ITEMS.TRANSLATED_TEXT:
             return "texts.jpeg";
+    }
+}
+
+export function isInnovationCard(card: ITEMS) {
+    switch (card) {
+        case ITEMS.PRINTING:
+        case ITEMS.GUNPOWDER:
+        case ITEMS.COMPASS:
+        case ITEMS.PAPER_MAKING:
+        case ITEMS.ASTROLABE:
+        case ITEMS.TEXTS:
+            return true;
+    }
+    return false;
+}
+
+
+export function getInnovationDescription(innovation: ITEMS) {
+    switch (innovation) {
+        case ITEMS.PRINTING:
+            return "Printing technology made its way to both the Middle East and Europe. Rashid al-Din marveled at the possibilities of this technology: \n “[W]hen any book was desired, a copy was made by a skillful calligrapher on tablets and carefully corrected by proof-readers... Under this system he had copies made, lent them to friends, and urged them to transcribe them and return the originals. He had Arabic translations made of those works he composed in Persian, and Persian translations of works composed in Arabic. When the translations had been prepared, he deposited them in the library.” Marco Polo also documented the technology in his book.";
+        case ITEMS.GUNPOWDER:
+            return "By this point, gunpowder was being used to make early forms of firearms and cannons. Muslims acquired gunpowder from China, and several Muslim scholars wrote gunpowder recipes. The earliest records and recipes for gunpowder in Europe appear not long after they appeared in the Islamic world. Gunpowder became its own industry that was improved upon in order to create new weaponry.";
+        case ITEMS.COMPASS:
+            return "Using his advances in astronomy, the Chinese developed the magnetic needle compass, a far more accurate compass. The needle was reduced in size and attached to a fixed stem (rather than floating in water). In some cases it was put in a small protective case with a glass top, making it suitable for sea travel. The compass made its way west, reaching the Middle East and Europe around 1300.";
+        case ITEMS.PAPER_MAKING:
+            return "Paper was invented in Han China around the first century CE and reached the Islamic world around the 8th century. It started to replace parchment soon after, and Muslims created paper mills that spread across the Muslim world to Spain. However, papermaking would not reach much of Europe until the 14th century.";
+        case ITEMS.ASTROLABE:
+            return "The astrolabe was invented in ancient Greece, but during the Islamic golden age, Muslim astronomers improved the astrolave, which can be used to determine latitude and triangulate a position, thus making it a critical instrument for navigators, especially sailors. ";
+        case ITEMS.TEXTS:
+            return "The Crusades helped introduce many scholarly works (many from the Translation Movement) to Europe, sparking a thirst for more texts on mathematics, science, medicine, astronomy and philosophy. The spread of papermaking and printing enhanced the availability of texts.";
     }
 }
