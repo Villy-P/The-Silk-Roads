@@ -60,7 +60,8 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityDescription, getCityInnovationCard, getCityName } from '@/data/city';
-    import { INNOVATIONS, getInnovationCardName, getInnovationCardSpecialText, getInnovationDescription, getInnovationImageSrc } from '@/data/innovation';
+    import { getInnovationCardSpecialText } from '@/data/innovation';
+    import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -68,7 +69,7 @@
     export default class MainView extends Vue {
         store = useStore(key);
 
-        currentInnovation = INNOVATIONS.PRINTING;
+        currentInnovation = ITEMS.TEXTS;
 
         getCityName() {
             return getCityName(this.store.state.user!.currentCity!);
@@ -87,11 +88,11 @@
         }
 
         getInnovationCardName() {
-            return getInnovationCardName(this.currentInnovation);
+            return getItemName(this.currentInnovation);
         }
 
         getItemAsset() {
-            return getInnovationImageSrc(this.currentInnovation);
+            return getItemAsset(this.currentInnovation);
         }
 
         getInnovationDescription() {
@@ -101,9 +102,9 @@
         changeInnovationCard(amount: number) {
             this.currentInnovation += amount;
             if (this.currentInnovation < 0)
-                this.currentInnovation = INNOVATIONS.TEXTS;
-            if (this.currentInnovation > INNOVATIONS.TEXTS)
-                this.currentInnovation = INNOVATIONS.PRINTING;
+                this.currentInnovation = ITEMS.PAPER_MAKING;
+            if (this.currentInnovation > ITEMS.PAPER_MAKING)
+                this.currentInnovation = ITEMS.TEXTS;
         }
     }
 </script>
