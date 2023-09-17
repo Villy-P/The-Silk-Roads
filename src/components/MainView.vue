@@ -36,7 +36,7 @@
                 <div v-if="getCityInnovationCard()">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
                     <div class="w-full flex h-fit m-auto items-center">
-                        <div class="h-full w-1/12 flex items-center cursor-pointer">
+                        <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(-1)">
                             <img src="../assets/icon/leftarrow.svg">
                         </div>
                         <div class="rounded-xl w-10/12 mx-3 border-2 border-black h-fit">
@@ -46,7 +46,7 @@
                             </div>
                             <div class="p-3 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
                         </div>
-                        <div class="h-full w-1/12 flex items-center cursor-pointer" @click="chanceInnovationCard(1)">
+                        <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(1)">
                             <img src="../assets/icon/rightarrow.svg">
                         </div>
                     </div>
@@ -97,7 +97,7 @@
             return getInnovationDescription(this.currentInnovation);
         }
 
-        chanceInnovationCard(amount: number) {
+        changeInnovationCard(amount: number) {
             this.currentInnovation += amount;
             if (this.currentInnovation < 0)
                 this.currentInnovation = INNOVATIONS.TEXTS;
