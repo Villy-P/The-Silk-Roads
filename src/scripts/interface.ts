@@ -20,4 +20,5 @@ export interface User {
     silver: number;
     currentCity?: CITIES;
     state: GAME_STATE;
+    cityInnovations: CITIES[];
 }

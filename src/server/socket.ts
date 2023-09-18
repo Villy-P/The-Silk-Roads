@@ -32,6 +32,7 @@ export function socketFunc() {
                 silver: 0,
                 gold: 0,
                 state: GAME_STATE.OPENING,
+                cityInnovations: []
             };
             const user = getUserByUsername(message);
             if (user === undefined)
