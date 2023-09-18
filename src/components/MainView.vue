@@ -39,13 +39,17 @@
                         <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(-1)">
                             <img src="../assets/icon/leftarrow.svg">
                         </div>
-                        <div class="rounded-xl w-10/12 mx-3 border-2 border-black h-fit">
+                        <div class="rounded-xl relative w-10/12 mx-3 border-2 border-black h-fit">
+                            <div class="citywelcome-warning tooltip-container tooltip-container-abs" v-if="store.state.user?.imports.includes(currentInnovation)">
+                                <p>!</p>
+                                <div class="tooltip-text tooltip-left">You need this item</div>
+                            </div>
                             <div class="flex gap-2 items-center w-fit m-auto p-2">
                                 <img :src="require(`@/assets/items/${getItemAsset()}`)" class="w-6 h-6">
                                 <p>{{ getInnovationCardName() }}</p>
                             </div>
                             <div class="p-3 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
-                            <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">Select</div>
+                            <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">Select this Innovation</div>
                         </div>
                         <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(1)">
                             <img src="../assets/icon/rightarrow.svg">
@@ -110,3 +114,4 @@
 </script>
 
 <style lang="scss" src="../styles/tooltip.scss"></style>
+<style lang="scss" src="../styles/citywelcome.scss"></style>

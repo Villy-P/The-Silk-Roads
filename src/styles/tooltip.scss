@@ -1,5 +1,9 @@
 .tooltip-container {
-    @apply relative
+    @apply relative;
+}
+
+.tooltip-container-abs {
+    position: absolute !important;
 }
 
 .tooltip-container:hover .tooltip-text, .tooltip-hovered .tooltip-text {
