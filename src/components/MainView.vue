@@ -33,6 +33,12 @@
                     Welcome To {{ getCityName() }}
                 </div>
                 <div class="w-11/12 m-auto indent-10" v-html="getCityDescription()"></div>
+                <div class="flex flex-wrap items-center jusitfy-center w-full text-center gap-3 py-2">
+                    <div class="w-8/12 m-auto tooltip-container" v-for="image in getCityImages()?.items" :key="image.name">
+                        <img :alt="image.name" :src="require(`@/assets/cities/${image.src}`)">
+                        <div class="tooltip-text tooltip-top">{{ image.name }}</div>
+                    </div>
+                </div>
                 <div v-if="getCityInnovationCard()">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
                     <div class="w-full flex h-fit m-auto items-center">
@@ -63,7 +69,7 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { getCityDescription, getCityInnovationCard, getCityName } from '@/data/city';
+    import { getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
     import { key } from '@/store/store';
@@ -109,6 +115,10 @@
                 this.currentInnovation = ITEMS.PAPER_MAKING;
             if (this.currentInnovation > ITEMS.PAPER_MAKING)
                 this.currentInnovation = ITEMS.TEXTS;
+        }
+
+        getCityImages() {
+            return getCityImages(this.store.state.user!.currentCity!);
         }
     }
 </script>

@@ -55,10 +55,10 @@ export function getCityImages(city: CITIES) {
             return {items: [
                 {
                     name: "Dening Hall Temple",
-                    src: '@/assets/cities/dening_hall_temple.png'
+                    src: 'dening_hall_temple.png'
                 }, {
                     name: "Arch Bridges Of Taicang, built by the Yuan Dynasty",
-                    src: '@/assets/cities/arch_bridges_of_taicang.png'
+                    src: 'arch_bridges_of_taicang.png'
                 }
             ]};
     }
