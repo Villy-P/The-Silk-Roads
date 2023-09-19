@@ -39,7 +39,7 @@
                         <div class="tooltip-text tooltip-top">{{ image.name }}</div>
                     </div>
                 </div>
-                <div v-if="getCityInnovationCard()">
+                <div v-if="getCityInnovationCard() && !store.state.user?.cityInnovations.includes(store.state.user!.currentCity!)">
                     <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
                     <div class="w-full flex h-fit m-auto items-center">
                         <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(-1)">
@@ -55,7 +55,9 @@
                                 <p>{{ getInnovationCardName() }}</p>
                             </div>
                             <div class="p-3 indent-8 overflow-auto h-fit">{{ getInnovationDescription() }}</div>
-                            <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">Select this Innovation</div>
+                            <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="selectInnovation">
+                                Select this Innovation
+                            </div>
                         </div>
                         <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(1)">
                             <img src="../assets/icon/rightarrow.svg">
@@ -119,6 +121,12 @@
 
         getCityImages() {
             return getCityImages(this.store.state.user!.currentCity!);
+        }
+
+        selectInnovation() {
+            this.store.state.user?.items.push(this.currentInnovation);
+            this.store.state.user?.cityInnovations.push(this.store.state.user!.currentCity!);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
 </script>
