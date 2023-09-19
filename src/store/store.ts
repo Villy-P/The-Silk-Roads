@@ -8,6 +8,7 @@ export interface StoreState {
     user: User | null;
     users: User[];
     socket: Socket | null;
+    showInventory: boolean;
 }
 
 export const key: InjectionKey<Store<StoreState>> = Symbol()
@@ -18,7 +19,8 @@ export const store = createStore<StoreState>({
             username: '',
             user: null,
             users: [],
-            socket: null
+            socket: null,
+            showInventory: false
         }
     },
     mutations: {}

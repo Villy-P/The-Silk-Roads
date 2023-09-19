@@ -17,7 +17,7 @@
                     <div class="tooltip-text tooltip-bottom">Items</div>
                 </div>
                 <div class="select-none tooltip-container h-full flex items-center cursor-pointer">
-                    <img src="../assets/economic.png" class="w-10">
+                    <img src="../assets/economic.png" class="w-10" @click="store.state.showInventory = true">
                     <div class="tooltip-text tooltip-bottom">Inventory</div>
                 </div>
                 <div class="select-none tooltip-container h-full flex items-center">
