@@ -64,6 +64,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
+                    Enter the City
+                </div>
             </div>
         </div>
     </div>
