@@ -48,6 +48,8 @@ export function getCityDescription(city: CITIES) {
             return "Waves of European travelers have set out across the Silk Roads to see for themselves the great wealth of China and the Mongol khanates, and Europe’s commerce and mercantile economy are growing. Bruges’ trade grew due to its involvement with the Hanseatic League, but in the 13th century it established trade ties with Genoa and then Venice, providing access to the Mediterranean trade and its luxury goods. Bruges became known for its wool manufactures and its stock exchange (perhaps the first in the world). Bruges became the prime hub of international trade in north-western Europe.";
         case CITIES.CALICUT:
             return "Calicut (aka Kerala) is a cosmopolitan city of the Malabar Coast of India under control of the Hindu Vijayanagara Empire. It is part of the maritime Silk Road network, and its thriving trade attracts merchants from China, Southeast Asia, Persia, Arabia, East Africa, and other parts of India flock here. Ibn Battuta marveled at the huge Chinese junk ships that brought China’s finest goods here, and Marco Polo noted that this kingdom had “a great quantity of pepper, and ginger, and cinnamon, and of nuts of India. The ships that come from the east [Asia] bring…cloths of silk and gold, and sendels; also gold and silver, cloves, and other fine spices for which there is a demand here, and exchange them for the products of these countries.” Ships can easily access this port from the Red Sea region (Aden, Mecca, East Africa), and goods from here are sold as far away as Venice.";
+        case CITIES.CONSTANTINOPLE:
+            return `Although the Byzantine Empire is no longer at its height, Constantinople remains an important trade city. Ever since the Fourth Crusade, Venetians have been in economic control of the city and dominate its markets. Ibn Battuta described its merchant activity:<br><b>"It is a busy city, and merchants come to it from every country by sea or land, and there is none like it in the world except Bagdad, the great city of Islam. From every part of the empire of Greece tribute is brought here every year, and they fill strongholds with garments of silk, purple, and gold. Like unto these storehouses and this wealth, there is nothing in the whole world to be found. It is said that the tribute of the city amounts every year to 20,000 gold pieces, derived both from the rents of shops and markets, and from the tribute of merchants who enter by sea or land. The Greek inhabitants are very rich in gold and precious stones, and they go clothed in garments of silk with gold embroidery, and they ride horses, and look like princes. Indeed, the land is very rich in all cloth stuffs, and in bread, meat, and wine....Wealth like that of Constantinople is not to be found in the whole world. Here also are men learned in all the books of the Greeks, and they eat and drink every man under his vine and his fig-tree.”</b><br>The Grand Bazaar (pictured below) is the center of trade, although it would not be constructed until after the Ottoman conquest of 1453.`;
     }
 }
 
@@ -68,6 +70,16 @@ export function getCityImages(city: CITIES) {
                 {
                     name: "Brudges Canal",
                     src: 'bruges_canal.png'
+                }
+            ]};
+        case CITIES.CONSTANTINOPLE:
+            return {items: [
+                {
+                    name: "Grand Bazaar",
+                    src: 'grand_bazaar_1.png'
+                }, {
+                    name: "Grand Bazaar",
+                    src: 'grand_bazaar_2.png'
                 }
             ]};
     }
@@ -232,6 +244,31 @@ export function getTradingItems(city: CITIES): TradingItems | undefined {
                     item: ITEMS.PRECIOUS_STONES,
                     silver: 5,
                     gold: 3,
+                }, 
+            ]};
+        case CITIES.CONSTANTINOPLE:
+            return {items: [
+                {
+                    item: ITEMS.BYZANTINE_SILK,
+                    silver: 6,
+                    gold: 3,
+                    displayName: "Embroidered Byzantine Silk"
+                }, {
+                    item: ITEMS.WINE,
+                    silver: 3,
+                    gold: 1,
+                }, {
+                    item: ITEMS.PRECIOUS_STONES,
+                    silver: 5,
+                    gold: 3,
+                }, {
+                    item: ITEMS.COTTON_CLOTH,
+                    silver: 3,
+                    gold: 1,
+                }, {
+                    item: ITEMS.PERFUME,
+                    silver: 3,
+                    gold: 1,
                 }, 
             ]};
     }
