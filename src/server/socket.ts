@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Server } from 'socket.io'
 import { server, serverCode } from './server'
 import { IP_ADDRESS, VUE_PORT } from '../data/data';
@@ -5,7 +6,7 @@ import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
 import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
 import { GAME_STATE } from '../scripts/state';
-import { shuffle } from '@/scripts/util';
+import { getRandomValueThenDelete } from '../scripts/util';
 
 export function socketFunc() {
     const io = new Server(server, {
@@ -43,15 +44,18 @@ export function socketFunc() {
             io.emit('userState', broadcastUsers());
         });
         socket.on('play', () => {
+            let nums = [0, 1, 2, 3, 4, 5];
             let id = 0;
-            for (const user of shuffle(users)) {
+            for (const user of users) {
                 if (user.status === USER_STATUS.LEADER)
                     continue;
-                user.merchantType = id++;
-                user.items = getMerchantBaseExports(user.merchantType);
-                user.imports = getMerchantBaseImports(user.merchantType);
-                if (id == 6)
+                user.merchantType = getRandomValueThenDelete(nums);
+                user.items = getMerchantBaseExports(user.merchantType!);
+                user.imports = getMerchantBaseImports(user.merchantType!);
+                if (id == 6) {
                     id = 0;
+                    nums = [0, 1, 2, 3, 4, 5];
+                }
             }
             io.emit('play', broadcastUsers());
         });

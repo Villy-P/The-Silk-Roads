@@ -9,3 +9,8 @@ export function shuffle(arr: any[]) {
     }
     return array;
 }
+
+export function getRandomValueThenDelete(values: any[]) {
+    const randomIndex = Math.floor(Math.random() * values.length);
+    return values.splice(randomIndex, 1)[0];
+}
