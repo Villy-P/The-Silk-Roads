@@ -52,6 +52,8 @@ export function getCityDescription(city: CITIES) {
             return `Although the Byzantine Empire is no longer at its height, Constantinople remains an important trade city. Ever since the Fourth Crusade, Venetians have been in economic control of the city and dominate its markets. Ibn Battuta described its merchant activity:<br><b>"It is a busy city, and merchants come to it from every country by sea or land, and there is none like it in the world except Bagdad, the great city of Islam. From every part of the empire of Greece tribute is brought here every year, and they fill strongholds with garments of silk, purple, and gold. Like unto these storehouses and this wealth, there is nothing in the whole world to be found. It is said that the tribute of the city amounts every year to 20,000 gold pieces, derived both from the rents of shops and markets, and from the tribute of merchants who enter by sea or land. The Greek inhabitants are very rich in gold and precious stones, and they go clothed in garments of silk with gold embroidery, and they ride horses, and look like princes. Indeed, the land is very rich in all cloth stuffs, and in bread, meat, and wine....Wealth like that of Constantinople is not to be found in the whole world. Here also are men learned in all the books of the Greeks, and they eat and drink every man under his vine and his fig-tree.”</b><br>The Grand Bazaar (pictured below) is the center of trade, although it would not be constructed until after the Ottoman conquest of 1453.`;
         case CITIES.DUNHUANG: 
             return "Dunhuang is a desert oasis at the edge of the Taklamakan Desert, Dunhuang was one of the first trading cities encountered by merchants arriving in China from the west. The name Dunhuang, meaning \"Blazing Beacon\", refers to the beacons lit to warn of attacks by marauding nomadic tribes. The Mongols rebuilt the city after conquering it, and it is an entrepot of various groups—many Buddhist monks, but also Nestorian Christians and Sogdians from Central Asia. Most impressive, however, are the Mogao Caves, the “Caves of a Thousand Buddhas.” And although they are Buddhist shrines, the caves also represent hundreds of years of syncretism, absorbing cultural elements from Central and Western Asia and Europe. Among the 2,000 sculptures and 45,000 square meters of frescos one can find manuscripts written in numerous languages, Greek style columns and decorative geometric patterns from Persia. A collection of 40,000 scrolls include texts written in Chinese, Tibetan, Sanskrit, Khotanese, Uighur, Sogdian, and Hebrew—just some of the languages of the traders and pilgrims of the Silk Roads. Some scrolls were transcribed using woodblock printing from China, demonstrating its spread across the Silk Roads. ";
+        case CITIES.KASHGAR:
+            return "Kashgar, in the westernmost region of China, has been a major trade outpost between China, the Middle East, and Europe for over 2,000 years, making it one of the oldest continuously inhabited cities in the world. According to Marco Polo, Kashgar (which he calls Cascar)<br><b>“is a region lying between north-east and east, and constituted a kingdom in former days, but now it is subject to the Great Kaan. The people worship Mahommet (Muhammad). There are a good number of towns and villages, but the greatest and finest is Cascar itself. The inhabitants live by trade and handicrafts; they have beautiful gardens and vineyards, and fine estates, and grow a great deal of cotton. From this country many merchants go forth about the world on trading journeys...There are in the country many Nestorian Christians, who have churches of their own.”</b><br>Kashgar has its own bazaar called the Ivan Bazaar that sells cotton and silk textiles, leatherwear and pottery and is still known as one of the largest markets in the region. It is also known for its livestock marketplace. Below is an image of Kashgar’s bazaar."
     }
 }
 
@@ -89,6 +91,13 @@ export function getCityImages(city: CITIES) {
                 {
                     name: "Cave 45 of the Mogoa Crottoes",
                     src: "cave45.png"
+                }
+            ]};
+        case CITIES.KASHGAR:
+            return {items: [
+                {
+                    name: "Kashgar Bazaar",
+                    src: "kashgar_bazaar.png"
                 }
             ]};
     }
@@ -311,6 +320,30 @@ export function getTradingItems(city: CITIES): TradingItems | undefined {
                     silver: 5,
                     gold: 3,
                     displayName: "Jade Jewelry & Precious Stones"
+                }, 
+            ]};
+        case CITIES.KASHGAR: 
+            return { items: [
+                {
+                    item: ITEMS.COTTON_TEXTILES,
+                    silver: 3,
+                    gold: 2
+                }, {
+                    item: ITEMS.TEA,
+                    silver: 2,
+                    gold: 1
+                }, {
+                    item: ITEMS.LEATHER_GOODS,
+                    silver: 3,
+                    gold: 1
+                }, {
+                    item: ITEMS.HORSES,
+                    silver: 7,
+                    gold: 5
+                }, {
+                    item: ITEMS.CAMELS,
+                    silver: 5,
+                    gold: 3
                 }, 
             ]};
     }
