@@ -58,6 +58,8 @@ export function getCityDescription(city: CITIES) {
             return "Spanish Ambassador Ruy Gonzalez de Clavijo notes that “distance to Samarqand Timur has established relays of horses kept ready at command...These government studs are stationed both in those desert or uninhabited regions along the route, and in places where there is a settled population, further for this service there have been built caravanserais with hostelries (inns) supplied with provisions...The post-houses have been built at intervals of a day's journey apart, or sometimes of half a day's Journey.” Thus, you reach Samarkand safely and well rested.<br>After the Mongol conquests, Samarkand was rebuilt into “one of the greatest and finest of cities, and most perfect of them in beauty.” A traveler from Spain fills you in on the trade in Samarkand.<br><b>“This land of Samarkand is not only rich in food stuffs but also in manufactures, such as silk...Further they make special fur linings for silk garments, and manufacture things in gold and blue and dyed tints...From India there are brought to Samarkand the most costly of spices, such as nutmegs and cloves and mace with cinnamon and ginger...with many other kinds that are never to be found in the markets of Alexandria [Egypt]…<br>From Russia and Tartary [Central Asia] come leathers and linens, from Cathay [China] silk stuffs that are the finest in the whole world…[and] rubies and diamonds, also pearls. The goods that are imported to Samarkand from Cathay indeed are of the richest and most precious of all those brought thither from foreign parts, for the craftsmen of Cathay are reputed to be the most skilful by far beyond those of any other nation…What’s more, the Khan brought together the best skilled men and master craftsmen and brought them here…”</b><br>Ibn Battuta claimed Samarkand was “one of the greatest and finest of cities, and most perfect of them in beauty. Under the Turko-Mongol ruler Timur (Tamerlane), the city became one of the centers of the Timurid Renaissance. As Ambassador Clavijo attested “trade has always been fostered by Timur with the view of making his capital the noblest of cities: and during all his conquests wheresoever he came he carried off the best men of the population to people Samarqand, bringing thither together the master-craftsmen of all nations.” Thus there are plenty of trade goods from which to choose. Its diversity also contributes to its vast trade markets: “Of the nations brought here together there were to be seen Turks, Arabs and Moors of diverse sects, with Christians who were Greeks and Armenians, Catholics, Jacobites and Nestorians, besides those [Indian] folk who baptize with fire in the forehead, who are indeed Christians but of a faith that is peculiar to their nation.”"
         case CITIES.TABRIZ: 
             return "Tabriz is one of the most important Silk Road Cities. Located in present day Iran, the inhabitants of Tabriz had been wise enough to surrender to the Mongols as their army advanced. Tabriz became the capital of the conquering army. This city is a central location along the Silk Road with colonies of people from Venice, Genoa, and other European countries as well as Armenians, Arabs, and even Chinese traders. Merchants, craftsmen and artisans are very well treated by the Mongols, and the city has grown to four times its previous size. There are also several Christian churches. The Mongol ruler Ghazan constructed the largest bazaar (market) in hundreds of miles and an extensive system of caravanserai to provide traveling merchants with accommodations, information, and resources. Standardized silver coins minted here are accepted from India and South China to the Mediterranean. This international city is one of the greatest centers of learning and culture during the 14th century after the Mongol invasion. There are educational buildings, caravanserai, and new walls erected by Ghazan Khan.<br><b>“From Tabriz the Mongols established relays of horses kept ready at command so that messengers may ride on missions night and day...each year great caravans of camels with merchandise arrive here from Lesser India [i.e., Afghanistan and other territories between Persia and India] who bring with them all kinds of spices. Here too are imported the best sorts of the lesser spices that are not to be found in the Syrian markets, such namely as cloves, nutmegs, cinnamon, manna, mace and the rest. These are prime spices that never reach the markets of Alexandria…” --Ibn Battuta</b><br>And where might one find all these goods? At the Bazaar of Tabriz, one of the oldest bazaars (markets) in the Middle East.<br>Some of your knowledge about the bazaar comes from Marco Polo’s visit here: <b>“a great city surrounded by beautiful and pleasant gardens. It is excellently situated so the goods brought here come from many regions. Latin merchants especially Genevis (Genoese, from Genoa, Italy) go there to buy the goods that come from foreign lands.”</b>"
+        case CITIES.VENICE:
+            return "Spanish traveler Pero Tafur described Venice as a city that is<br><b>“One of the most wonderful in Christendom, wonderful alike in size, as in wealth and government. Every hour there came news from all countries of the world, for the sea-borne traffic is very great, and ships are continually arriving from all parts, and if one desires to have news of any place it is only necessary to enquire about the ships. The people are very wealthy, for these places are the ports of discharge for Greece and the Black Sea for all classes of merchandise.”</b><br>Ever since the Crusades, Venice has controlled Mediterranean trade, enjoying trade rights with Constantinople and the Middle East along with Eastern Europe and Russia. Venice not only imports desired luxuries from across Eurasia, but it also taxes these goods, providing it with unrivaled wealth. The best goods and foods from China, India, and the Middle East make their way to Venice before being sold throughout Europe. "
     }
 }
 
@@ -123,6 +125,13 @@ export function getCityImages(city: CITIES) {
                     name: "Bazaar of Tabriz",
                     src: "tabriz_3.png"
                 }, 
+            ]};
+        case CITIES.VENICE:
+            return {items: [
+                {
+                    name: "Venice's Grand Canal",
+                    src: "venice_canal.png"
+                }
             ]};
     }
     return {items: []};
@@ -436,6 +445,39 @@ export function getTradingItems(city: CITIES): TradingItems | undefined {
                     item: ITEMS.PERFUME,
                     silver: 3,
                     gold: 2,
+                }, 
+            ]};
+        case CITIES.VENICE:
+            return { items: [
+                {
+                    item: ITEMS.SPICES,
+                    silver: 12,
+                    gold: 10
+                }, {
+                    item: ITEMS.SILK,
+                    silver: 8,
+                    gold: 6
+                }, {
+                    item: ITEMS.SALT,
+                    silver: 12,
+                    gold: 10
+                }, {
+                    item: ITEMS.COTTON_CLOTH,
+                    silver: 8,
+                    gold: 6
+                }, {
+                    item: ITEMS.COTTON_TEXTILES,
+                    silver: 8,
+                    gold: 6
+                }, {
+                    item: ITEMS.PRECIOUS_STONES,
+                    silver: 10,
+                    gold: 8
+                }, {
+                    item: ITEMS.PORCELAIN,
+                    silver: 12,
+                    gold: 10,
+                    displayName: "Porcelain from China"
                 }, 
             ]};
     }

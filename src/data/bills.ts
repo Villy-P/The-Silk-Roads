@@ -3,6 +3,7 @@ import { CITIES } from "./city";
 export function canBuyBill(city: CITIES) {
     switch (city) {
         case CITIES.BRUGES:
+        case CITIES.VENICE:
             return true;
     }
     return false;
