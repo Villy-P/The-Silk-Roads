@@ -5,6 +5,7 @@ import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
 import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
 import { GAME_STATE } from '../scripts/state';
+import { shuffle } from '@/scripts/util';
 
 export function socketFunc() {
     const io = new Server(server, {
@@ -43,7 +44,7 @@ export function socketFunc() {
         });
         socket.on('play', () => {
             let id = 0;
-            for (const user of users) {
+            for (const user of shuffle(users)) {
                 if (user.status === USER_STATUS.LEADER)
                     continue;
                 user.merchantType = id++;
