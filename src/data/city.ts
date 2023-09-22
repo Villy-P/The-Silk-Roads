@@ -54,6 +54,8 @@ export function getCityDescription(city: CITIES) {
             return "Dunhuang is a desert oasis at the edge of the Taklamakan Desert, Dunhuang was one of the first trading cities encountered by merchants arriving in China from the west. The name Dunhuang, meaning \"Blazing Beacon\", refers to the beacons lit to warn of attacks by marauding nomadic tribes. The Mongols rebuilt the city after conquering it, and it is an entrepot of various groups—many Buddhist monks, but also Nestorian Christians and Sogdians from Central Asia. Most impressive, however, are the Mogao Caves, the “Caves of a Thousand Buddhas.” And although they are Buddhist shrines, the caves also represent hundreds of years of syncretism, absorbing cultural elements from Central and Western Asia and Europe. Among the 2,000 sculptures and 45,000 square meters of frescos one can find manuscripts written in numerous languages, Greek style columns and decorative geometric patterns from Persia. A collection of 40,000 scrolls include texts written in Chinese, Tibetan, Sanskrit, Khotanese, Uighur, Sogdian, and Hebrew—just some of the languages of the traders and pilgrims of the Silk Roads. Some scrolls were transcribed using woodblock printing from China, demonstrating its spread across the Silk Roads. ";
         case CITIES.KASHGAR:
             return "Kashgar, in the westernmost region of China, has been a major trade outpost between China, the Middle East, and Europe for over 2,000 years, making it one of the oldest continuously inhabited cities in the world. According to Marco Polo, Kashgar (which he calls Cascar)<br><b>“is a region lying between north-east and east, and constituted a kingdom in former days, but now it is subject to the Great Kaan. The people worship Mahommet (Muhammad). There are a good number of towns and villages, but the greatest and finest is Cascar itself. The inhabitants live by trade and handicrafts; they have beautiful gardens and vineyards, and fine estates, and grow a great deal of cotton. From this country many merchants go forth about the world on trading journeys...There are in the country many Nestorian Christians, who have churches of their own.”</b><br>Kashgar has its own bazaar called the Ivan Bazaar that sells cotton and silk textiles, leatherwear and pottery and is still known as one of the largest markets in the region. It is also known for its livestock marketplace. Below is an image of Kashgar’s bazaar."
+        case CITIES.SAMARKAND:
+            return "Spanish Ambassador Ruy Gonzalez de Clavijo notes that “distance to Samarqand Timur has established relays of horses kept ready at command...These government studs are stationed both in those desert or uninhabited regions along the route, and in places where there is a settled population, further for this service there have been built caravanserais with hostelries (inns) supplied with provisions...The post-houses have been built at intervals of a day's journey apart, or sometimes of half a day's Journey.” Thus, you reach Samarkand safely and well rested.<br>After the Mongol conquests, Samarkand was rebuilt into “one of the greatest and finest of cities, and most perfect of them in beauty.” A traveler from Spain fills you in on the trade in Samarkand.<br><b>“This land of Samarkand is not only rich in food stuffs but also in manufactures, such as silk...Further they make special fur linings for silk garments, and manufacture things in gold and blue and dyed tints...From India there are brought to Samarkand the most costly of spices, such as nutmegs and cloves and mace with cinnamon and ginger...with many other kinds that are never to be found in the markets of Alexandria [Egypt]…<br>From Russia and Tartary [Central Asia] come leathers and linens, from Cathay [China] silk stuffs that are the finest in the whole world…[and] rubies and diamonds, also pearls. The goods that are imported to Samarkand from Cathay indeed are of the richest and most precious of all those brought thither from foreign parts, for the craftsmen of Cathay are reputed to be the most skilful by far beyond those of any other nation…What’s more, the Khan brought together the best skilled men and master craftsmen and brought them here…”</b><br>Ibn Battuta claimed Samarkand was “one of the greatest and finest of cities, and most perfect of them in beauty. Under the Turko-Mongol ruler Timur (Tamerlane), the city became one of the centers of the Timurid Renaissance. As Ambassador Clavijo attested “trade has always been fostered by Timur with the view of making his capital the noblest of cities: and during all his conquests wheresoever he came he carried off the best men of the population to people Samarqand, bringing thither together the master-craftsmen of all nations.” Thus there are plenty of trade goods from which to choose. Its diversity also contributes to its vast trade markets: “Of the nations brought here together there were to be seen Turks, Arabs and Moors of diverse sects, with Christians who were Greeks and Armenians, Catholics, Jacobites and Nestorians, besides those [Indian] folk who baptize with fire in the forehead, who are indeed Christians but of a faith that is peculiar to their nation.”"
     }
 }
 
@@ -98,6 +100,13 @@ export function getCityImages(city: CITIES) {
                 {
                     name: "Kashgar Bazaar",
                     src: "kashgar_bazaar.png"
+                }
+            ]};
+        case CITIES.SAMARKAND:
+            return {items: [
+                {
+                    name: "Timurs's Bibi-Khanym Friday Mosque",
+                    src: "friday_mosque.png"
                 }
             ]};
     }
@@ -344,6 +353,42 @@ export function getTradingItems(city: CITIES): TradingItems | undefined {
                     item: ITEMS.CAMELS,
                     silver: 5,
                     gold: 3
+                }, 
+            ]};
+        case CITIES.SAMARKAND:
+            return { items: [
+                {
+                    item: ITEMS.SPICES,
+                    silver: 12,
+                    gold: 10,
+                    displayName: "Spices from India"
+                }, {
+                    item: ITEMS.SILK,
+                    silver: 8,
+                    gold: 6,
+                    displayName: "Chinese Silks"
+                }, {
+                    item: ITEMS.PERFUME,
+                    silver: 5,
+                    gold: 3,
+                    displayName: "Chinese Musk (Perfume)"
+                }, {
+                    item: ITEMS.LINEN,
+                    silver: 3,
+                    gold: 1,
+                    displayName: "Russian Linens"
+                }, {
+                    item: ITEMS.LEATHER_GOODS,
+                    silver: 3,
+                    gold: 1
+                }, {
+                    item: ITEMS.PRECIOUS_STONES,
+                    silver: 7,
+                    gold: 5
+                }, {
+                    item: ITEMS.GLASSWARE,
+                    silver: 4,
+                    gold: 2
                 }, 
             ]};
     }
