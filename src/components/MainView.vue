@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col h-screen w-full overflow-clip">
-        <div class="h-14 flex border-b-black border-b-2">
+        <div class="h-14 flex border-b-black border-b-2 w-full">
             <div class="flex items-center justify-center w-fit tooltip-container">
                 <img src="../assets/items/silver.jpg" class="w-10">
                 <div class="select-none">{{ store.state.user?.silver }}</div>
@@ -24,6 +24,10 @@
                     <p>{{ store.state.user?.imports.length }}</p>
                     <div class="tooltip-text tooltip-bottom">Imports</div>
                 </div>
+            </div>
+            <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer">
+                <img src="../assets/icon/culture.png" class="w-10">
+                <div class="tooltip-text tooltip-left">Culture Cards</div>
             </div>
         </div>
         <div class="flex w-full" style="height: calc(100% - 56px);">
@@ -64,6 +68,21 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="getCultureCard() && !store.state.user?.cultureCards?.includes(store.state.user!.currentCity!)">
+                    <hr><br>
+                    <div class="text-center pb-2">You got a culture card!</div>
+                    <div class="w-11/12 m-auto indent-8 pb-3">{{ getCultureCard() }}</div>
+                    <div class="flex flex-wrap items-center jusitfy-center w-full text-center gap-3 py-2">
+                        <div class="w-8/12 m-auto tooltip-container" v-for="image in getCultureCardImages()?.items" :key="image.name">
+                            <img :alt="image.name" :src="require(`@/assets/culture/${image.src}`)">
+                            <div class="tooltip-text tooltip-top">{{ image.name }}</div>
+                        </div>
+                    </div>
+                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
+                        Collect Culture Card
+                    </div>
+                    <hr class="pb-5">
+                </div>
                 <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
                     Enter the City
                 </div>
@@ -75,6 +94,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
+    import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
     import { key } from '@/store/store';
@@ -85,6 +105,14 @@
         store = useStore(key);
 
         currentInnovation = ITEMS.TEXTS;
+
+        getCultureCard() {
+            return getCultureCard(this.store.state.user!.currentCity!);
+        }
+
+        getCultureCardImages() {
+            return getCultureCardImages(this.store.state.user!.currentCity!);
+        }
 
         getCityName() {
             return getCityName(this.store.state.user!.currentCity!);

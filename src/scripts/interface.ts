@@ -21,4 +21,5 @@ export interface User {
     currentCity?: CITIES;
     state: GAME_STATE;
     cityInnovations: CITIES[];
+    cultureCards: CITIES[];
 }

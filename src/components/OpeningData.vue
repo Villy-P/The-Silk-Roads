@@ -6,9 +6,12 @@
             <p class="p-4 pt-0">Below are the items that you have to trade (export) and the items you wish to buy (import)</p>
             <InventoryPage/>
             <div v-if="getMerchantStartingCities().length == 1" class="pb-4 mt-7">
-                Since you are an {{ getMerchantName() }} Merchant, you start your journey in {{ getMerchantStartingCities()[0] }}
+                Since you are an {{ getMerchantName() }} Merchant, you start your journey in {{ getCityName(getMerchantStartingCities()[0]) }}
+                <div @click="moveToCity(getMerchantStartingCities()[0])" class="m-auto w-fit pt-4">
+                    <div class="m-1 p-1 cursor-pointer border-2 border-black bg-blue-400 w-fit">Start in {{ getCityName(getMerchantStartingCities()[0]) }}</div>
+                </div>
             </div>
-            <div v-else class="pb-4">
+            <div v-else class="pb-4 mt-7">
                 <p class="pb-4">Since you are an {{ getMerchantName() }} Merchant, you can choose where you start your journey:</p>
                 <div class="flex items-center flex-wrap justify-center">
                     <div v-for="city in getMerchantStartingCities()" :key="city" @click="moveToCity(city)">
