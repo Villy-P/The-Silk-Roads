@@ -33,7 +33,8 @@
         <div class="flex w-full" style="height: calc(100% - 56px);">
             <div class="w-2/3" ref="worldcontainer">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full" ref="worldmap">
-                    <image x="0" y="0" :width="imageWidth" :height="imageHeight" xlink:href="../assets/world.jpg" ref="worldimage"/>
+                    <image :x="imageX" :y="imageY" :width="imageW" :height="imageH" xlink:href="../assets/world.jpg" ref="worldimage"/>
+                    <image v-for="city in cityPoints" :key="city.x" :x="city.x + imageX" :y="city.y + imageY" width="30" height="30" xlink:href="../assets/icon/tack.png"/>
                 </svg>
             </div>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
@@ -113,12 +114,22 @@
             worldcontainer: HTMLDivElement
         }
 
+        cityPoints: Point[] = [
+            {x: 100, y: 100}
+        ]
+
         store = useStore(key);
 
         currentInnovation = ITEMS.TEXTS;
 
         imageWidth = 9821;
         imageHeight = 4577;
+
+        imageW = this.imageWidth / 5;
+        imageH = this.imageHeight / 5;
+
+        imageX = 0;
+        imageY = 0;
 
         lastDragged: Point | null = null;
 
@@ -150,8 +161,8 @@
                 let currentY = parseInt(this.$refs.worldimage.getAttribute('y')!);
                 const distanceX = this.lastDragged.x - evt.offsetX;
                 const distanceY = this.lastDragged.y - evt.offsetY;
-                this.$refs.worldimage.setAttribute('x', (currentX - distanceX).toString());
-                this.$refs.worldimage.setAttribute('y', (currentY - distanceY).toString());
+                this.imageX = currentX - distanceX;
+                this.imageY = currentY - distanceY;
                 this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
                 this.checkImageBounds();
             };
@@ -164,18 +175,16 @@
         }
 
         checkImageBounds() {
-            const currentX = parseInt(this.$refs.worldimage.getAttribute('x')!);
-            const currentY = parseInt(this.$refs.worldimage.getAttribute('y')!);
             const currentW = parseInt(this.$refs.worldimage.getAttribute('width')!);
             const currentH = parseInt(this.$refs.worldimage.getAttribute('height')!);
-            if (currentX > 0)
-                this.$refs.worldimage.setAttribute('x', '0');
-            if (currentY > 0)
-                this.$refs.worldimage.setAttribute('y', '0');
-            if (Math.abs(currentX) + this.$refs.worldcontainer.clientWidth > currentW)
-                this.$refs.worldimage.setAttribute('x', (this.$refs.worldcontainer.clientWidth - currentW).toString());
-            if (Math.abs(currentY) + this.$refs.worldcontainer.clientHeight > currentH)
-                this.$refs.worldimage.setAttribute('y', (this.$refs.worldcontainer.clientHeight - currentH).toString());
+            if (this.imageX > 0)
+                this.imageX = 0;
+            if (this.imageY > 0)
+                this.imageY = 0;
+            if (Math.abs(this.imageX) + this.$refs.worldcontainer.clientWidth > currentW)
+                this.imageX = this.$refs.worldcontainer.clientWidth - currentW;
+            if (Math.abs(this.imageY) + this.$refs.worldcontainer.clientHeight > currentH)
+                this.imageY = this.$refs.worldcontainer.clientHeight - currentH;
         }
 
         getCultureCard() {
