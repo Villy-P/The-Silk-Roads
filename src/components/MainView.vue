@@ -35,13 +35,13 @@
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full" ref="worldmap">
                     <image :x="imageX" :y="imageY" :width="imageW" :height="imageH" xlink:href="../assets/world.jpg" ref="worldimage"/>
                     <image 
-                        v-for="(city) in cityPoints" 
+                        v-for="(city, index) in cityPoints" 
                         :key="city.x" 
                         :x="(city.x / (imageWidth / 5)) * imageW - 15 + imageX" 
                         :y="(city.y / (imageHeight / 5)) * imageH - 30 + imageY" 
                         width="30" 
                         height="30" 
-                        xlink:href="../assets/icon/tack.png">
+                        :xlink:href="require(`../assets/icon/${index == store.state.user?.currentCity ? 'current' : ''}tack.png`)">
                     </image>
                     <text 
                         v-for="(city, index) in cityPoints" 
