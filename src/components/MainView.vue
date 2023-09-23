@@ -101,6 +101,7 @@
     import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
+    import { Point } from '@/scripts/interface';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -119,6 +120,8 @@
         imageWidth = 9821;
         imageHeight = 4577;
 
+        lastDragged: Point | null = null;
+
         mounted(): void {
             this.$refs.worldmap.onwheel = (evt: WheelEvent) => {
                 const worldImageWidth = parseInt(this.$refs.worldimage.getAttribute('width')!);
@@ -131,12 +134,48 @@
                     this.$refs.worldimage.setAttribute("height", (worldImageHeight / 2).toString());
                 }
                 worldImageHeight = parseInt(this.$refs.worldimage.getAttribute('height')!);
-                console.log(this.$refs.worldcontainer.clientHeight)
                 if (worldImageHeight < this.$refs.worldcontainer.clientHeight) {
                     this.$refs.worldimage.setAttribute("height", this.$refs.worldcontainer.clientHeight.toString());
                     this.$refs.worldimage.setAttribute("width", (this.$refs.worldcontainer.clientHeight * (this.imageWidth / this.imageHeight)).toString());
                 }
+                this.checkImageBounds();
+            };
+            this.$refs.worldmap.onmousedown = (evt: MouseEvent) => {
+                this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
+            };
+            this.$refs.worldmap.onmousemove = (evt: MouseEvent) => {
+                if (!this.lastDragged)
+                    return;
+                let currentX = parseInt(this.$refs.worldimage.getAttribute('x')!);
+                let currentY = parseInt(this.$refs.worldimage.getAttribute('y')!);
+                const distanceX = this.lastDragged.x - evt.offsetX;
+                const distanceY = this.lastDragged.y - evt.offsetY;
+                this.$refs.worldimage.setAttribute('x', (currentX - distanceX).toString());
+                this.$refs.worldimage.setAttribute('y', (currentY - distanceY).toString());
+                this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
+                this.checkImageBounds();
+            };
+            this.$refs.worldmap.onmouseup = () => {
+                this.lastDragged = null;
+            };
+            this.$refs.worldmap.onmouseleave = () => {
+                this.lastDragged = null;
             }
+        }
+
+        checkImageBounds() {
+            const currentX = parseInt(this.$refs.worldimage.getAttribute('x')!);
+            const currentY = parseInt(this.$refs.worldimage.getAttribute('y')!);
+            const currentW = parseInt(this.$refs.worldimage.getAttribute('width')!);
+            const currentH = parseInt(this.$refs.worldimage.getAttribute('height')!);
+            if (currentX > 0)
+                this.$refs.worldimage.setAttribute('x', '0');
+            if (currentY > 0)
+                this.$refs.worldimage.setAttribute('y', '0');
+            if (Math.abs(currentX) + this.$refs.worldcontainer.clientWidth > currentW)
+                this.$refs.worldimage.setAttribute('x', (this.$refs.worldcontainer.clientWidth - currentW).toString());
+            if (Math.abs(currentY) + this.$refs.worldcontainer.clientHeight > currentH)
+                this.$refs.worldimage.setAttribute('y', (this.$refs.worldcontainer.clientHeight - currentH).toString());
         }
 
         getCultureCard() {

@@ -23,3 +23,8 @@ export interface User {
     cityInnovations: CITIES[];
     cultureCards: CITIES[];
 }
+
+export interface Point {
+    x: number;
+    y: number;
+}
