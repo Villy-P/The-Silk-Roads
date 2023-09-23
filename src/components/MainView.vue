@@ -43,6 +43,15 @@
                         height="30" 
                         xlink:href="../assets/icon/tack.png">
                     </image>
+                    <text 
+                        v-for="(city, index) in cityPoints" 
+                        :key="city.x"
+                        ref="rects"
+                        fill="white"
+                        :x="(city.x / (imageWidth / 5)) * imageW + 15 + imageX"
+                        :y="(city.y / (imageHeight / 5)) * imageH - 12.5 + imageY">
+                        {{ getCityNameWithI(index) }}
+                    </text>
                 </svg>
             </div>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
@@ -119,7 +128,8 @@
         declare $refs: {
             worldmap: SVGElement,
             worldimage: SVGImageElement,
-            worldcontainer: HTMLDivElement
+            worldcontainer: HTMLDivElement,
+            rects: SVGRectElement[],
         }
 
         cityPoints: Point[] = [
@@ -183,7 +193,9 @@
             };
             this.$refs.worldmap.onmouseleave = () => {
                 this.lastDragged = null;
-            }
+            };
+            for (const rect of this.$refs.rects)
+                this.cropSVG(rect);
         }
 
         checkImageBounds() {
@@ -195,6 +207,11 @@
                 this.imageX = this.$refs.worldcontainer.clientWidth - this.imageW;
             if (Math.abs(this.imageY) + this.$refs.worldcontainer.clientHeight > this.imageH)
                 this.imageY = this.$refs.worldcontainer.clientHeight - this.imageH;
+        }
+
+        cropSVG(rect: SVGRectElement) {
+            const bbox = rect.getBBox();
+            rect.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
         }
 
         getCultureCard() {
