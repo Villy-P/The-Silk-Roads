@@ -5,6 +5,12 @@
 		</div>
         <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4"><InventoryPage/></div>
     </div>
+    <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showCultureCards">
+        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showCultureCards = false">
+			<img src="../assets/x.svg">
+		</div>
+        <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><CultureCards/></div>
+    </div>
     <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
     <MainView v-if="store.state.user?.state === GAME_STATE.MAIN"/>
 </template>
@@ -18,13 +24,15 @@
     import OpeningData from '@/components/OpeningData.vue';
     import MainView from '@/components/MainView.vue';
     import InventoryPage from '@/components/InventoryPage.vue';
+    import CultureCards from '@/components/CultureCards.vue';
     import { GAME_STATE } from '@/scripts/state';
 
     @Options({
         components: {
             OpeningData,
             MainView,
-            InventoryPage
+            InventoryPage,
+            CultureCards
         }
     })
     export default class PlayPage extends Vue {

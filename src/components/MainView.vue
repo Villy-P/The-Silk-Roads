@@ -25,7 +25,7 @@
                     <div class="tooltip-text tooltip-bottom">Imports</div>
                 </div>
             </div>
-            <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer">
+            <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer" @click="store.state.showCultureCards = true">
                 <img src="../assets/icon/culture.png" class="w-10">
                 <div class="tooltip-text tooltip-left">Culture Cards</div>
             </div>
@@ -78,7 +78,7 @@
                             <div class="tooltip-text tooltip-top">{{ image.name }}</div>
                         </div>
                     </div>
-                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
+                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="selectCultureCard">
                         Collect Culture Card
                     </div>
                     <hr class="pb-5">
@@ -157,6 +157,11 @@
         selectInnovation() {
             this.store.state.user?.items.push(this.currentInnovation);
             this.store.state.user?.cityInnovations.push(this.store.state.user!.currentCity!);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
+        }
+
+        selectCultureCard() {
+            this.store.state.user?.cultureCards.push(this.store.state.user!.currentCity!);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
