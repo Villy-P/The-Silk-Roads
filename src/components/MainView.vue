@@ -37,8 +37,8 @@
                     <image 
                         v-for="city in cityPoints" 
                         :key="city.x" 
-                        :x="city.x + imageX" 
-                        :y="city.y + imageY" 
+                        :x="(city.x / (imageWidth / 5)) * imageW - 15 + imageX" 
+                        :y="(city.y / (imageHeight / 5)) * imageH - 30 + imageY" 
                         width="30" 
                         height="30" 
                         xlink:href="../assets/icon/tack.png"/>
@@ -122,7 +122,7 @@
         }
 
         cityPoints: Point[] = [
-            {x: 100, y: 100}
+            {x: 313, y: 387}
         ]
 
         store = useStore(key);
@@ -157,6 +157,7 @@
             };
             this.$refs.worldmap.onmousedown = (evt: MouseEvent) => {
                 this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
+                console.log(this.lastDragged);
             };
             this.$refs.worldmap.onmousemove = (evt: MouseEvent) => {
                 if (!this.lastDragged)
