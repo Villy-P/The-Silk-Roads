@@ -35,13 +35,14 @@
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full" ref="worldmap">
                     <image :x="imageX" :y="imageY" :width="imageW" :height="imageH" xlink:href="../assets/world.jpg" ref="worldimage"/>
                     <image 
-                        v-for="city in cityPoints" 
+                        v-for="(city) in cityPoints" 
                         :key="city.x" 
                         :x="(city.x / (imageWidth / 5)) * imageW - 15 + imageX" 
                         :y="(city.y / (imageHeight / 5)) * imageH - 30 + imageY" 
                         width="30" 
                         height="30" 
-                        xlink:href="../assets/icon/tack.png"/>
+                        xlink:href="../assets/icon/tack.png">
+                    </image>
                 </svg>
             </div>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
@@ -105,7 +106,7 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
+    import { CITIES, getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
     import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
@@ -166,7 +167,6 @@
             };
             this.$refs.worldmap.onmousedown = (evt: MouseEvent) => {
                 this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
-                console.log(evt.offsetX - this.imageX, evt.offsetY);
             };
             this.$refs.worldmap.onmousemove = (evt: MouseEvent) => {
                 if (!this.lastDragged)
@@ -207,6 +207,10 @@
 
         getCityName() {
             return getCityName(this.store.state.user!.currentCity!);
+        }
+
+        getCityNameWithI(i: CITIES) {
+            return getCityName(i);
         }
 
         getCityDescription() {
