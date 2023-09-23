@@ -31,7 +31,11 @@
             </div>
         </div>
         <div class="flex w-full" style="height: calc(100% - 56px);">
-            <img src="../assets/world.jpg" class="object-cover w-2/3">
+            <div class="w-2/3" ref="worldcontainer">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full" ref="worldmap">
+                    <image x="0" y="0" :width="imageWidth" :height="imageHeight" xlink:href="../assets/world.jpg" ref="worldimage"/>
+                </svg>
+            </div>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
                 <div class="text-center py-3 text-3xl" style="font-variant: small-caps;">
                     Welcome To {{ getCityName() }}
@@ -102,9 +106,38 @@
     import { useStore } from 'vuex';
 
     export default class MainView extends Vue {
+        declare $refs: {
+            worldmap: SVGElement,
+            worldimage: SVGImageElement,
+            worldcontainer: HTMLDivElement
+        }
+
         store = useStore(key);
 
         currentInnovation = ITEMS.TEXTS;
+
+        imageWidth = 9821;
+        imageHeight = 4577;
+
+        mounted(): void {
+            this.$refs.worldmap.onwheel = (evt: WheelEvent) => {
+                const worldImageWidth = parseInt(this.$refs.worldimage.getAttribute('width')!);
+                let worldImageHeight = parseInt(this.$refs.worldimage.getAttribute('height')!);
+                if (evt.deltaY < 0) {
+                    this.$refs.worldimage.setAttribute("width", (worldImageWidth * 2).toString());
+                    this.$refs.worldimage.setAttribute("height", (worldImageHeight * 2).toString());
+                } else {
+                    this.$refs.worldimage.setAttribute("width", (worldImageWidth / 2).toString());
+                    this.$refs.worldimage.setAttribute("height", (worldImageHeight / 2).toString());
+                }
+                worldImageHeight = parseInt(this.$refs.worldimage.getAttribute('height')!);
+                console.log(this.$refs.worldcontainer.clientHeight)
+                if (worldImageHeight < this.$refs.worldcontainer.clientHeight) {
+                    this.$refs.worldimage.setAttribute("height", this.$refs.worldcontainer.clientHeight.toString());
+                    this.$refs.worldimage.setAttribute("width", (this.$refs.worldcontainer.clientHeight * (this.imageWidth / this.imageHeight)).toString());
+                }
+            }
+        }
 
         getCultureCard() {
             return getCultureCard(this.store.state.user!.currentCity!);
