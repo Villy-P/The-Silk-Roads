@@ -105,6 +105,15 @@
                     </div>
                     <hr class="pb-5">
                 </div>
+                <div v-if="canBuyBill() && hasBill()">
+                    <p class="w-11/12 m-auto indent-8 pb-3">{{ bill.replace('{}', getCityName()) }}</p>
+                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="exchangeBills(true)">
+                        Exchange Bills for {{20 * getBillAmount()}} silver
+                    </div>
+                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="exchangeBills(false)">
+                        Exchange Bills for {{15 * getBillAmount()}} gold
+                    </div>
+                </div>
                 <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
                     Enter the City
                 </div>
@@ -119,6 +128,7 @@
     import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
+    import { bill, canBuyBill } from '@/data/bills'
     import { Point } from '@/scripts/interface';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
@@ -148,6 +158,7 @@
         store = useStore(key);
 
         currentInnovation = ITEMS.TEXTS;
+        bill = bill;
 
         imageWidth = 9821;
         imageHeight = 4577;
@@ -196,6 +207,26 @@
             };
             for (const rect of this.$refs.rects)
                 this.cropSVG(rect);
+        }
+
+        hasBill() {
+            return this.store.state.user?.items.includes(ITEMS.BANK_NOTES);
+        }
+
+        canBuyBill() {
+            return canBuyBill(this.store.state.user!.currentCity!);
+        }
+
+        getBillAmount() {
+            return this.store.state.user!.items.filter((i) => i == ITEMS.BANK_NOTES).length;
+        }
+
+        exchangeBills(silver: boolean) {
+            this.store.state.user!.items = this.store.state.user!.items.filter((i) => i != ITEMS.BANK_NOTES);
+            if (silver)
+                this.store.state.user!.silver += 20;
+            else
+                this.store.state.user!.gold += 15;
         }
 
         checkImageBounds() {
