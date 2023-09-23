@@ -34,7 +34,14 @@
             <div class="w-2/3" ref="worldcontainer">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="w-full h-full" ref="worldmap">
                     <image :x="imageX" :y="imageY" :width="imageW" :height="imageH" xlink:href="../assets/world.jpg" ref="worldimage"/>
-                    <image v-for="city in cityPoints" :key="city.x" :x="city.x + imageX" :y="city.y + imageY" width="30" height="30" xlink:href="../assets/icon/tack.png"/>
+                    <image 
+                        v-for="city in cityPoints" 
+                        :key="city.x" 
+                        :x="city.x + imageX" 
+                        :y="city.y + imageY" 
+                        width="30" 
+                        height="30" 
+                        xlink:href="../assets/icon/tack.png"/>
                 </svg>
             </div>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
@@ -135,19 +142,16 @@
 
         mounted(): void {
             this.$refs.worldmap.onwheel = (evt: WheelEvent) => {
-                const worldImageWidth = parseInt(this.$refs.worldimage.getAttribute('width')!);
-                let worldImageHeight = parseInt(this.$refs.worldimage.getAttribute('height')!);
                 if (evt.deltaY < 0) {
-                    this.$refs.worldimage.setAttribute("width", (worldImageWidth * 2).toString());
-                    this.$refs.worldimage.setAttribute("height", (worldImageHeight * 2).toString());
+                    this.imageW *= 2;
+                    this.imageH *= 2;
                 } else {
-                    this.$refs.worldimage.setAttribute("width", (worldImageWidth / 2).toString());
-                    this.$refs.worldimage.setAttribute("height", (worldImageHeight / 2).toString());
+                    this.imageW /= 2;
+                    this.imageH /= 2;
                 }
-                worldImageHeight = parseInt(this.$refs.worldimage.getAttribute('height')!);
-                if (worldImageHeight < this.$refs.worldcontainer.clientHeight) {
-                    this.$refs.worldimage.setAttribute("height", this.$refs.worldcontainer.clientHeight.toString());
-                    this.$refs.worldimage.setAttribute("width", (this.$refs.worldcontainer.clientHeight * (this.imageWidth / this.imageHeight)).toString());
+                if (this.imageH < this.$refs.worldcontainer.clientHeight) {
+                    this.imageW = this.$refs.worldcontainer.clientHeight * (this.imageWidth / this.imageHeight)
+                    this.imageH = this.$refs.worldcontainer.clientHeight;
                 }
                 this.checkImageBounds();
             };
@@ -157,12 +161,10 @@
             this.$refs.worldmap.onmousemove = (evt: MouseEvent) => {
                 if (!this.lastDragged)
                     return;
-                let currentX = parseInt(this.$refs.worldimage.getAttribute('x')!);
-                let currentY = parseInt(this.$refs.worldimage.getAttribute('y')!);
                 const distanceX = this.lastDragged.x - evt.offsetX;
                 const distanceY = this.lastDragged.y - evt.offsetY;
-                this.imageX = currentX - distanceX;
-                this.imageY = currentY - distanceY;
+                this.imageX = this.imageX - distanceX;
+                this.imageY = this.imageY - distanceY;
                 this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
                 this.checkImageBounds();
             };
@@ -175,16 +177,14 @@
         }
 
         checkImageBounds() {
-            const currentW = parseInt(this.$refs.worldimage.getAttribute('width')!);
-            const currentH = parseInt(this.$refs.worldimage.getAttribute('height')!);
             if (this.imageX > 0)
                 this.imageX = 0;
             if (this.imageY > 0)
                 this.imageY = 0;
-            if (Math.abs(this.imageX) + this.$refs.worldcontainer.clientWidth > currentW)
-                this.imageX = this.$refs.worldcontainer.clientWidth - currentW;
-            if (Math.abs(this.imageY) + this.$refs.worldcontainer.clientHeight > currentH)
-                this.imageY = this.$refs.worldcontainer.clientHeight - currentH;
+            if (Math.abs(this.imageX) + this.$refs.worldcontainer.clientWidth > this.imageW)
+                this.imageX = this.$refs.worldcontainer.clientWidth - this.imageW;
+            if (Math.abs(this.imageY) + this.$refs.worldcontainer.clientHeight > this.imageH)
+                this.imageY = this.$refs.worldcontainer.clientHeight - this.imageH;
         }
 
         getCultureCard() {
