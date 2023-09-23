@@ -122,7 +122,16 @@
         }
 
         cityPoints: Point[] = [
-            {x: 313, y: 387}
+            {x: 733, y: 546},
+            {x: 1732, y: 445},
+            {x: 188, y: 313},
+            {x: 1155, y: 817},
+            {x: 535, y: 445},
+            {x: 1429, y: 439},
+            {x: 1178, y: 442},
+            {x: 1042, y: 468},
+            {x: 769, y: 476},
+            {x: 313, y: 387},
         ]
 
         store = useStore(key);
@@ -157,7 +166,7 @@
             };
             this.$refs.worldmap.onmousedown = (evt: MouseEvent) => {
                 this.lastDragged = { x: evt.offsetX, y: evt.offsetY };
-                console.log(this.lastDragged);
+                console.log(evt.offsetX - this.imageX, evt.offsetY);
             };
             this.$refs.worldmap.onmousemove = (evt: MouseEvent) => {
                 if (!this.lastDragged)
