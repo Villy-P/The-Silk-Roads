@@ -27,7 +27,7 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { getCityDescription, getCityImages, getCityName } from '@/data/city';
+    import { getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
     import { key } from '@/store/store';
     import { Vue, Options } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -59,6 +59,10 @@
 
         getCityImages() {
             return getCityImages(this.store.state.user!.currentCity!);
+        }
+
+        canEnter() {
+            //
         }
     }
 </script>
