@@ -117,6 +117,8 @@
 
         selectInnovation() {
             this.store.state.user?.items.push(this.currentInnovation);
+            if (this.store.state.user?.imports.includes(this.currentInnovation))
+                this.store.state.user?.imports.splice(this.store.state.user?.imports.indexOf(this.currentInnovation), 1);
             this.store.state.user?.cityInnovations.push(this.store.state.user!.currentCity!);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
