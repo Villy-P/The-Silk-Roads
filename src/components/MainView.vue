@@ -39,21 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="getCultureCard() && !store.state.user?.cultureCards?.includes(store.state.user!.currentCity!)">
-                    <hr><br>
-                    <div class="text-center pb-2">You got a culture card!</div>
-                    <div class="w-11/12 m-auto indent-8 pb-3">{{ getCultureCard() }}</div>
-                    <div class="flex flex-wrap items-center jusitfy-center w-full text-center gap-3 py-2">
-                        <div class="w-8/12 m-auto tooltip-container" v-for="image in getCultureCardImages()?.items" :key="image.name">
-                            <img :alt="image.name" :src="require(`@/assets/culture/${image.src}`)">
-                            <div class="tooltip-text tooltip-top">{{ image.name }}</div>
-                        </div>
-                    </div>
-                    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="selectCultureCard">
-                        Collect Culture Card
-                    </div>
-                    <hr class="pb-5">
-                </div>
+                <CollectCulture/>
                 <div v-if="canBuyBill() && hasBill()">
                     <p class="w-11/12 m-auto indent-8 pb-3">{{ bill.replace('{}', getCityName()) }}</p>
                     <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="exchangeBills(true)">
@@ -74,7 +60,6 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityDescription, getCityImages, getCityInnovationCard, getCityName } from '@/data/city';
-    import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { getInnovationCardSpecialText } from '@/data/innovation';
     import { ITEMS, getItemAsset, getItemName, getInnovationDescription } from '@/data/items';
     import { bill, canBuyBill } from '@/data/bills'
@@ -83,11 +68,13 @@
     import { useStore } from 'vuex';
     import NavBar from './NavBar.vue';
     import WorldMap from './WorldMap.vue';
+    import CollectCulture from './CollectCulture.vue';
 
     @Options({
         components: {
             NavBar,
-            WorldMap
+            WorldMap,
+            CollectCulture
         }
     })
     export default class MainView extends Vue {
@@ -114,14 +101,6 @@
                 this.store.state.user!.silver += 20;
             else
                 this.store.state.user!.gold += 15;
-        }
-
-        getCultureCard() {
-            return getCultureCard(this.store.state.user!.currentCity!);
-        }
-
-        getCultureCardImages() {
-            return getCultureCardImages(this.store.state.user!.currentCity!);
         }
 
         getCityName() {
@@ -167,11 +146,6 @@
         selectInnovation() {
             this.store.state.user?.items.push(this.currentInnovation);
             this.store.state.user?.cityInnovations.push(this.store.state.user!.currentCity!);
-            this.store.state.socket?.emit('updateUser', this.store.state.user);
-        }
-
-        selectCultureCard() {
-            this.store.state.user?.cultureCards.push(this.store.state.user!.currentCity!);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
