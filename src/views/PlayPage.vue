@@ -17,6 +17,7 @@
 		</div>
         <div class="rounded-xl py-4 overflow-auto scrapbook flex items-center justify-center">
             <div class="w-5/6 h-4/6 font-extrabold text-3xl" style="font-family: allura;">
+                asdfasdf
                 <p class="indent-8" v-for="text in store.state.user?.journal" :key="text">{{ text }}</p>
             </div>
         </div>
@@ -66,7 +67,7 @@
 <style lang="scss">
     @font-face {
         font-family: allura;
-        src: url(../assets/fonts/Allura-Regular.ttf);
+        src: url(../assets/fonts/Tangerine-Bold.ttf);
     }
 
     .scrapbook {
