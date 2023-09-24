@@ -48,6 +48,7 @@
                         :key="city.x"
                         ref="rects"
                         fill="white"
+                        class="select-none"
                         :x="(city.x / (imageWidth / 5)) * imageW + 15 + imageX"
                         :y="(city.y / (imageHeight / 5)) * imageH - 12.5 + imageY">
                         {{ getCityNameWithI(index) }}

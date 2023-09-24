@@ -487,6 +487,7 @@ export function getCityInnovationCard(city: CITIES) {
     switch (city) {
         case CITIES.BAGHDAD:
         case CITIES.BEIJING:
+        case CITIES.SAMARKAND:
             return true
     }
     return false;
