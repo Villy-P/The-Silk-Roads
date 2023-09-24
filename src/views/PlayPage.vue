@@ -16,8 +16,8 @@
 			<img src="../assets/x.svg">
 		</div>
         <div class="rounded-xl py-4 overflow-auto scrapbook flex items-center justify-center">
-            <div class="w-5/6 h-4/6 font-extrabold text-3xl" style="font-family: allura;">
-                <p class="indent-8" v-for="text in store.state.user?.journal" :key="text">{{ text }}</p>
+            <div class="w-5/6 h-4/6 font-extrabold text-xl sm:text-3xl overflow-y-auto scroll" style="font-family: allura;">
+                <p class="indent-8 pb-3 px-3 select-none" v-for="text in store.state.user?.journal" :key="text">{{ text }}</p>
             </div>
         </div>
     </div>
@@ -73,9 +73,17 @@
         background: url(../assets/scrapbook.jpg);
         max-width: 100%;
         max-height: 100%;
-        width: 720px;
+        width: 700px;
         aspect-ratio: 1 / 1;
 
         @apply bg-no-repeat bg-contain
+    }
+
+    .scroll::-webkit-scrollbar {
+        width: 0px;
+    }
+
+    .scroll {
+        word-wrap: break-word;
     }
 </style>
