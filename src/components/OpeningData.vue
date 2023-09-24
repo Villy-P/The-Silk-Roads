@@ -60,6 +60,7 @@
         moveToCity(i: CITIES) {
             this.store.state.user!.currentCity = i;
             this.store.state.user!.state = GAME_STATE.MAIN;
+            this.store.state.user!.journal.push(`I have begun my jouney as a ${this.getMerchantName()} Merchant. I will start my journey in ${this.getCityName(i)}, and will attempt to obtain all the things I need.`);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }

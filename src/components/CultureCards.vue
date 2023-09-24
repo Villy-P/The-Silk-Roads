@@ -55,7 +55,6 @@
             if (this.store.state.user!.cultureCards.length == this.currentCultureCardIndex)
                 this.currentCultureCardIndex = 0;
             this.currentCultureCard = this.store.state.user!.cultureCards[this.currentCultureCardIndex];
-            
         }
     }
 </script>

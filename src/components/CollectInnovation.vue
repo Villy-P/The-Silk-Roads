@@ -29,8 +29,8 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { getCityInnovationCard } from '@/data/city';
-import { getInnovationCardSpecialText } from '@/data/innovation';
-import { ITEMS, getInnovationDescription, getItemAsset, getItemName } from '@/data/items';
+    import { getInnovationCardSpecialText } from '@/data/innovation';
+    import { ITEMS, getInnovationDescription, getItemAsset, getItemName } from '@/data/items';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -69,9 +69,11 @@ import { ITEMS, getInnovationDescription, getItemAsset, getItemName } from '@/da
         }
 
         selectInnovation() {
-            this.store.state.user?.items.push(this.currentInnovation);
             if (this.store.state.user?.imports.includes(this.currentInnovation))
                 this.store.state.user?.imports.splice(this.store.state.user?.imports.indexOf(this.currentInnovation), 1);
+            else
+                this.store.state.user?.items.push(this.currentInnovation);
+            this.store.state.user!.journal.push(`I have collected a ${this.getInnovationCardName()}.`);
             this.store.state.user?.cityInnovations.push(this.store.state.user!.currentCity!);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }

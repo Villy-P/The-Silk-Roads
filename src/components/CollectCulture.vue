@@ -18,7 +18,8 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { getCultureCard, getCultureCardImages } from '@/data/culture';
+    import { getCityName } from '@/data/city';
+import { getCultureCard, getCultureCardImages } from '@/data/culture';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -36,6 +37,7 @@
 
         selectCultureCard() {
             this.store.state.user?.cultureCards.push(this.store.state.user!.currentCity!);
+            this.store.state.user!.journal.push(`I have collected a new culture card from the city ${getCityName(this.store.state.user!.currentCity!)}.`);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }

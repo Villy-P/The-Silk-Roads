@@ -41,11 +41,12 @@
         }
 
         exchangeBills(silver: boolean) {
-            this.store.state.user!.items = this.store.state.user!.items.filter((i) => i != ITEMS.BANK_NOTES);
             if (silver)
-                this.store.state.user!.silver += 20;
+                this.store.state.user!.silver += 20 * this.getBillAmount();
             else
-                this.store.state.user!.gold += 15;
+                this.store.state.user!.gold += 15 * this.getBillAmount();
+            this.store.state.user!.journal.push(`I have exchanged my bank notes and have gained ${silver ? 20 * this.getBillAmount() : 15 * this.getBillAmount()} ${silver ? 'silver' : 'gold'}.`);
+            this.store.state.user!.items = this.store.state.user!.items.filter((i) => i != ITEMS.BANK_NOTES);
         }
     }
 </script>
