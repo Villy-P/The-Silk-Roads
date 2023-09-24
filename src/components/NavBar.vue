@@ -24,7 +24,11 @@
                 <div class="tooltip-text tooltip-bottom">Imports</div>
             </div>
         </div>
-        <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer" @click="store.state.showCultureCards = true">
+        <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer" @click="store.state.showJournal = true">
+            <img src="../assets/icon/journal.png" class="w-10">
+            <div class="tooltip-text tooltip-left">Journal</div>
+        </div>
+        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right pr-3 cursor-pointer" @click="store.state.showCultureCards = true">
             <img src="../assets/icon/culture.png" class="w-10">
             <div class="tooltip-text tooltip-left">Culture Cards</div>
         </div>

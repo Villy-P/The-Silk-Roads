@@ -36,6 +36,7 @@ export function socketFunc() {
                 state: GAME_STATE.OPENING,
                 cityInnovations: [],
                 cultureCards: [],
+                journal: []
             };
             const user = getUserByUsername(message);
             if (user === undefined)

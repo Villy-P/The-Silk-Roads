@@ -22,6 +22,7 @@ export interface User {
     state: GAME_STATE;
     cityInnovations: CITIES[];
     cultureCards: CITIES[];
+    journal: string[];
 }
 
 export interface Point {

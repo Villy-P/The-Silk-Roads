@@ -10,6 +10,7 @@ export interface StoreState {
     socket: Socket | null;
     showInventory: boolean;
     showCultureCards: boolean;
+    showJournal: boolean;
 }
 
 export const key: InjectionKey<Store<StoreState>> = Symbol()
@@ -22,7 +23,8 @@ export const store = createStore<StoreState>({
             users: [],
             socket: null,
             showInventory: false,
-            showCultureCards: false
+            showCultureCards: false,
+            showJournal: false
         }
     },
     mutations: {}
