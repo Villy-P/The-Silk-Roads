@@ -11,3 +11,4 @@
 * Show Instructions
 * Bank Notes
 * Debt
+* Stop from entering if not payed tax
