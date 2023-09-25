@@ -23,6 +23,8 @@ export interface User {
     cityInnovations: CITIES[];
     cultureCards: CITIES[];
     journal: string[];
+    silverDebt: number;
+    goldDebt: number;
 }
 
 export interface Point {

@@ -10,3 +10,4 @@
 * Taxes
 * Show Instructions
 * Bank Notes
+* Debt
