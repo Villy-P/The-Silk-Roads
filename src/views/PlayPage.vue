@@ -22,7 +22,7 @@
         </div>
     </div>
     <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
-    <MainView v-if="store.state.user?.state === GAME_STATE.MAIN"/>
+    <MainView v-else/>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
