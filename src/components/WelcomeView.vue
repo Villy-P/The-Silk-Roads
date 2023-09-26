@@ -12,7 +12,7 @@
     <CollectInnovation/>
     <CollectCulture/>
     <PayBills/>
-    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
+    <div class="m-auto px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="enterCity">
         Enter the City
     </div>
 </template>
@@ -28,6 +28,7 @@
     import CollectCulture from './CollectCulture.vue';
     import PayBills from './PayBills.vue';
     import CollectInnovation from './CollectInnovation.vue';
+    import { GAME_STATE } from '@/scripts/state';
 
     @Options({
         components: {
@@ -51,6 +52,11 @@
 
         getCityImages() {
             return getCityImages(this.store.state.user!.currentCity!);
+        }
+
+        enterCity() {
+            this.store.state.user!.state = GAME_STATE.IN_CITY;
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
 </script>

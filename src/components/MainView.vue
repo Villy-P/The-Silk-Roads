@@ -5,6 +5,7 @@
             <WorldMap/>
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
                 <WelcomeView v-if="store.state.user?.state == GAME_STATE.WELCOME_TO_CITY"/>
+                <InCity v-else-if="store.state.user?.state == GAME_STATE.IN_CITY"/>
             </div>
         </div>
     </div>
@@ -16,6 +17,7 @@
     import WelcomeView from './WelcomeView.vue';
     import WorldMap from './WorldMap.vue';
     import NavBar from './NavBar.vue';
+    import InCity from './InCity.vue';
     import { useStore } from 'vuex';
     import { key } from '@/store/store';
     import { GAME_STATE } from '@/scripts/state';
@@ -24,7 +26,8 @@
         components: {
             WelcomeView,
             WorldMap,
-            NavBar
+            NavBar,
+            InCity
         }
     })
     export default class MainView extends Vue {
