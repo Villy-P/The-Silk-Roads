@@ -50,7 +50,7 @@
 
         GAME_STATE = GAME_STATE;
         
-        mounted() {
+        beforeMount() {
             const username = localStorage.getItem("username");
             if (username == null) {
                 this.$router.push("/");
