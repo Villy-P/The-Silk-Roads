@@ -1,5 +1,5 @@
 <template>
-    <div v-if="getCityInnovationCard() && !store.state.user?.cityInnovations.includes(store.state.user!.currentCity!)">
+    <div v-if="getCityInnovationCard() && !store.state.user?.cityInnovations.includes(store.state.user!.currentCity!)" class="pb-5">
         <div class="w-11/12 m-auto text-center py-5">{{ getInnovationCardSpecialText() }}</div>
         <div class="w-full flex h-fit m-auto items-center">
             <div class="h-full w-1/12 flex items-center cursor-pointer" @click="changeInnovationCard(-1)">
