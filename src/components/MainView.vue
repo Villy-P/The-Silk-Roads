@@ -6,6 +6,7 @@
             <div class="bg-white w-1/3 border-l-2 border-l-black overflow-y-auto">
                 <WelcomeView v-if="store.state.user?.state == GAME_STATE.WELCOME_TO_CITY"/>
                 <InCity v-else-if="store.state.user?.state == GAME_STATE.IN_CITY"/>
+                <MarketView v-else-if="store.state.user?.state == GAME_STATE.MARKET"/>
             </div>
         </div>
     </div>
@@ -18,6 +19,7 @@
     import WorldMap from './WorldMap.vue';
     import NavBar from './NavBar.vue';
     import InCity from './InCity.vue';
+    import MarketView from './MarketView.vue';
     import { useStore } from 'vuex';
     import { key } from '@/store/store';
     import { GAME_STATE } from '@/scripts/state';
@@ -27,7 +29,8 @@
             WelcomeView,
             WorldMap,
             NavBar,
-            InCity
+            InCity,
+            MarketView
         }
     })
     export default class MainView extends Vue {
