@@ -148,7 +148,7 @@ interface TradingItems {
     items: TradingItem[]
 }
 
-export function getTradingItems(city: CITIES): TradingItems | undefined {
+export function getTradingItems(city: CITIES): TradingItems {
     switch (city) {
         case CITIES.BAGHDAD:
             return { items: [
