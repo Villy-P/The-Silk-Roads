@@ -492,3 +492,28 @@ export function getCityInnovationCard(city: CITIES) {
     }
     return false;
 }
+
+export function getCityConnections(city: CITIES) {
+    switch (city) {
+        case CITIES.BAGHDAD:
+            return [CITIES.CONSTANTINOPLE, CITIES.TABRIZ];
+        case CITIES.BEIJING:
+            return [CITIES.DUNHUANG, CITIES.BRUGES];
+        case CITIES.BRUGES:
+            return [CITIES.VENICE, CITIES.BEIJING];
+        case CITIES.CALICUT:
+            return [CITIES.KASHGAR, CITIES.SAMARKAND];
+        case CITIES.CONSTANTINOPLE:
+            return [CITIES.BAGHDAD, CITIES.VENICE];
+        case CITIES.DUNHUANG:
+            return [CITIES.BEIJING, CITIES.KASHGAR];
+        case CITIES.KASHGAR:
+            return [CITIES.CALICUT, CITIES.DUNHUANG];
+        case CITIES.SAMARKAND:
+            return [CITIES.CALICUT, CITIES.TABRIZ];
+        case CITIES.TABRIZ:
+            return [CITIES.SAMARKAND, CITIES.BAGHDAD];
+        case CITIES.VENICE:
+            return [CITIES.BRUGES, CITIES.CONSTANTINOPLE];
+    }
+}

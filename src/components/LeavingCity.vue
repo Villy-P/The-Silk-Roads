@@ -1,12 +1,9 @@
 <template>
     <div class="text-center py-3 text-3xl" style="font-variant: small-caps;">
-        {{ getCityName() }}
+        Leaving {{ getCityName() }}
     </div>
-    <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500 mb-5" style="font-variant: small-caps;" @click="enterMarket">
-        <p>Enter the Market</p>
-    </div>
-    <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500" style="font-variant: small-caps;" @click="leaveCity">
-        <p>Leave City</p>
+    <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500 mb-5" style="font-variant: small-caps;" @click="goBack">
+        <p>Go Back Inside</p>
     </div>
 </template>
 
@@ -17,16 +14,17 @@
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
+    import {  } from '@/data/city';
 
-    export default class InCity extends Vue {
+    export default class LeavingCity extends Vue {
         store = useStore(key);
 
         getCityName() {
             return getCityName(this.store.state.user!.currentCity!);
         }
 
-        enterMarket() {
-            this.store.state.user!.state = GAME_STATE.MARKET;
+        goBack() {
+            this.store.state.user!.state = GAME_STATE.IN_CITY;
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
 

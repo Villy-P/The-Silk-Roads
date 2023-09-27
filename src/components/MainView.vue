@@ -7,6 +7,7 @@
                 <WelcomeView v-if="store.state.user?.state == GAME_STATE.WELCOME_TO_CITY"/>
                 <InCity v-else-if="store.state.user?.state == GAME_STATE.IN_CITY"/>
                 <MarketView v-else-if="store.state.user?.state == GAME_STATE.MARKET"/>
+                <LeavingCity v-else-if="store.state.user?.state == GAME_STATE.LEAVING"/>
             </div>
         </div>
     </div>
@@ -23,6 +24,7 @@
     import { useStore } from 'vuex';
     import { key } from '@/store/store';
     import { GAME_STATE } from '@/scripts/state';
+    import LeavingCity from './LeavingCity.vue';
 
     @Options({
         components: {
@@ -30,7 +32,8 @@
             WorldMap,
             NavBar,
             InCity,
-            MarketView
+            MarketView,
+            LeavingCity
         }
     })
     export default class MainView extends Vue {
