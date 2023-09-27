@@ -24,7 +24,11 @@
                 <div class="tooltip-text tooltip-bottom">Imports</div>
             </div>
         </div>
-        <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer" @click="store.state.showCultureCards = true">
+        <div class="flex items-center justify-center w-fit tooltip-container ml-auto float-right text-right pr-3 cursor-pointer" @click="store.state.showInstructions = true">
+            <img src="../assets/icon/help.png" class="w-10">
+            <div class="tooltip-text tooltip-left">Help</div>
+        </div>
+        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right pr-3 cursor-pointer" @click="store.state.showCultureCards = true">
             <img src="../assets/icon/debt.png" class="w-10">
             <div class="absolute bg-red-700 w-4 h-4 flex items-center justify-center rounded-full right-10 top-8 text-white text-xs">!</div>
             <div class="tooltip-text tooltip-left">Debt</div>
