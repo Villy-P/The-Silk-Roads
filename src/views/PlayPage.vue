@@ -1,34 +1,37 @@
 <template>
-    <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showInventory">
-        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showInventory = false">
-			<img src="../assets/x.svg">
-		</div>
-        <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4"><InventoryPage/></div>
-    </div>
-    <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showCultureCards">
-        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showCultureCards = false">
-			<img src="../assets/x.svg">
-		</div>
-        <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><CultureCards/></div>
-    </div>
-    <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showJournal">
-        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showJournal = false">
-			<img src="../assets/x.svg">
-		</div>
-        <div class="rounded-xl py-4 overflow-auto scrapbook flex items-center justify-center">
-            <div class="w-5/6 h-4/6 font-extrabold text-xl sm:text-3xl overflow-y-auto scroll" style="font-family: allura;">
-                <p class="indent-8 pb-3 px-3 select-none" v-for="text in store.state.user?.journal" :key="text">{{ text }}</p>
+    <TeacherView v-if="store.state.user?.status == USER_STATUS.LEADER"/>
+    <div v-else>
+        <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showInventory">
+            <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showInventory = false">
+                <img src="../assets/x.svg">
+            </div>
+            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4"><InventoryPage/></div>
+        </div>
+        <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showCultureCards">
+            <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showCultureCards = false">
+                <img src="../assets/x.svg">
+            </div>
+            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><CultureCards/></div>
+        </div>
+        <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showJournal">
+            <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showJournal = false">
+                <img src="../assets/x.svg">
+            </div>
+            <div class="rounded-xl py-4 overflow-auto scrapbook flex items-center justify-center">
+                <div class="w-5/6 h-4/6 font-extrabold text-xl sm:text-3xl overflow-y-auto scroll" style="font-family: allura;">
+                    <p class="indent-8 pb-3 px-3 select-none" v-for="text in store.state.user?.journal" :key="text">{{ text }}</p>
+                </div>
             </div>
         </div>
+        <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showInstructions">
+            <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showInstructions = false">
+                <img src="../assets/x.svg">
+            </div>
+            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><InstructionsView/></div>
+        </div>
+        <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
+        <MainView v-else/>
     </div>
-    <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.showInstructions">
-        <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showInstructions = false">
-			<img src="../assets/x.svg">
-		</div>
-        <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><InstructionsView/></div>
-    </div>
-    <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
-    <MainView v-else/>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
@@ -43,6 +46,8 @@
     import CultureCards from '@/components/CultureCards.vue';
     import InstructionsView from '@/components/InstructionsView.vue';
     import { GAME_STATE } from '@/scripts/state';
+    import { USER_STATUS } from '@/scripts/interface';
+    import TeacherView from '@/components/TeacherView.vue';
 
     @Options({
         components: {
@@ -50,13 +55,15 @@
             MainView,
             InventoryPage,
             CultureCards,
-            InstructionsView
+            InstructionsView,
+            TeacherView
         }
     })
     export default class PlayPage extends Vue {
         store = useStore(key);
 
         GAME_STATE = GAME_STATE;
+        USER_STATUS = USER_STATUS;
         
         beforeMount() {
             const username = localStorage.getItem("username");
