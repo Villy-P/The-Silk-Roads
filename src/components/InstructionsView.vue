@@ -1,4 +1,5 @@
 <template>
+    <h1 class="px-10 font-bold text-5xl">The Silk Roads - Instructions</h1>
     <h1 class="h1">Silver and Gold</h1>
     <p class="p">Silver and Gold are the base currencies used within the game. They can be used at all cities to buy items, or to trade with other players. Each merchant starts off with 8 silver and 5 gold. Gold can be obtained by selling/trading exports, or using bank notes at certain cities.</p>
     <h1 class="h1">Exports and Imports</h1>
