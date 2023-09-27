@@ -11,6 +11,8 @@ export interface StoreState {
     showInventory: boolean;
     showCultureCards: boolean;
     showJournal: boolean;
+    showDebtMenu: boolean;
+    showInstructions: boolean;
 }
 
 export const key: InjectionKey<Store<StoreState>> = Symbol()
@@ -24,7 +26,9 @@ export const store = createStore<StoreState>({
             socket: null,
             showInventory: false,
             showCultureCards: false,
-            showJournal: false
+            showJournal: false,
+            showDebtMenu: false,
+            showInstructions: false
         }
     },
     mutations: {}

@@ -137,14 +137,14 @@ export function getCityImages(city: CITIES) {
     return {items: []};
 }
 
-interface TradingItem {
+export interface TradingItem {
     item: ITEMS,
     silver: number,
     gold: number,
     displayName?: string
 }
 
-interface TradingItems {
+export interface TradingItems {
     items: TradingItem[]
 }
 
