@@ -28,17 +28,18 @@
                     <div class="tooltip-text tooltip-left">You need this item!</div>
                 </div>
                 <div class="w-0.5 bg-black h-full"></div>
-                <div class="text-center w-8 tooltip-container cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, true)">
+                <div class="text-center w-8 tooltip-container cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, true)" @click="silverTransaction(item)">
                     <p>{{ item.silver }}</p>
                     <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, true) }}</div>
                 </div>
                 <div class="w-0.5 bg-black h-full"></div>
-                <div class="text-center w-8 tooltip-container h-full cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, false)">
+                <div class="text-center w-8 tooltip-container h-full cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, false)" @click="goldTransaction(item)">
                     <p>{{ item.gold }}</p>
                     <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, false) }}</div>
                 </div>
             </div>
         </div>
+        <p class="w-10/12 text-center m-auto pt-5">Note: You can only buy or sell one thing <i>per</i> city.</p>
     </div>
 </template>
 
@@ -83,6 +84,42 @@
                 return this.store.state.user!.silver < i.silver ? 'You don\' have enough silver' : 'Buy this item';
             if (!silver && this.buying)
                 return this.store.state.user!.gold < i.gold ? 'You don\' have enough gold' : 'Buy this item';
+        }
+
+        silverTransaction(i: TradingItem) {
+            if (this.buying && this.store.state.user!.silver >= i.silver)
+                this.addItem(i, true);
+            if (!this.buying && this.store.state.user!.items.includes(i.item))
+                this.sellItem(i, true);
+        }
+
+        goldTransaction(i: TradingItem) {
+            if (this.buying && this.store.state.user!.gold >= i.gold)
+                this.addItem(i, false);
+            if (!this.buying && this.store.state.user!.items.includes(i.item))
+                this.sellItem(i, false);
+        }
+
+        addItem(i: TradingItem, silver: boolean) {
+            if (this.store.state.user?.imports.includes(i.item))
+                this.store.state.user?.imports.splice(this.store.state.user?.imports.indexOf(i.item), 1);
+            else
+                this.store.state.user?.items.push(i.item);
+            if (silver)
+                this.store.state.user!.silver -= i.silver;
+            else
+                this.store.state.user!.gold -= i.gold;
+            this.store.state.user!.journal.push(`I bought a ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
+        }
+
+        sellItem(i: TradingItem, silver: boolean) {
+            this.store.state.user!.items.splice(this.store.state.user!.items.indexOf(i.item), 1);
+            if (silver)
+                this.store.state.user!.silver += i.silver;
+            else
+                this.store.state.user!.gold += i.gold;
+            this.store.state.user!.journal.push(`I sold my ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
         }
     }
 </script>
