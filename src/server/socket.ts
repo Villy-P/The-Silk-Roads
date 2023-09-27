@@ -39,6 +39,8 @@ export function socketFunc() {
                 journal: [],
                 goldDebt: 0,
                 silverDebt: 0,
+                hasMarketTransactions: false,
+                hasPaidCityTax: false,
             };
             const user = getUserByUsername(message);
             if (user === undefined)

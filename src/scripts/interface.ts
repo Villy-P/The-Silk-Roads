@@ -25,6 +25,8 @@ export interface User {
     journal: string[];
     silverDebt: number;
     goldDebt: number;
+    hasPaidCityTax: boolean;
+    hasMarketTransactions: boolean;
 }
 
 export interface Point {
