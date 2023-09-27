@@ -5,42 +5,45 @@
     <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500" style="font-variant: small-caps;">
         <p>Back</p>
     </div>
-    <div class="flex w-10/12 pt-10">
-        <div class="w-1/3 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer" :class="buying ? 'bg-cyan-500' : ''" @click="buying = true">
-            <p>Buy</p>
-        </div>
-        <div class="w-1/3 bg-cyan-400 border-2 border-black py-2 px-4 cursor-pointer" :class="!buying ? 'bg-cyan-500' : ''" @click="buying = false">
-            <p>Sell</p>
-        </div>
-    </div>
-    <div class="w-10/12 m-auto pt-10">
-        <div class="flex border-2 border-black pl-2 justify-center items-center h-10">
-            <div class="grow px-2 py-2 border-r-black border-r-2">Name</div>
-            <div class="text-center w-8"><img src="../assets/items/silver.jpg"></div>
-            <div class="w-0.5 bg-black h-full"></div>
-            <div class="text-center w-8"><img src="../assets/items/gold.jpg"></div>
-        </div>
-        <div v-for="item in getCityItems()" :key="item.item">
-            <div class="flex border-2 border-black pl-2 justify-center items-center h-10">
-                <div class="grow px-2 py-2">{{ item.displayName || getItemName(item.item) }}</div>
-                <div class="w-5 h-5 bg-black flex items-center justify-center rounded-full mr-1 tooltip-container" v-if="store.state.user?.imports.includes(item.item) && buying">
-                    <p class="text-white select-none">!</p>
-                    <div class="tooltip-text tooltip-left">You need this item!</div>
-                </div>
-                <div class="w-0.5 bg-black h-full"></div>
-                <div class="text-center w-8 tooltip-container cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, true)" @click="silverTransaction(item)">
-                    <p>{{ item.silver }}</p>
-                    <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, true) }}</div>
-                </div>
-                <div class="w-0.5 bg-black h-full"></div>
-                <div class="text-center w-8 tooltip-container h-full cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, false)" @click="goldTransaction(item)">
-                    <p>{{ item.gold }}</p>
-                    <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, false) }}</div>
-                </div>
+    <div v-if="!store.state.user!.hasMarketTransactions">    
+        <div class="flex w-10/12 pt-10">
+            <div class="w-1/3 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer" :class="buying ? 'bg-cyan-500' : ''" @click="buying = true">
+                <p>Buy</p>
+            </div>
+            <div class="w-1/3 bg-cyan-400 border-2 border-black py-2 px-4 cursor-pointer" :class="!buying ? 'bg-cyan-500' : ''" @click="buying = false">
+                <p>Sell</p>
             </div>
         </div>
-        <p class="w-10/12 text-center m-auto pt-5">Note: You can only buy or sell one thing <i>per</i> city.</p>
+        <div class="w-10/12 m-auto pt-10">
+            <div class="flex border-2 border-black pl-2 justify-center items-center h-10">
+                <div class="grow px-2 py-2 border-r-black border-r-2">Name</div>
+                <div class="text-center w-8"><img src="../assets/items/silver.jpg"></div>
+                <div class="w-0.5 bg-black h-full"></div>
+                <div class="text-center w-8"><img src="../assets/items/gold.jpg"></div>
+            </div>
+            <div v-for="item in getCityItems()" :key="item.item">
+                <div class="flex border-2 border-black pl-2 justify-center items-center h-10">
+                    <div class="grow px-2 py-2">{{ item.displayName || getItemName(item.item) }}</div>
+                    <div class="w-5 h-5 bg-black flex items-center justify-center rounded-full mr-1 tooltip-container" v-if="store.state.user?.imports.includes(item.item) && buying">
+                        <p class="text-white select-none">!</p>
+                        <div class="tooltip-text tooltip-left">You need this item!</div>
+                    </div>
+                    <div class="w-0.5 bg-black h-full"></div>
+                    <div class="text-center w-8 tooltip-container cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, true)" @click="silverTransaction(item)">
+                        <p>{{ item.silver }}</p>
+                        <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, true) }}</div>
+                    </div>
+                    <div class="w-0.5 bg-black h-full"></div>
+                    <div class="text-center w-8 tooltip-container h-full cursor-pointer" style="line-height: 36px;" :class="getItemStyle(item, false)" @click="goldTransaction(item)">
+                        <p>{{ item.gold }}</p>
+                        <div class="tooltip-text tooltip-left">{{ getItemTooltip(item, false) }}</div>
+                    </div>
+                </div>
+            </div>
+            <p class="w-10/12 text-center m-auto pt-5">Note: You can only buy or sell one thing <i>per</i> city.</p>
+        </div>
     </div>
+    <div v-else class="w-10/12 m-auto text-center pt-10">You've already bought/sold something in this city. Move on to another city or trade with other players at this location.</div>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
@@ -110,6 +113,7 @@
             else
                 this.store.state.user!.gold -= i.gold;
             this.store.state.user!.journal.push(`I bought a ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
+            this.store.state.user!.hasMarketTransactions = true;
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
 
@@ -119,6 +123,7 @@
                 this.store.state.user!.silver += i.silver;
             else
                 this.store.state.user!.gold += i.gold;
+            this.store.state.user!.hasMarketTransactions = true;
             this.store.state.user!.journal.push(`I sold my ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
         }
     }
