@@ -2,7 +2,7 @@
     <div class="text-center py-3 text-3xl" style="font-variant: small-caps;">
         {{ getCityName() }} Market
     </div>
-    <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500" style="font-variant: small-caps;">
+    <div class="w-10/12 bg-cyan-400 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-cyan-500" style="font-variant: small-caps;" @click="leaveMarket">
         <p>Back</p>
     </div>
     <div v-if="!store.state.user!.hasMarketTransactions">    
@@ -50,6 +50,7 @@
 <script lang="ts">
     import { getCityName, getTradingItems, TradingItem } from '@/data/city';
     import { ITEMS, getItemName } from '@/data/items';
+    import { GAME_STATE } from '@/scripts/state';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -125,6 +126,11 @@
                 this.store.state.user!.gold += i.gold;
             this.store.state.user!.hasMarketTransactions = true;
             this.store.state.user!.journal.push(`I sold my ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
+        }
+
+        leaveMarket() {
+            this.store.state.user!.state = GAME_STATE.IN_CITY;
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
 </script>
