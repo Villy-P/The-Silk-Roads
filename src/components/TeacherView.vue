@@ -5,17 +5,17 @@
         <div>{{ u.username }}</div>
         <div class="flex items-center justify-center w-fit tooltip-container">
             <img src="../assets/items/silver.jpg" class="w-10">
-            <div class="select-none">{{ store.state.user?.silver }}</div>
+            <div class="select-none">{{ u.silver }}</div>
             <div class="tooltip-text tooltip-bottom">Silver</div>
         </div>
         <div class="flex items-center justify-center w-fit tooltip-container">
             <img src="../assets/items/gold.jpg" class="w-10">
-            <div class="select-none">{{ store.state.user?.gold }}</div>
+            <div class="select-none">{{ u.gold }}</div>
             <div class="tooltip-text tooltip-bottom">Gold</div>
         </div>
         <div class="flex items-center justify-center w-fit pl-5">
             <div class="select-none tooltip-container h-full flex items-center">
-                <p>{{ store.state.user?.items.length }}</p>
+                <p>{{ u.items.length }}</p>
                 <div class="tooltip-text tooltip-bottom">Items</div>
             </div>
             <div class="select-none tooltip-container h-full flex items-center cursor-pointer">
@@ -23,21 +23,25 @@
                 <div class="tooltip-text tooltip-bottom">Inventory</div>
             </div>
             <div class="select-none tooltip-container h-full flex items-center">
-                <p>{{ store.state.user?.imports.length }}</p>
+                <p>{{ u.imports.length }}</p>
                 <div class="tooltip-text tooltip-bottom">Imports</div>
             </div>
         </div>
         <div class="flex items-center justify-center w-fit tooltip-container float-right text-right px-3 cursor-pointer">
             <img src="../assets/icon/culture.png" class="w-10">
-            <div class="select-none">{{ store.state.user?.cultureCards.length }}</div>
+            <div class="select-none">{{ u.cultureCards.length }}</div>
             <div class="tooltip-text tooltip-bottom">Culture Cards</div>
+        </div>
+        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right px-3 cursor-pointer ml-auto">
+            <div class="select-none">{{ calculateScore(u) }}</div>
+            <div class="tooltip-text tooltip-bottom">Score</div>
         </div>
     </div>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { USER_STATUS } from '@/scripts/interface';
+    import { USER_STATUS, User } from '@/scripts/interface';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -46,6 +50,16 @@
         store = useStore(key);
 
         USER_STATUS = USER_STATUS;
+
+        calculateScore(user: User) {
+            let score = 0;
+            score += user.silver * 2;
+            score += user.gold * 1.5;
+            score += user.items.length * 2;
+            score -= user.imports.length;
+            score += user.cultureCards.length * 5;
+            return score;
+        }
     }
 </script>
 

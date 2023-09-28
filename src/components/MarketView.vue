@@ -126,6 +126,7 @@
                 this.store.state.user!.gold += i.gold;
             this.store.state.user!.hasMarketTransactions = true;
             this.store.state.user!.journal.push(`I sold my ${this.getItemName(i.item)} for ${silver ? i.silver : i.gold} ${silver ? 'silver' : 'gold'} at the ${this.getCityName()} market.`);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
 
         leaveMarket() {
