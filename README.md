@@ -4,9 +4,6 @@
 
 * Trading
 * Taxes
-* Bank Notes
-* Debt
 * Stop from entering if not payed tax
 * Ending View
-* Teacher View
-* Leaderboard
+* Demand Debt

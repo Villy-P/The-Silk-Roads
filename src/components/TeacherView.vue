@@ -1,6 +1,6 @@
 <template>
     <div class="h-10"></div>
-    <div v-for="(u, index) in store.state.users.filter((i) => i.status != USER_STATUS.LEADER)" :key="JSON.stringify(u)" class="userbox">
+    <div v-for="(u, index) in store.state.users.filter((i) => i.status != USER_STATUS.LEADER).sort((a, b) => calculateScore(b) - calculateScore(a))" :key="JSON.stringify(u)" class="userbox">
         <div class="text-4xl px-2 underline">{{ index + 1 }}</div>
         <div>{{ u.username }}</div>
         <div class="flex items-center justify-center w-fit tooltip-container">
@@ -36,6 +36,10 @@
             <div class="select-none">{{ calculateScore(u) }}</div>
             <div class="tooltip-text tooltip-bottom">Score</div>
         </div>
+        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right px-3 cursor-pointer" v-if="u.silverDebt > 0 || u.goldDebt > 0">
+            <div class="bg-red-600 w-fit p-3 border-2 border-black">DEMAND {{ u.silverDebt }} SILVER {{ u.goldDebt }} GOLD DEBT</div>
+            <div class="tooltip-text tooltip-bottom">Debt</div>
+        </div>
     </div>
 </template>
 
@@ -58,7 +62,13 @@
             score += user.items.length * 2;
             score -= user.imports.length;
             score += user.cultureCards.length * 5;
+            if (user.imports.length == 0)
+                score += 100;
             return score;
+        }
+
+        demandDebt(user: User) {
+            //
         }
     }
 </script>

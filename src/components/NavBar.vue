@@ -30,7 +30,7 @@
         </div>
         <div class="flex items-center justify-center w-fit tooltip-container float-right text-right pr-3 cursor-pointer" @click="store.state.showDebtMenu = true">
             <img src="../assets/icon/debt.png" class="w-10">
-            <div class="absolute bg-red-700 w-4 h-4 flex items-center justify-center rounded-full right-10 top-8 text-white text-xs" v-if="store.state.user!.silverDebt > 0 || store.state.user!.goldDebt > 0">!</div>
+            <div class="absolute bg-red-700 w-4 h-4 flex items-center justify-center rounded-full right-10 top-8 text-white text-xs" v-if="(store.state.user?.silverDebt || 0) > 0 || (store.state.user?.goldDebt || 0) > 0">!</div>
             <div class="tooltip-text tooltip-left">Debt</div>
         </div>
         <div class="flex items-center justify-center w-fit tooltip-container float-right text-right pr-3 cursor-pointer" @click="store.state.showJournal = true">
