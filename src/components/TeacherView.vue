@@ -36,7 +36,7 @@
             <div class="select-none">{{ calculateScore(u) }}</div>
             <div class="tooltip-text tooltip-bottom">Score</div>
         </div>
-        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right px-3 cursor-pointer" v-if="u.silverDebt > 0 || u.goldDebt > 0">
+        <div class="flex items-center justify-center w-fit tooltip-container float-right text-right px-3 cursor-pointer" v-if="u.silverDebt > 0 || u.goldDebt > 0" @click="demandDebt(u)">
             <div class="bg-red-600 w-fit p-3 border-2 border-black">DEMAND {{ u.silverDebt }} SILVER {{ u.goldDebt }} GOLD DEBT</div>
             <div class="tooltip-text tooltip-bottom">Debt</div>
         </div>
@@ -68,7 +68,7 @@
         }
 
         demandDebt(user: User) {
-            //
+            this.store.state.socket?.emit("demandDebt", JSON.stringify(user));
         }
     }
 </script>

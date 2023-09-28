@@ -27,6 +27,7 @@ export interface User {
     goldDebt: number;
     hasPaidCityTax: boolean;
     hasMarketTransactions: boolean;
+    showDemandDebt: boolean;
 }
 
 export interface Point {

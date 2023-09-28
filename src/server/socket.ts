@@ -41,6 +41,7 @@ export function socketFunc() {
                 silverDebt: 0,
                 hasMarketTransactions: false,
                 hasPaidCityTax: false,
+                showDemandDebt: false
             };
             const user = getUserByUsername(message);
             if (user === undefined)
@@ -76,6 +77,9 @@ export function socketFunc() {
                 }
             }
             io.emit('userState', broadcastUsers());
+        });
+        socket.on("demandDebt", (user) => {
+            io.emit("demandDebt", user);
         });
     });
 }

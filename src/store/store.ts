@@ -28,7 +28,7 @@ export const store = createStore<StoreState>({
             showCultureCards: false,
             showJournal: false,
             showDebtMenu: false,
-            showInstructions: false
+            showInstructions: false,
         }
     },
     mutations: {}

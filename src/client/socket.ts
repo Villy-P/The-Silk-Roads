@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IP_ADDRESS, SERVER_PORT } from '@/data/data';
-import { getMerchantName } from '@/data/merchant';
 import { User } from '@/scripts/interface';
 import { StoreState } from '@/store/store';
 import io from 'socket.io-client'
@@ -27,8 +26,19 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         const users: User[] = msg.users;
         store.state.users = users;
         store.state.user = users.find((u) => u.username === store.state.username) || store.state.user;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        console.log(getMerchantName(store.state.user!.merchantType!));
         router.push("/play");
+    });
+    store.state.socket.on('demandDebt', (user) => {
+        const u: User | undefined = store.state.users.find((u) => u.username == JSON.parse(user).username);
+        if (!u)
+            return;
+        if (u.username != store.state.user?.username)
+            return;
+        u.silver -= u.silverDebt;
+        u.gold -= u.goldDebt;
+        u.silverDebt = 0;
+        u.goldDebt = 0;
+        u.showDemandDebt = true;
+        store.state.socket?.emit('updateUser', store.state.user);
     });
 }
