@@ -33,7 +33,7 @@
             <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.showDebtMenu = false">
                 <img src="../assets/x.svg">
             </div>
-            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"></div>
+            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto"><DebtMenu/></div>
         </div>
         <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
         <MainView v-else/>
@@ -54,6 +54,7 @@
     import { GAME_STATE } from '@/scripts/state';
     import { USER_STATUS } from '@/scripts/interface';
     import TeacherView from '@/components/TeacherView.vue';
+    import DebtMenu from '@/components/DebtMenu.vue';
 
     @Options({
         components: {
@@ -62,7 +63,8 @@
             InventoryPage,
             CultureCards,
             InstructionsView,
-            TeacherView
+            TeacherView,
+            DebtMenu
         }
     })
     export default class PlayPage extends Vue {
