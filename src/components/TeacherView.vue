@@ -62,6 +62,8 @@
             score += user.items.length * 2;
             score -= user.imports.length;
             score += user.cultureCards.length * 5;
+            score -= user.silverDebt;
+            score -= user.goldDebt * .75;
             if (user.imports.length == 0)
                 score += 100;
             return score;
