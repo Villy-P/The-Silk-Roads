@@ -6,4 +6,3 @@
 * Taxes
 * Stop from entering if not payed tax
 * Ending View
-* Demand Debt
