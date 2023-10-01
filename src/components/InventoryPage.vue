@@ -1,8 +1,8 @@
 <template>
     <div class="w-11/12 border-2 border-black flex m-auto">
-        <p class="w-1/2 p-2">Exports</p>
+        <p class="w-1/2 p-2">Exports (Things you have)</p>
         <div class="w-0.5 bg-black"></div>
-        <p class="w-1/2 p-2">Imports</p>
+        <p class="w-1/2 p-2">Imports (Things you need)</p>
     </div>
     <div class="w-11/12 border-2 border-t-0 border-black flex m-auto">
         <div class="h-full w-1/2 text-left pl-2 py-2">
