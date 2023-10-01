@@ -46,7 +46,7 @@
         <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
         <MainView v-else/>
         <div class="absolute bottom-3 left-3">
-            <div class="w-80 h-fit bg-white rounded-2xl mt-4 border-2 border-black" v-for="u in store.state.tradeRequests" :key="u">
+            <div class="w-80 h-fit bg-white rounded-2xl mt-4 border-2 border-black" v-for="u in getTradeRequests()" :key="u">
                 <div class="text-center p-3">{{ u }} wants to trade</div>
                 <div class="flex items-center justify-center w-full gap-3 pb-4">
                     <div class="w-fit p-2 bg-cyan-400 text-center cursor-pointer">Accept</div>
@@ -99,6 +99,11 @@
             this.store.state.username = username;
             socketSetup(this.store, this.$router);
             this.store.state.socket?.emit('joined', username);
+        }
+
+        getTradeRequests() {
+            // const users = this.store.state.users;
+            return this.store.state.tradeRequests;
         }
     }
 </script>

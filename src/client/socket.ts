@@ -47,6 +47,21 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
             return;
         if (u.username != store.state.user?.username)
             return;
-        store.state.tradeRequests.push(sender)
+        store.state.tradeRequests.push(sender);
+    });
+    store.state.socket.on("cancelRequestTrade", (sender, reciever) => {
+        const u: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!u)
+            return;
+        if (u.username != store.state.user?.username)
+            return;
+        store.state.tradeRequests = store.state.tradeRequests.filter((u) => u != sender);
+    });
+    store.state.socket.on("refuseTrade", (sender, reciever) => {
+        const u: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!u)
+            return;
+        if (u.username != store.state.user?.username)
+            return;
     });
 }

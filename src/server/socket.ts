@@ -84,5 +84,11 @@ export function socketFunc() {
         socket.on("requestTrade", (sender, reciever) => {
             io.emit("requestTrade", sender, reciever);
         });
+        socket.on("cancelRequestTrade", (sender, reciever) => {
+            io.emit("cancelRequestTrade", sender, reciever);
+        });
+        socket.on("refuseTrade", (sender, reciever) => {
+            io.emit("refuseTrade", sender, reciever);
+        });
     });
 }
