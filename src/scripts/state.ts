@@ -3,5 +3,6 @@ export enum GAME_STATE {
     WELCOME_TO_CITY,
     IN_CITY,
     MARKET,
-    LEAVING
+    LEAVING,
+    TRADE_PLAYERS
 }
