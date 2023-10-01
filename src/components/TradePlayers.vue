@@ -49,6 +49,7 @@
             if (user.tradingWith)
                 return;
             this.store.state.user!.tradingWith = user.username;
+            this.store.state.socket?.emit('requestTrade', this.store.state.user?.username, this.store.state.user?.tradingWith);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
 

@@ -81,5 +81,8 @@ export function socketFunc() {
         socket.on("demandDebt", (user) => {
             io.emit("demandDebt", user);
         });
+        socket.on("requestTrade", (sender, reciever) => {
+            io.emit("requestTrade", sender, reciever);
+        });
     });
 }

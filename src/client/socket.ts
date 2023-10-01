@@ -41,4 +41,12 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         u.showDemandDebt = true;
         store.state.socket?.emit('updateUser', store.state.user);
     });
+    store.state.socket.on("requestTrade", (sender, reciever) => {
+        const u: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!u)
+            return;
+        if (u.username != store.state.user?.username)
+            return;
+        store.state.tradeRequests.push(sender)
+    });
 }

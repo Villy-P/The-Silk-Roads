@@ -13,6 +13,7 @@ export interface StoreState {
     showJournal: boolean;
     showDebtMenu: boolean;
     showInstructions: boolean;
+    tradeRequests: string[];
 }
 
 export const key: InjectionKey<Store<StoreState>> = Symbol()
@@ -29,6 +30,7 @@ export const store = createStore<StoreState>({
             showJournal: false,
             showDebtMenu: false,
             showInstructions: false,
+            tradeRequests: []
         }
     },
     mutations: {}
