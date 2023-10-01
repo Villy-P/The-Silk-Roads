@@ -31,7 +31,10 @@
         }
 
         getOtherPlayersAtLocation() {
-            return this.store.state.users.filter((u) => u.currentCity == this.store.state.user?.currentCity && u.username != this.store.state.user?.username);
+            return this.store.state.users.filter((u) => 
+                u.currentCity == this.store.state.user?.currentCity && 
+                u.username != this.store.state.user?.username
+            );
         }
     }
 </script>
