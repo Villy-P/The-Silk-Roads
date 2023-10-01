@@ -34,6 +34,7 @@
 
         goBack() {
             this.store.state.user!.state = GAME_STATE.IN_CITY;
+            this.store.state.socket?.emit('cancelRequestTrade', this.store.state.user?.username, this.store.state.user?.tradingWith);
             this.store.state.user!.tradingWith = undefined;
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
