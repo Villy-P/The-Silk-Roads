@@ -28,6 +28,8 @@ export interface User {
     hasPaidCityTax: boolean;
     hasMarketTransactions: boolean;
     showDemandDebt: boolean;
+    tradingWith?: string;
+    requestTradeWith?: string;
 }
 
 export interface Point {
