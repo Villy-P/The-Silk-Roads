@@ -106,6 +106,12 @@
             return this.store.state.tradeRequests;
         }
 
+        acceptDeal(u: string) {
+            this.store.state.tradeRequests = [];
+            this.store.state.user!.tradingWith = u;
+            this.store.state.socket?.emit('beginTrade', this.store.state.user?.username, u);
+        }
+
         refuseDeal(u: string) {
             this.store.state.tradeRequests = this.store.state.tradeRequests.filter((i) => i != u);
             this.store.state.socket?.emit('refuseTrade', this.store.state.user?.username, u);
