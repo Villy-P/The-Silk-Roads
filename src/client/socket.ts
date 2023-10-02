@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IP_ADDRESS, SERVER_PORT } from '@/data/data';
 import { User } from '@/scripts/interface';
-import { GAME_STATE } from '@/scripts/state';
+import { GAME_STATE, TRADING_STATE } from '@/scripts/state';
 import { StoreState } from '@/store/store';
 import io from 'socket.io-client'
 import { Router } from 'vue-router';
@@ -76,6 +76,7 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         store.state.user.tradingWith = sender;
         store.state.user.isMainTrader = true;
         store.state.user.state = GAME_STATE.TRADING;
+        store.state.user.tradingStage = TRADING_STATE.MANAGING;
         store.state.socket?.emit('updateUser', store.state.user);
     });
     store.state.socket.on("endTrade", (sender, reciever) => {

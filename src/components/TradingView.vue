@@ -5,10 +5,19 @@
     <div class="w-10/12 bg-red-600 m-auto border-2 border-black py-2 px-4 cursor-pointer hover:bg-red-500 mb-5" style="font-variant: small-caps;" @click="goBack">
         <p>Stop Trading</p>
     </div>
-    <div v-if="!store.state.user?.isMainTrader" class="text-center">
+    <div v-if="store.state.user?.tradingStage === TRADING_STATE.WAITING" class="text-center">
         <p>Waiting for {{ store.state.user?.tradingWith }} to send a trade...</p>
     </div>
-    <div v-else>
+    <div  v-else-if="store.state.user?.tradingStage === TRADING_STATE.WAITING_FOR_RESPONSE" class="text-center">
+        <p>Waiting for {{ store.state.user?.tradingWith }} to respond...</p>
+    </div>
+    <div  v-else-if="store.state.user?.tradingStage === TRADING_STATE.TRADE_ACCEPTED" class="text-center">
+        <p>{{ store.state.user?.tradingWith }} has accepted your trade</p>
+    </div>
+    <div  v-else-if="store.state.user?.tradingStage === TRADING_STATE.EVAL_TRADE" class="text-center">
+        <p>{{ store.state.user?.tradingWith }} has offered this trade:</p>
+    </div>
+    <div v-else-if="store.state.user?.tradingStage === TRADING_STATE.MANAGING">
         <div class="flex border-2 w-11/12 m-auto border-black h-fit">
             <div class="w-1/2 border-r-2 border-r-black p-1">Give</div>
             <div class="w-1/2 p-1">Recieve</div>
@@ -50,7 +59,7 @@
                 <div class="flex flex-wrap">
                     <div v-for="i in tradeRecieve" :key="i" class="w-10 h-10 m-1 border-black border-2 rounded-md flex items-center justify-center tooltip-container">
                         <img :src="require(`@/assets/items/${getItemAsset(i)}`)" class="w-8 h-8 cursor-pointer" @click="removeRecieveItem(i)">
-                        <div v-if="i in store.state.user.imports" class="citywelcome-warning tooltip-container -bottom-1.5 -left-1.5 w-4 h-4">!</div>
+                        <div v-if="i in store.state.user!.imports" class="citywelcome-warning tooltip-container -bottom-1.5 -left-1.5 w-4 h-4">!</div>
                         <div class="tooltip-text tooltip-left">Remove {{ getItemName(i) }} from trade</div>
                     </div>
                 </div>
@@ -61,12 +70,12 @@
                 <div class="flex flex-wrap">
                     <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer" @click="addGiveSilver">
                         <img src="../assets/items/silver.jpg" class="w-8 h-8">
-                        <div class="select-none pr-1">{{ store.state.user?.silver - tradeGiveSilver }}</div>
+                        <div class="select-none pr-1">{{ store.state.user!.silver - tradeGiveSilver }}</div>
                         <div class="tooltip-text tooltip-right">Add 1 Silver to trade</div>
                     </div><br>
                     <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer" @click="addGiveGold">
                         <img src="../assets/items/gold.jpg" class="w-10">
-                        <div class="select-none pr-1">{{ store.state.user?.gold - tradeGiveGold }}</div>
+                        <div class="select-none pr-1">{{ store.state.user!.gold - tradeGiveGold }}</div>
                         <div class="tooltip-text tooltip-right">Add 1 Gold to Trade</div>
                     </div>
                 </div>
@@ -93,7 +102,7 @@
                 <div class="flex flex-wrap">
                     <div v-for="i in currentTradeRecieveItems" :key="i" class="w-10 h-10 m-1 border-black border-2 rounded-md flex items-center justify-center tooltip-container">
                         <img :src="require(`@/assets/items/${getItemAsset(i)}`)" class="w-8 h-8 cursor-pointer" @click="clickRecieveItem(i)">
-                        <div v-if="i in store.state.user.imports" class="citywelcome-warning tooltip-container -bottom-1.5 -left-1.5 w-4 h-4">!</div>
+                        <div v-if="i in store.state.user!.imports" class="citywelcome-warning tooltip-container -bottom-1.5 -left-1.5 w-4 h-4">!</div>
                         <div class="tooltip-text tooltip-left">Add {{ getItemName(i) }} to trade</div>
                     </div>
                 </div>
@@ -107,7 +116,7 @@
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
-    import { GAME_STATE } from '@/scripts/state';
+    import { GAME_STATE, TRADING_STATE } from '@/scripts/state';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -115,6 +124,8 @@
 
     export default class TradingView extends Vue {
         store = useStore(key);
+
+        TRADING_STATE = TRADING_STATE;
 
         tradeGive: ITEMS[] = [];
         tradeGiveSilver = 0;

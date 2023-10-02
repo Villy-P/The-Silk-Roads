@@ -7,3 +7,11 @@ export enum GAME_STATE {
     TRADE_PLAYERS,
     TRADING
 }
+
+export enum TRADING_STATE {
+    WAITING,
+    MANAGING,
+    WAITING_FOR_RESPONSE,
+    EVAL_TRADE,
+    TRADE_ACCEPTED
+}

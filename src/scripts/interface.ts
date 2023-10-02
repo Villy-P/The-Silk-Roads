@@ -1,7 +1,7 @@
 import { CITIES } from "@/data/city";
 import { ITEMS } from "@/data/items";
 import { MERCHANT } from "@/data/merchant";
-import { GAME_STATE } from "./state";
+import { GAME_STATE, TRADING_STATE } from "./state";
 
 export enum USER_STATUS {
     LEADER,
@@ -31,6 +31,7 @@ export interface User {
     tradingWith?: string;
     requestTradeWith?: string;
     isMainTrader: boolean;
+    tradingStage: TRADING_STATE;
 }
 
 export interface Point {

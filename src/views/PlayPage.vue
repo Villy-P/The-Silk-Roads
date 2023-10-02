@@ -68,7 +68,7 @@
     import InventoryPage from '@/components/InventoryPage.vue';
     import CultureCards from '@/components/CultureCards.vue';
     import InstructionsView from '@/components/InstructionsView.vue';
-    import { GAME_STATE } from '@/scripts/state';
+    import { GAME_STATE, TRADING_STATE } from '@/scripts/state';
     import { USER_STATUS } from '@/scripts/interface';
     import TeacherView from '@/components/TeacherView.vue';
     import DebtMenu from '@/components/DebtMenu.vue';
@@ -111,6 +111,7 @@
             this.store.state.user!.tradingWith = u;
             this.store.state.user!.isMainTrader = false;
             this.store.state.user!.state = GAME_STATE.TRADING;
+            this.store.state.user!.tradingStage = TRADING_STATE.WAITING;
             this.store.state.socket?.emit('updateUser', this.store.state.user);
             this.store.state.socket?.emit('beginTrade', this.store.state.user?.username, u);
         }

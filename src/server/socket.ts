@@ -5,7 +5,7 @@ import { IP_ADDRESS, VUE_PORT } from '../data/data';
 import { USER_STATUS, User } from '../scripts/interface';
 import { broadcastUsers, getUserByUsername, users } from './users';
 import { getMerchantBaseExports, getMerchantBaseImports } from '../data/merchant';
-import { GAME_STATE } from '../scripts/state';
+import { GAME_STATE, TRADING_STATE } from '../scripts/state';
 import { getRandomValueThenDelete } from '../scripts/util';
 
 export function socketFunc() {
@@ -43,6 +43,7 @@ export function socketFunc() {
                 hasPaidCityTax: false,
                 showDemandDebt: false,
                 isMainTrader: false,
+                tradingStage: TRADING_STATE.WAITING
             };
             const user = getUserByUsername(message);
             if (user === undefined)
