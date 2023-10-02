@@ -50,7 +50,7 @@
                 <div class="text-center p-3">{{ u }} wants to trade</div>
                 <div class="flex items-center justify-center w-full gap-3 pb-4">
                     <div class="w-fit p-2 bg-cyan-400 text-center cursor-pointer">Accept</div>
-                    <div class="w-fit p-2 bg-red-600 text-center cursor-pointer">Refuse</div>
+                    <div class="w-fit p-2 bg-red-600 text-center cursor-pointer" @click="refuseDeal(u)">Refuse</div>
                 </div>
             </div>
         </div>
@@ -104,6 +104,11 @@
         getTradeRequests() {
             // const users = this.store.state.users;
             return this.store.state.tradeRequests;
+        }
+
+        refuseDeal(u: string) {
+            this.store.state.tradeRequests = this.store.state.tradeRequests.filter((i) => i != u);
+            this.store.state.socket?.emit('refuseTrade', this.store.state.user?.username, u);
         }
     }
 </script>

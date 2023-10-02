@@ -58,10 +58,13 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         store.state.tradeRequests = store.state.tradeRequests.filter((u) => u != sender);
     });
     store.state.socket.on("refuseTrade", (sender, reciever) => {
-        const u: User | undefined = store.state.users.find((u) => u.username == reciever);
-        if (!u)
+        const r: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!r)
             return;
-        if (u.username != store.state.user?.username)
+        if (r.username != store.state.user?.username)
             return;
+        store.state.user.tradingWith = undefined;
+        store.state.user.requestTradeWith = undefined;
+        store.state.socket?.emit('updateUser', store.state.user);
     });
 }
