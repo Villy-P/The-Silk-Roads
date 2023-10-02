@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IP_ADDRESS, SERVER_PORT } from '@/data/data';
 import { User } from '@/scripts/interface';
@@ -98,6 +99,38 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
             return;
         store.state.user.tradingStage = TRADING_STATE.EVAL_TRADE;
         store.state.user.currentTrade = JSON.parse(trade);
+        store.state.socket?.emit('updateUser', store.state.user);
+    });
+    store.state.socket.on("acceptTrade", (reciever) => {
+        const r: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!r)
+            return;
+        if (r.username != store.state.user?.username)
+            return;
+        const trade = store.state.user!.currentTrade!;
+        store.state.user!.silver -= trade.giveSilver;
+        store.state.user!.gold -= trade.giveGold;
+        store.state.user!.silver += trade.recieveSilver;
+        store.state.user!.gold += trade.recieveGold;
+        for (const item of trade.recieve) {
+            if (store.state.user?.imports.includes(item))
+                store.state.user?.imports.splice(store.state.user?.imports.indexOf(item), 1);
+            else
+                store.state.user?.items.push(item);
+        }
+        for (const item of trade.give)
+            store.state.user?.items.splice(store.state.user?.items.indexOf(item), 1);
+        store.state.user.tradingStage = TRADING_STATE.TRADE_ACCEPTED;
+        store.state.user.journal.push(`I traded some items with ${store.state.user!.tradingWith}.`)
+        store.state.socket?.emit('updateUser', store.state.user);
+    });
+    store.state.socket.on("countertrade", (reciever) => {
+        const r: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!r)
+            return;
+        if (r.username != store.state.user?.username)
+            return;
+        store.state.user.tradingStage = TRADING_STATE.WAITING;
         store.state.socket?.emit('updateUser', store.state.user);
     });
 }

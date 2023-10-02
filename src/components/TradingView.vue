@@ -58,6 +58,12 @@
                 </div>
             </div>
         </div>
+        <div class="m-auto mt-3 px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="acceptTrade">
+            Accept Trade
+        </div>
+        <div class="m-auto mt-3 px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="countertrade">
+            Offer a Countertrade
+        </div>
     </div>
 
 
@@ -183,6 +189,11 @@
         currentTradeGiveItems: ITEMS[] = JSON.parse(JSON.stringify(this.store.state.user?.items));
         currentTradeRecieveItems: ITEMS[] = JSON.parse(JSON.stringify(this.getTradePartnerInfo()?.items));
 
+        mounted() {
+            this.currentTradeGiveItems = JSON.parse(JSON.stringify(this.store.state.user?.items));
+            this.currentTradeRecieveItems = JSON.parse(JSON.stringify(this.getTradePartnerInfo()?.items));
+        }
+
         goBack() {
             this.store.state.socket?.emit('endTrade', this.store.state.user?.username, this.store.state.user?.tradingWith);
             this.store.state.user!.tradingWith = undefined;
@@ -286,6 +297,32 @@
             this.store.state.user!.tradingStage = TRADING_STATE.WAITING_FOR_RESPONSE;
             this.store.state.user!.currentTrade = this.getTrade();
             this.store.state.socket?.emit('sendTrade', JSON.stringify(this.getTrade()), this.store.state.user?.tradingWith);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
+        }
+
+        acceptTrade() {
+            const trade = this.store.state.user!.currentTrade!;
+            this.store.state.user!.silver -= trade.recieveSilver;
+            this.store.state.user!.gold -= trade.recieveGold;
+            this.store.state.user!.silver += trade.giveSilver;
+            this.store.state.user!.gold += trade.giveGold;
+            for (const item of trade.give) {
+                if (this.store.state.user?.imports.includes(item))
+                    this.store.state.user?.imports.splice(this.store.state.user?.imports.indexOf(item), 1);
+                else
+                    this.store.state.user?.items.push(item);
+            }
+            for (const item of trade.recieve)
+                this.store.state.user?.items.splice(this.store.state.user?.items.indexOf(item), 1);
+            this.store.state.user!.tradingStage = TRADING_STATE.TRADE_ACCEPTED;
+            this.store.state.user!.journal.push(`I traded some items with ${this.store.state.user!.tradingWith}.`)
+            this.store.state.socket?.emit('acceptTrade', this.store.state.user?.tradingWith);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
+        }
+
+        countertrade() {
+            this.store.state.user!.tradingStage = TRADING_STATE.MANAGING;
+            this.store.state.socket?.emit('countertrade', this.store.state.user?.tradingWith);
             this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }

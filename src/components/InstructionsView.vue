@@ -16,6 +16,8 @@
     <p class="p">The World Map on the left shows all cities that you can move to. A yellow map tack shows you where you currently are. You can move the map by dragging/scrolling</p>
     <h1 class="h1">Bills and Debt</h1>
     <p class="p">If you are in need of silver/gold, and you have a bank note in your inventory, you may trade them at certain cities for a loan of 20 silver or 10 gold. You instantly get this money, however you are now "in debt" and must pay this back to the lender. In order to do this you may click on the debt tab in the top right corner. The lender may demand the debt back at any time. If you are in need of a bank note, go to the debt tab and take one out.</p>
+    <h1 class="h1">Trading</h1>
+    <p class="p">In any city, you may trade with all other players in that city. Whenever trading, items in the give column are what you will be paying, and items in the recieve column is what you will be getting. The first row is the actual things you will be trading, and the second row is for the things that you can add to the trade.</p>
 </template>
 
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
