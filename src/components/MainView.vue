@@ -9,6 +9,7 @@
                 <MarketView v-else-if="store.state.user?.state == GAME_STATE.MARKET"/>
                 <LeavingCity v-else-if="store.state.user?.state == GAME_STATE.LEAVING"/>
                 <TradePlayers v-else-if="store.state.user?.state == GAME_STATE.TRADE_PLAYERS"/>
+                <TradingView v-else-if="store.state.user?.state == GAME_STATE.TRADING"/>
             </div>
         </div>
     </div>
@@ -27,6 +28,7 @@
     import { GAME_STATE } from '@/scripts/state';
     import LeavingCity from './LeavingCity.vue';
     import TradePlayers from './TradePlayers.vue';
+    import TradingView from './TradingView.vue';
 
     @Options({
         components: {
@@ -36,7 +38,8 @@
             InCity,
             MarketView,
             LeavingCity,
-            TradePlayers
+            TradePlayers,
+            TradingView
         }
     })
     export default class MainView extends Vue {

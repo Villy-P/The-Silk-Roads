@@ -49,7 +49,7 @@
             <div class="w-80 h-fit bg-white rounded-2xl mt-4 border-2 border-black" v-for="u in getTradeRequests()" :key="u">
                 <div class="text-center p-3">{{ u }} wants to trade</div>
                 <div class="flex items-center justify-center w-full gap-3 pb-4">
-                    <div class="w-fit p-2 bg-cyan-400 text-center cursor-pointer">Accept</div>
+                    <div class="w-fit p-2 bg-cyan-400 text-center cursor-pointer" @click="acceptDeal(u)">Accept</div>
                     <div class="w-fit p-2 bg-red-600 text-center cursor-pointer" @click="refuseDeal(u)">Refuse</div>
                 </div>
             </div>
@@ -109,6 +109,9 @@
         acceptDeal(u: string) {
             this.store.state.tradeRequests = [];
             this.store.state.user!.tradingWith = u;
+            this.store.state.user!.isMainTrader = false;
+            this.store.state.user!.state = GAME_STATE.TRADING;
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
             this.store.state.socket?.emit('beginTrade', this.store.state.user?.username, u);
         }
 

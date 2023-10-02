@@ -91,5 +91,11 @@ export function socketFunc() {
         socket.on("refuseTrade", (sender, reciever) => {
             io.emit("refuseTrade", sender, reciever);
         });
+        socket.on("beginTrade", (sender, reciever) => {
+            io.emit("beginTrade", sender, reciever);
+        });
+        socket.on("endTrade", (sender, reciever) => {
+            io.emit("endTrade", sender, reciever);
+        });
     });
 }
