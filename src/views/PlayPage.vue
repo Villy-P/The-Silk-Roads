@@ -43,6 +43,14 @@
                 Your debt has been forcefully collected!
             </div>
         </div>
+        <div class="w-full h-screen absolute z-50 flex items-center justify-center" style="background-color: rgba(0, 0, 0, .6);" v-if="store.state.victory">
+            <div class="absolute w-5 h-5 top-6 right-6 cursor-pointer" @click="store.state.victory = false">
+                <img src="../assets/x.svg">
+            </div>
+            <div class="w-3/4 max-h-3/4 bg-white rounded-xl py-4 h-3/4 overflow-auto flex items-center justify-center">
+                You have won! You can still go around and try and get a better score than the other merchants
+            </div>
+        </div>
         <OpeningData v-if="store.state.user?.state === GAME_STATE.OPENING"/>
         <MainView v-else/>
         <div class="absolute bottom-3 left-3">

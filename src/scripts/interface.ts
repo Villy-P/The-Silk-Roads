@@ -42,6 +42,7 @@ export interface User {
     isMainTrader: boolean;
     tradingStage: TRADING_STATE;
     currentTrade?: Trade;
+    hasWon: boolean;
 }
 
 export interface Point {

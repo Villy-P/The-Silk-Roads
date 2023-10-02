@@ -13,6 +13,7 @@ export interface StoreState {
     showJournal: boolean;
     showDebtMenu: boolean;
     showInstructions: boolean;
+    victory: boolean;
     tradeRequests: string[];
 }
 
@@ -30,7 +31,8 @@ export const store = createStore<StoreState>({
             showJournal: false,
             showDebtMenu: false,
             showInstructions: false,
-            tradeRequests: []
+            tradeRequests: [],
+            victory: false
         }
     },
     mutations: {}

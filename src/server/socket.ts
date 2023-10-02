@@ -43,7 +43,8 @@ export function socketFunc() {
                 hasPaidCityTax: false,
                 showDemandDebt: false,
                 isMainTrader: false,
-                tradingStage: TRADING_STATE.WAITING
+                tradingStage: TRADING_STATE.WAITING,
+                hasWon: false,
             };
             const user = getUserByUsername(message);
             if (user === undefined)

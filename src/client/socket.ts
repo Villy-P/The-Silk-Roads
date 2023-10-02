@@ -22,6 +22,10 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         const users: User[] = msg.users;
         store.state.users = users;
         store.state.user = users.find((u) => u.username === store.state.username) || store.state.user;
+        if (store.state.user!.imports.length > 0 && !store.state.user?.hasWon) {
+            store.state.victory = true;
+            store.state.user!.hasWon = true;
+        }
     });
     store.state.socket.on('play', (message) => {
         const msg = JSON.parse(message);
