@@ -16,7 +16,52 @@
     </div>
     <div  v-else-if="store.state.user?.tradingStage === TRADING_STATE.EVAL_TRADE" class="text-center">
         <p>{{ store.state.user?.tradingWith }} has offered this trade:</p>
+        <div class="flex border-2 w-11/12 m-auto mt-2 border-black h-fit">
+            <div class="w-1/2 border-r-2 border-r-black p-1">Recieve</div>
+            <div class="w-1/2 p-1">Give</div>
+        </div>
+        <div class="flex border-2 w-11/12 m-auto border-black h-fit">
+            <div class="border-r-black border-r-2 w-1/2">
+                <div class="flex flex-wrap">
+                    <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer">
+                        <img src="../assets/items/silver.jpg" class="w-8 h-8">
+                        <div class="select-none pr-1">{{ store.state.user.currentTrade?.giveSilver }}</div>
+                    </div><br>
+                    <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer">
+                        <img src="../assets/items/gold.jpg" class="w-10">
+                        <div class="select-none pr-1">{{ store.state.user.currentTrade?.giveGold }}</div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap">
+                    <div v-for="i in store.state.user.currentTrade?.give" :key="i" class="w-10 h-10 m-1 border-black border-2 rounded-md flex items-center justify-center tooltip-container">
+                        <img :src="require(`@/assets/items/${getItemAsset(i)}`)" class="w-8 h-8 cursor-pointer">
+                        <div class="tooltip-text tooltip-right">{{ getItemName(i) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/2">
+                <div class="flex flex-wrap">
+                    <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer">
+                        <img src="../assets/items/silver.jpg" class="w-8 h-8">
+                        <div class="select-none pr-1">{{ store.state.user.currentTrade?.recieveSilver }}</div>
+                    </div><br>
+                    <div class="flex items-center justify-center w-fit tooltip-container border-2 border-black h-10 m-1 rounded-md cursor-pointer">
+                        <img src="../assets/items/gold.jpg" class="w-10">
+                        <div class="select-none pr-1">{{ store.state.user.currentTrade?.recieveGold }}</div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap">
+                    <div v-for="i in store.state.user.currentTrade?.recieve" :key="i" class="w-10 h-10 m-1 border-black border-2 rounded-md flex items-center justify-center tooltip-container">
+                        <img :src="require(`@/assets/items/${getItemAsset(i)}`)" class="w-8 h-8 cursor-pointer">
+                        <div class="tooltip-text tooltip-left">{{ getItemName(i) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
     <div v-else-if="store.state.user?.tradingStage === TRADING_STATE.MANAGING">
         <div class="flex border-2 w-11/12 m-auto border-black h-fit">
             <div class="w-1/2 border-r-2 border-r-black p-1">Give</div>
@@ -108,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <div class="m-auto mt-3 px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer">
+        <div class="m-auto mt-3 px-2 py-1 mb-2 border-2 border-black w-fit bg-blue-400 cursor-pointer" @click="sendTrade">
             Send Trade
         </div>
     </div>
@@ -117,6 +162,7 @@
 <!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
 <script lang="ts">
     import { GAME_STATE, TRADING_STATE } from '@/scripts/state';
+    import { Trade } from '@/scripts/interface';
     import { key } from '@/store/store';
     import { Vue } from 'vue-class-component';
     import { useStore } from 'vuex';
@@ -223,6 +269,24 @@
             if (this.tradeRecieveGold <= 0)
                 return;
             this.tradeRecieveGold--;
+        }
+
+        getTrade(): Trade {
+            return {
+                give: this.tradeGive,
+                giveSilver: this.tradeGiveSilver,
+                giveGold: this.tradeGiveGold,
+                recieve: this.tradeRecieve,
+                recieveSilver: this.tradeRecieveSilver,
+                recieveGold: this.tradeRecieveGold
+            };
+        }
+
+        sendTrade() {
+            this.store.state.user!.tradingStage = TRADING_STATE.WAITING_FOR_RESPONSE;
+            this.store.state.user!.currentTrade = this.getTrade();
+            this.store.state.socket?.emit('sendTrade', JSON.stringify(this.getTrade()), this.store.state.user?.tradingWith);
+            this.store.state.socket?.emit('updateUser', this.store.state.user);
         }
     }
 </script>

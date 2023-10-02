@@ -98,5 +98,8 @@ export function socketFunc() {
         socket.on("endTrade", (sender, reciever) => {
             io.emit("endTrade", sender, reciever);
         });
+        socket.on("sendTrade", (trade, reciever) => {
+            io.emit("sendTrade", trade, reciever);
+        });
     });
 }

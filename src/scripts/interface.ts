@@ -8,6 +8,15 @@ export enum USER_STATUS {
     BASIC
 }
 
+export interface Trade {
+    give: ITEMS[],
+    giveSilver: number,
+    giveGold: number,
+    recieve: ITEMS[],
+    recieveSilver: number,
+    recieveGold: number
+}
+
 export interface User {
     socketID: string;
     username: string;
@@ -32,6 +41,7 @@ export interface User {
     requestTradeWith?: string;
     isMainTrader: boolean;
     tradingStage: TRADING_STATE;
+    currentTrade?: Trade;
 }
 
 export interface Point {

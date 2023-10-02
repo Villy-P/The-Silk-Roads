@@ -90,4 +90,14 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
         store.state.user.state = GAME_STATE.IN_CITY;
         store.state.socket?.emit('updateUser', store.state.user);
     });
+    store.state.socket.on("sendTrade", (trade, reciever) => {
+        const r: User | undefined = store.state.users.find((u) => u.username == reciever);
+        if (!r)
+            return;
+        if (r.username != store.state.user?.username)
+            return;
+        store.state.user.tradingStage = TRADING_STATE.EVAL_TRADE;
+        store.state.user.currentTrade = JSON.parse(trade);
+        store.state.socket?.emit('updateUser', store.state.user);
+    });
 }
