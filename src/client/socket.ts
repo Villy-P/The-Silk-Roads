@@ -63,7 +63,6 @@ export default function socketSetup(store: Store<StoreState>, router: Router) {
             return;
         if (r.username != store.state.user?.username)
             return;
-        store.state.user.tradingWith = undefined;
         store.state.user.requestTradeWith = undefined;
         store.state.socket?.emit('updateUser', store.state.user);
     });

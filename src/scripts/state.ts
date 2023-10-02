@@ -4,5 +4,6 @@ export enum GAME_STATE {
     IN_CITY,
     MARKET,
     LEAVING,
-    TRADE_PLAYERS
+    TRADE_PLAYERS,
+    TRADING
 }

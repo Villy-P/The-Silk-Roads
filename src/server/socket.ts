@@ -41,7 +41,8 @@ export function socketFunc() {
                 silverDebt: 0,
                 hasMarketTransactions: false,
                 hasPaidCityTax: false,
-                showDemandDebt: false
+                showDemandDebt: false,
+                isMainTrader: false,
             };
             const user = getUserByUsername(message);
             if (user === undefined)

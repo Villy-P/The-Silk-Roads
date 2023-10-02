@@ -30,6 +30,7 @@ export interface User {
     showDemandDebt: boolean;
     tradingWith?: string;
     requestTradeWith?: string;
+    isMainTrader: boolean;
 }
 
 export interface Point {
