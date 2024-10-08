@@ -36,7 +36,7 @@
     "install": "^0.13.0",
     "ip": "^2.0.1",
     "mysql2": "^3.11.1",
-    "npm": "^10.8.3",
+    "npm": "^10.9.0",
     "postcss": "^8.4.45",
     "random-username-generator": "^1.0.4",
     "sass": "^1.78.0",
