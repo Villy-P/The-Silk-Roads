@@ -39,7 +39,7 @@
     "npm": "^10.9.0",
     "postcss": "^8.4.45",
     "random-username-generator": "^1.0.4",
-    "sass": "^1.78.0",
+    "sass": "^1.79.5",
     "sass-loader": "^16.0.1",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
