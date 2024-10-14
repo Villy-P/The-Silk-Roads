@@ -44,7 +44,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.10",
-    "typescript": "~5.6.2",
+    "typescript": "~5.6.3",
     "username-generator": "^1.1.0",
     "vue-property-decorator": "^9.1.2",
     "vuex": "^4.1.0"
