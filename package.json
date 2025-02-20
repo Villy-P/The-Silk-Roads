@@ -37,7 +37,7 @@
     "ip": "^2.0.1",
     "mysql2": "^3.11.1",
     "npm": "^10.9.0",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.0",
     "random-username-generator": "^1.0.4",
     "sass": "^1.79.5",
     "sass-loader": "^16.0.1",
